@@ -1,7 +1,7 @@
 source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
 
 ions=("CS" "LI" "NA" "K" "CA" "MG")
-for((ioni=0;ioni<4;ioni++)); do
+for((ioni=2;ioni<3;ioni++)); do
   ion=${ions[${ioni}]}
     for((layi=7;layi<=13;layi++)); do
         lay=`awk -v layi=$layi 'BEGIN{printf("%2.1f",layi*0.1);}'` 

@@ -43,7 +43,7 @@ for((i=1;i<=$numofcycle;i++)) ; do
     source ./$scriptsdir/findwatersinlayer.sh
 
     gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o ./$rundir/$tprname \
-    -po $mdpdir/step$i -n $ndxfile
+    -po $mdpdir/step$i -n $ndxfile -maxwarn 1
     # -r $posregro   -maxwarn 1
     cd $rundir ; $gmxrun -v -deffnm ${tprname%.*} ; cd ..
 done

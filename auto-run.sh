@@ -15,10 +15,9 @@ if [ ! -d $rundir ]; then
     ##choose proper node setting ########################################
     submissionscript='cn.sh'
     keyword="#SBATCH -N"; newline="#SBATCH -N $NodeNum"
-    sed -i "/$keyword/c$newline" $scriptsdir $submissionscript
+    sed -i "/$keyword/c$newline" ./$scriptsdir/$submissionscript
     keyword="#SBATCH --ntasks-per-node"; newline="#SBATCH --ntasks-per-node=$NtasksPerNode"
-    sed -i "/$keyword/c$newline" $scriptsdir $submissionscript
-    changesubmissionscript 
+    sed -i "/$keyword/c$newline" ./$scriptsdir/$submissionscript
     if [ "$NodeType" == cn-short ]; then
         keyword="#SBATCH --qos"; newline="#SBATCH --qos=liufengcns"
         sed -i "/$keyword/c$newline" ./$scriptsdir/$submissionscript

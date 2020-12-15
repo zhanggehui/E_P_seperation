@@ -18,7 +18,7 @@ for((ioni=0;ioni<4;ioni++)); do
             mv Gmx_GO_ubuntu scripts
             cp $odir/md_scripts/.git/config ./scripts/.git/config2
             mv -f ./scripts/.git/config2 ./scripts/.git/config
-            source ./scripts/auto-run.sh em.sh em
+            #source ./scripts/auto-run.sh em.sh em
             cd $odir
         else
             echo 'already exist!'

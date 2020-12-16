@@ -27,11 +27,10 @@ lastgro=./$nvtequdir/nvt-equ.gro
 #修改每个循环步数
 reset_nsteps="nsteps                   = $nsteps"
 sed -i "/nsteps/c${reset_nsteps}" $mdpfile
-
+tprname=nvt-cycle.tpr
 for((i=1;i<=$numofcycle;i++)); do
     #用于记录目前的步数
     echo $i >> ./$rundir/recordcycle ; export i
-    tprname=nvt-step-$i.tpr
     # if [ $i -eq 1 ] ; then
     #     lastcpt=./$nvtequdir/nvt-step-$((i-1)).cpt
     # else
@@ -45,8 +44,9 @@ for((i=1;i<=$numofcycle;i++)); do
     gmx grompp -f $mdpfile -t $lastcpt -c $lastgro -p $topfile -o ./$rundir/$tprname \
     -po $mdpdir/step$i -n $ndxfile -maxwarn 1
     cd $rundir
-    $gmxrun -v -deffnm ${tprname%.*} -cpi $lastcpt -cpt -1
+    $gmxrun -v -deffnm ${tprname%.*} -cpi $lastcpt #-cpt -1
     cd ..
+    $lastcpt=${tprname%.*}.cpt
 done
 
 #####after run#########################################

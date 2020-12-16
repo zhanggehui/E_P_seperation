@@ -44,13 +44,13 @@ rtpi                     = 0.05
 
 ; OUTPUT CONTROL OPTIONS
 ; Output frequency for coords (x), velocities (v) and forces (f)
-nstxout                  = 1000
-nstvout                  = 1000
+nstxout                  = 0
+nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
-nstlog                   = 1000
-nstcalcenergy            = 100
-nstenergy                = 1000
+nstlog                   = 0
+nstcalcenergy            = 0
+nstenergy                = 0
 ; Output frequency and precision for .xtc file
 nstxout-compressed       = 0
 compressed-x-precision   = 1000
@@ -297,9 +297,9 @@ sim-temp-high            = 300
 ; amplitude (V/nm), frequency omega (1/ps), time for the pulse peak (ps),
 ; and sigma (ps) width of the pulse. Omega = 0 means static field,
 ; sigma = 0 means no pulse, leaving the field to be a cosine function.
-;electric-field-x         = 0 0 0 0
-;electric-field-y         = 0 0 0 0
-;electric-field-z         = 0 0 0 0
+electric-field-x         = 0 0 0 0
+electric-field-y         = 0 0 0 0
+electric-field-z         = 0 0 0 0
 
 ; Ion/water position swapping for computational electrophysiology setups
 ; Swap positions along direction: no, X, Y, Z

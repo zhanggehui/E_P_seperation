@@ -8,7 +8,7 @@ pressure=0         #共同作用时记得改变一下压强
 word="pressure=" ; new="pressure=${pressure}    #Mpa"
 sed -i "/$word/c$new" ./$scriptsdir/cycle-run.sh
 #shut off electric-field-y
-word='electric-field-y' ; new=';electric-field-y         = 0 0 0 0'
+word='electric-field-y' ; new='electric-field-y         = 0 0 0 0'
 sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp
 
 if [ $subpressure -ne 0 ]; then

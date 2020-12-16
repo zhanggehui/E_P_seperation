@@ -19,6 +19,8 @@ if [ ! -d $rundir ]; then
     mkdir $rundir
     ##choose proper node setting ########################################
     submissionscript='cn.sh'
+    keyword="#SBATCH -p"; newline="#SBATCH -p $NodeType"
+    sed -i "/$keyword/c$newline" ./$scriptsdir/$submissionscript
     keyword="#SBATCH -N"; newline="#SBATCH -N $NodeNum"
     sed -i "/$keyword/c$newline" ./$scriptsdir/$submissionscript
     keyword="#SBATCH --ntasks-per-node"; newline="#SBATCH --ntasks-per-node=$NtasksPerNode"

@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# environment variable:
+# orientation ; rundir ; runscript ; scriptsdir
+
 for ((i=0;i<2;i++))
 do
-    gmx grompp -f ./scripts/em.mdp  -c GO2-ion.gro -p GO2.top \
+    gmx grompp -f ./$scriptsdir/em.mdp -c GO2-ion.gro -p GO2.top \
     -o ./$rundir/em.tpr -po ./$rundir/em-out -n waterlayer.ndx -maxwarn 1
 
     cd $rundir
@@ -12,4 +15,3 @@ do
     cp -rf ../GO2-afterem.gro ../GO2-ion.gro
     cd ..
 done
-

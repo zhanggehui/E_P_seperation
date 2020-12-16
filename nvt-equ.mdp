@@ -31,13 +31,14 @@ ld-seed                  = -1
 ; Force tolerance and initial step-size
 emtol                    = 10
 emstep                   = 0.01
+; Frequency of steepest descents steps when doing CG
+nstcgsteep               = 1000
+nbfgscorr                = 10
+; Shell Molecular Dynamics
 ; Max number of iterations in relax-shells
 niter                    = 20
 ; Step size (ps^2) for minimization of flexible constraints
 fcstep                   = 0
-; Frequency of steepest descents steps when doing CG
-nstcgsteep               = 1000
-nbfgscorr                = 10
 
 ; TEST PARTICLE INSERTION OPTIONS
 rtpi                     = 0.05
@@ -48,9 +49,9 @@ nstxout                  = 0
 nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
-nstlog                   = 1000
-nstcalcenergy            = 100
-nstenergy                = 1000
+nstlog                   = 0
+nstcalcenergy            = 0
+nstenergy                = 0
 ; Output frequency and precision for .xtc file
 nstxout-compressed       = 0
 compressed-x-precision   = 1000

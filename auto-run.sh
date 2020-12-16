@@ -12,14 +12,14 @@ ncns=`sinfo | grep 'idle' | grep 'cn-short' | awk '{print $4}'`
 
 if [ -z "$ncnnl" ] && [ -z "$ncns" ]; then #-n是否为非空串,-z是否为空串,判断必须加引号
     NodeType=cn_nl
-elif [ -z "$ncnnl" ] && [ -n "$ncns" ]
+elif [ -z "$ncnnl" ] && [ -n "$ncns" ]; then
     NodeType=cn-short
-elif [ -n "$ncnnl" ] && [ -z "$ncns" ]
+elif [ -n "$ncnnl" ] && [ -z "$ncns" ]; then
     NodeType=cn-short
 else
     if [ $ncnnl -ge 10 ]; then
         NodeType=cn_nl
-    elif [ $ncns -gt $ncnnl ]
+    elif [ $ncns -gt $ncnnl ]; then
         NodeType=cn-short
     else 
         NodeType=cn_nl
@@ -28,7 +28,7 @@ fi
 
 if [ -n "$ncnnl" ]; then
     NodeType=cn_nl
-elif [ -n "$ncns" ]
+elif [ -n "$ncns" ]; then
     NodeType=cn-short
 else
     NodeType=cn_nl

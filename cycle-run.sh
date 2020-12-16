@@ -13,10 +13,6 @@ echo "pressure: $pressure" > ./$rundir/waternumber
 echo '' >> ./$rundir/waternumber
 echo 'stepnum   count   acceleration' >> ./$rundir/waternumber
 
-#修改每个循环步数
-reset_nsteps="nsteps                   = $nsteps"
-sed -i "/nsteps/c${reset_nsteps}" $mdpfile
-
 #run cycle
 cp waterlayer.ndx $rundir
 mdpdir=./$rundir/${rundir}mdps ; mkdir -p $mdpdir
@@ -31,6 +27,10 @@ topfile=GO2.top
 ndxfile=./$rundir/waterlayer.ndx
 grofile=./$nvtequdir/nvt-equ.gro
 tprname=nvt-cycle.tpr
+
+#修改每个循环步数
+reset_nsteps="nsteps                   = $nsteps"
+sed -i "/nsteps/c${reset_nsteps}" $mdpfile
 
 for((i=1;i<=$numofcycle;i++)); do
     #用于记录目前的步数

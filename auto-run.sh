@@ -5,7 +5,7 @@ NodeNum=1
 export Usempirun=1  # mdrun or mdrun_mpi
 export runscript=$1
 export rundir=$2
-export orientation=2  #ori x1,y2,z3
+export orientation=y
 export scriptsdir='scripts'
 
 if [ $NodeType == 'cn_nl' ]; then

@@ -47,7 +47,7 @@ if [ ! -d $rundir ]; then
 
     cp ./$scriptsdir/$submissionscript ./$rundir
     cp ./$scriptsdir/$runscript ./$rundir
-    if [ $runscript == 'cycle-run.sh' ]; then
+    if [ $runscript == 'nvt-cycle.sh' ]; then
         cp ./$scriptsdir/nvt-cycle.mdp ./$rundir
     fi
 

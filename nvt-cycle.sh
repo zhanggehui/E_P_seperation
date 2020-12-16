@@ -4,8 +4,8 @@
 # orientation ; rundir ; runscript ; scriptsdir
 # run in root dir
 
-numofcycle=10     
-nsteps=5000
+numofcycle=1     
+nsteps=10000000
 pressure=0         #Mpa
 nvtequdir=nvtequ
 dt=0.001           #ps
@@ -28,6 +28,9 @@ sed -i "/nsteps/c${reset_nsteps}" $mdpfile
 reset_dt="dt                       = $dt"
 dtline='dt                       ='
 sed -i "/$dtline/c${reset_dt}" $mdpfile
+reset_nstxout="nstxout                  =$nsteps"
+nstxoutline='nstxout                  ='
+sed -i "/$nstxoutline/c${reset_nstxout}" $mdpfile
 
 for ((i=1;i<=$numofcycle;i++)); do
     tprname=nvt-step-$i

@@ -13,11 +13,8 @@
 # environment variable:
 # orientation ; rundir ; runscript ; scriptsdir
 hosts=`scontrol show hostname $SLURM_JOB_NODELIST` ; echo $hosts
-echo 'Begin at:' > ./$rundir/time.out
-date "+%Y-%m-%d %H:%M:%S"  >> ./$rundir/time.out
-echo '' >> ./$rundir/time.out
+
 # export I_MPI_DEBUG=20
-#############################################################
 if [ $SLURM_JOB_PARTITION == cn_nl ]; then
     source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
 else 
@@ -33,6 +30,3 @@ else
     #gmxrun="$mpistring mdrun_mpi2"
 fi
 source ./$rundir/$runscript
-###########################################################
-echo 'End at:' >> ./$rundir/time.out
-date "+%Y-%m-%d %H:%M:%S"  >> ./$rundir/time.out

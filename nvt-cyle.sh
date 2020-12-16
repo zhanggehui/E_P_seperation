@@ -30,7 +30,7 @@ dtline='dt                       ='
 sed -i "/$dtline/c${reset_dt}" $mdpfile
 
 for ((i=1;i<=$numofcycle;i++)); do
-    tprname=nvt-step-$i.tpr
+    tprname=nvt-step-$i
     if [ $i -eq 1 ]; then
         lastgro=./$nvtequdir/nvt-equ.gro ; lastcpt=./$nvtequdir/nvt-equ.cpt
     else
@@ -40,15 +40,15 @@ for ((i=1;i<=$numofcycle;i++)); do
     reset_tinit="tinit                    = $tinit"
     sed -i "/tinit/c${reset_tinit}" $mdpfile
 
-    source ./$scriptsdir/findwatersinlayer.sh
+    #重新给水加速度
+    #source ./$scriptsdir/findwatersinlayer.sh
 
-    gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o ./$rundir/$tprname \
+    gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o ./$rundir/$tprname.tpr \
     -po $mdpdir/step$i -n $ndxfile -maxwarn 1  
-    cd $rundir ; $gmxrun -v -deffnm ${tprname%.*} ; cd ..
+    cd $rundir ; $gmxrun -v -deffnm tprname ; cd ..
 done
 
 #####after run#########################################
-rm -rf ./$rundir/tmp
 mv ./$rundir/nvt-step-$numofcycle.gro ./$rundir/last.gro
 mv ./$rundir/nvt-step-1.tpr ./$rundir/traj.tpr
 if [ $numofcycle -gt 1 ] ; then

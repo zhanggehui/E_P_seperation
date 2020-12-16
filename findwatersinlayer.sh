@@ -14,7 +14,7 @@ awk -v boolpr=1 \
 mv $oldndxfile $ndxdir
 
 boxlengthline=`sed -n '$p' $lastgro`
-awk -v boxlengthline=$boxlengthline -v rundir=$rundir -v orientation=$orientation 
+awk -v boxlengthline=$boxlengthline -v rundir=$rundir -v orientation=$orientation \
 -v pressure=$pressure -v i=$i \ 
 '
 BEGIN{
@@ -25,25 +25,20 @@ BEGIN{
   araalen1=substr(boxlengthline,pbox2,10); araalen1=araalen1+0;
   araalen2=substr(boxlengthline,pbox3,10); araalen2=araalen2+0;
   area=araalen1*araalen2;
-  coord=0; count=0; vcoord=0; vcount=0; pv=37; acceleration=0;
-  thick=100;
+  coord=0; count=0; acceleration=0;
+  thick=2*len;
 }
 /OW/{
   coord=substr($0,p1,8); coord=coord+0;
   if( coord<thick || coord>(len-thick) )
   { 
     count++; serial=substr($0,16,5);
-    vcoord=substr($0,pv,8); vcoord=vcoord+0;
-    if( vcoord>-100 && vcoord<100)
-    { 
-      vcount++;
-      if(vcount%15!=0) {printf("%5s ", serial) ;}
-      else {printf("%5s\n", serial) ;}
-    }
+    if(count%15!=0) {printf("%5s ",serial);}
+    else            {printf("%5s\n",serial);}
   }
 }
 END{
-  acceleration=0.602*pressure*area/(vcount*18);
+  acceleration=0.602*pressure*area/(count*18);
   print acceleration > rundir"""/tmp" ;
   print (i, count, acceleration) >> rundir"""/waternumber" ;
 }

@@ -5,7 +5,7 @@
 # run in root dir
 
 numofcycle=10     
-nsteps=1000
+nsteps=5000
 pressure=0         #Mpa
 nvtequdir=nvtequ
 dt=0.001           #ps
@@ -40,15 +40,15 @@ for ((i=1;i<=$numofcycle;i++)); do
     reset_tinit="tinit                    = $tinit"
     sed -i "/tinit/c${reset_tinit}" $mdpfile
 
-    #重新给水加速度
-    #source ./$scriptsdir/findwatersinlayer.sh
+    #重新给水加速度,更新mdp文件,更新ndx文件
+    source ./$scriptsdir/findwatersinlayer.sh
 
     gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o ./$rundir/$tprname.tpr \
     -po $mdpdir/step$i -n $ndxfile -maxwarn 1  
     cd $rundir ; $gmxrun -v -deffnm tprname ; cd ..
 done
 
-#####after run#########################################
+# 进行多余文件的删除run
 mv ./$rundir/nvt-step-$numofcycle.gro ./$rundir/last.gro
 mv ./$rundir/nvt-step-1.tpr ./$rundir/traj.tpr
 if [ $numofcycle -gt 1 ] ; then

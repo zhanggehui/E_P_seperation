@@ -22,31 +22,31 @@ if [ -a ./$nvtequdir/nvt-equ.cpt ] ; then
     mv ./$nvtequdir/nvt-equ.cpt ./$nvtequdir/nvt-step-0.cpt
 fi
 mdpfile=./$rundir/nvt-cycle.mdp ; topfile=GO2.top ; ndxfile=./$rundir/waterlayer.ndx
-lastcpt=./$nvtequdir/nvt-step-0.cpt
-lastgro=./$nvtequdir/nvt-equ.gro
 #修改每个循环步数
 reset_nsteps="nsteps                   = $nsteps"
 sed -i "/nsteps/c${reset_nsteps}" $mdpfile
+
+grofile=./$nvtequdir/nvt-equ.gro
 tprname=nvt-cycle.tpr
+
 for((i=1;i<=$numofcycle;i++)); do
     #用于记录目前的步数
     echo $i >> ./$rundir/recordcycle ; export i
-    # if [ $i -eq 1 ] ; then
-    #     lastcpt=./$nvtequdir/nvt-step-$((i-1)).cpt
-    # else
-    #     lastcpt=./$rundir/nvt-step-$((i-1)).cpt
-    # fi
+    if [ $i -eq 1 ] ; then
+         lastcpt=./$nvtequdir/nvt-step-0.cpt
+    else
+         lastcpt=./$rundir/nvt-cycle.cpt
+    fi
     #tinit=$(( (i-1)*(tstep/1000) )) ; resettinit="tinit                    = $tinit"
     #sed -i "/tinit/c$resettinit" $mdpfile
-
     #source ./$scriptsdir/findwatersinlayer.sh
 
-    gmx grompp -f $mdpfile -t $lastcpt -c $lastgro -p $topfile -o ./$rundir/$tprname \
-    -po $mdpdir/step$i -n $ndxfile -maxwarn 1
+    gmx grompp -f $mdpfile -t $lastcpt -c $grofile -p $topfile \
+    -o ./$rundir/nvt-cycle.tpr -po $mdpdir/step$i -n $ndxfile -maxwarn 1
+    
     cd $rundir
-    $gmxrun -v -deffnm ${tprname%.*} -cpi $lastcpt #-cpt -1
+    $gmxrun -v -deffnm 'nvt-cycle' -s nvt-cycle -cpi $lastcpt -append
     cd ..
-    $lastcpt=${tprname%.*}.cpt
 done
 
 #####after run#########################################

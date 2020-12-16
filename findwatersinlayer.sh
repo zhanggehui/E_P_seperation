@@ -14,7 +14,8 @@ awk -v boolpr=1 \
 mv $oldndxfile $ndxdir
 
 boxlengthline=`sed -n '$p' $lastgro`
-awk -v boxlengthline=$boxlengthline -v rundir=$rundir -v orientation=$orientation\
+awk -v boxlengthline=$boxlengthline -v rundir=$rundir -v orientation=$orientation 
+-v pressure=$pressure \ 
 '
 BEGIN{
       if(orientation==1) {p1=21;pbox1=1;pbox2=11;pbox3=21;}
@@ -25,7 +26,6 @@ BEGIN{
       araalen2=substr(boxlengthline,pbox3,10); araalen2=araalen2+0;
       area=araalen1*araalen2;
       coord=0; count=0; vcoord=0; vcount=0; pv=37; acceleration=0;
-      pressure=ENVIRON["pressure"]; pressure=pressure+0;
       thick=100;
       }
 /OW/{

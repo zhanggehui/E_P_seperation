@@ -1,31 +1,34 @@
 #!/bin/bash
 
-# environment variable: orientation ; rundir ; runscript ; scriptsdir
+# environment variable: 
+# orientation ; rundir ; runscript ; scriptsdir
 # run in root dir
+
 numofcycle=10     
 nsteps=1000    #fs >1000 at least
 pressure=0        #Mpa
-export pressure
 nvtequdir=nvtequ
 ############################################################
 echo "pressure: $pressure" > ./$rundir/waternumber
 echo '' >> ./$rundir/waternumber
 echo 'stepnum   count   acceleration' >> ./$rundir/waternumber
 
+#修改每个循环步数
+reset_nsteps="nsteps                   = $nsteps"
+sed -i "/nsteps/c${reset_nsteps}" $mdpfile
+
 #run cycle
 cp waterlayer.ndx $rundir
-mdpdir=./$rundir/${rundir}mdps ; mkdir $mdpdir
-ndxdir=./$rundir/${rundir}ndxs ; mkdir $ndxdir
+mdpdir=./$rundir/${rundir}mdps ; mkdir -p $mdpdir
+ndxdir=./$rundir/${rundir}ndxs ; mkdir -p $ndxdir
 
 #有cpt(检查点文件)的情况下不需要使用gro,但仍必须提供
 if [ -a ./$nvtequdir/nvt-equ.cpt ] ; then
     mv ./$nvtequdir/nvt-equ.cpt ./$nvtequdir/nvt-step-0.cpt
 fi
-mdpfile=./$rundir/nvt-cycle.mdp ; topfile=GO2.top ; ndxfile=./$rundir/waterlayer.ndx
-#修改每个循环步数
-reset_nsteps="nsteps                   = $nsteps"
-sed -i "/nsteps/c${reset_nsteps}" $mdpfile
-
+mdpfile=./$rundir/nvt-cycle.mdp
+topfile=GO2.top
+ndxfile=./$rundir/waterlayer.ndx
 grofile=./$nvtequdir/nvt-equ.gro
 tprname=nvt-cycle.tpr
 

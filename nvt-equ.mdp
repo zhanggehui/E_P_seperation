@@ -1,4 +1,4 @@
-title                   = OPLS equilibration NVT 300k 5ns
+title                   = OPLS equilibration NVT 300k 2ns
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
 ; e.g.: -I/home/joe/doe -I/home/mary/roe
@@ -10,7 +10,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 5000000
+nsteps                   = 2000000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)

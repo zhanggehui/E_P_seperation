@@ -1,24 +1,38 @@
 #!/bin/bash
 #####  changable   ###################################################
-NodeNum=1
+NodeNum=1           #由于后面有文件修改，故节点数只能用1
 export Usempirun=1  # mdrun or mdrun_mpi
 export runscript=$1
 export rundir=$2
 export orientation=y
 export scriptsdir='scripts'
 
-ncnnl=`idle | grep 'cn_nl' | awk '{print $4}'`
-ncns=`idle | grep 'cn-short' | awk '{print $4}'`
+ncnnl=`sinfo | grep 'idle' | grep 'cn_nl' | awk '{print $4}'`
+ncns=`sinfo | grep 'idle' | grep 'cn-short' | awk '{print $4}'`
 
-if [ -n "$ncnnl" ]; then  #-n是否为非空串,-z是否为空串,判断必须加引号
+if [ -z "$ncnnl" ] && [ -z "$ncns" ]; then #-n是否为非空串,-z是否为空串,判断必须加引号
+    NodeType=cn_nl
+elif [ -z "$ncnnl" ] && [ -n "$ncns" ]
+    NodeType=cn-short
+elif [ -n "$ncnnl" ] && [ -z "$ncns" ]
+    NodeType=cn-short
+else
+    if [ $ncnnl -ge 10 ]; then
+        NodeType=cn_nl
+    elif [ $ncns -gt $ncnnl ]
+        NodeType=cn-short
+    else 
+        NodeType=cn_nl
+    fi
+fi
+
+if [ -n "$ncnnl" ]; then
     NodeType=cn_nl
 elif [ -n "$ncns" ]
     NodeType=cn-short
 else
     NodeType=cn_nl
 fi
-
-if 
 
 if [ $NodeType == 'cn_nl' ]; then
     NtasksPerNode=28

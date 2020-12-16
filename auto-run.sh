@@ -8,11 +8,12 @@ export rundir=$2
 export orientation=2  #ori x1,y2,z3
 export scriptsdir='scripts'
 
-if [ $NodeType == 'cn_nl']; then
+if [ $NodeType == 'cn_nl' ]; then
     NtasksPerNode=28
 else
     NtasksPerNode=20
 fi
+
 #rm -rf $rundir
 if [ ! -d $rundir ]; then
     mkdir $rundir

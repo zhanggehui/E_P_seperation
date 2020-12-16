@@ -1,6 +1,6 @@
 #!/bin/bash
 #####  changable   ###################################################
-NodeType=cn-short # cn-short ; cn_nl ; cn-long
+NodeType=cn_nl # cn-short ; cn_nl ; cn-long
 NodeNum=1
 export Usempirun=1  # mdrun or mdrun_mpi
 export runscript=$1

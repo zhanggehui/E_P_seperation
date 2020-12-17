@@ -4,7 +4,7 @@
 # orientation ; rundir ; runscript ; scriptsdir
 # run in root dir
 
-numofcycle=10     
+ncycles=10     
 nsteps=10000
 pressure=1900         #Mpa
 nvtequdir=nvtequ
@@ -32,7 +32,7 @@ reset_nstxout="nstxout                  =$nsteps"
 nstxoutline='nstxout                  ='
 sed -i "/$nstxoutline/c${reset_nstxout}" $mdpfile
 
-for ((i=1;i<=$numofcycle;i++)); do
+for ((i=1;i<=$ncycles;i++)); do
     tprname=nvt-step-$i
     if [ $i -eq 1 ]; then
         lastgro=./$nvtequdir/nvt-equ.gro ; lastcpt=./$nvtequdir/nvt-equ.cpt
@@ -52,9 +52,9 @@ for ((i=1;i<=$numofcycle;i++)); do
 done
 
 # 进行多余文件的删除run
-mv ./$rundir/nvt-step-$numofcycle.gro ./$rundir/last.gro
-mv ./$rundir/nvt-step-1.tpr ./$rundir/traj.tpr
-if [ $numofcycle -gt 1 ] ; then
+mv ./$rundir/nvt-step-$ncycles.gro ./$rundir/last.gro
+mv ./$rundir/nvt-step-$ncycles.tpr ./$rundir/traj.tpr
+if [ $ncycles -gt 1 ] ; then
     cd $rundir ; gmx trjcat -f *.trr -o nvt-pro-traj.trr ; cd ..
     rm -rf ./$rundir/*.edr
     rm -rf ./$rundir/*.log

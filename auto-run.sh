@@ -26,14 +26,6 @@ else
     fi
 fi
 
-if [ -n "$ncnnl" ]; then
-    NodeType=cn_nl
-elif [ -n "$ncns" ]; then
-    NodeType=cn-short
-else
-    NodeType=cn_nl
-fi
-
 if [ $NodeType == 'cn_nl' ]; then
     NtasksPerNode=28
 else

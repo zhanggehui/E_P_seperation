@@ -44,7 +44,7 @@ for ((i=1;i<=$ncycles;i++)); do
     sed -i "/tinit/c${reset_tinit}" $mdpfile
 
     #重新给水加速度,更新mdp文件,更新ndx文件
-    source ./$scriptsdir/findwatersinlayer.sh
+    source ./$scriptsdir/pressure_on_water.sh
 
     gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o ./$rundir/$tprname.tpr \
     -po $mdpdir/step$i -n $ndxfile -maxwarn 1  

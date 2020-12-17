@@ -10,9 +10,9 @@ pressure=1900         #Mpa
 nvtequdir=nvtequ
 dt=0.0001              #ps
 ############################################################
-echo "pressure: $pressure" > ./$rundir/cycle.log
-echo '' >> ./$rundir/cycle.log
-echo 'stepnum   count   len   lenv1   lenv2   area   acceleration' >> ./$rundir/cycle.log
+echo "pressure: $pressure" > ./$rundir/cyclelog
+echo '' >> ./$rundir/cyclelog
+echo 'stepnum   count   len   lenv1   lenv2   area   acceleration' >> ./$rundir/cyclelog
 
 cp waterlayer.ndx $rundir
 mdpdir=./$rundir/mdps ; mkdir -p $mdpdir

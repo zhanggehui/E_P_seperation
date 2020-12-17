@@ -6,7 +6,7 @@
 
 numofcycle=10     
 nsteps=10000
-pressure=0         #Mpa
+pressure=1000         #Mpa
 nvtequdir=nvtequ
 dt=0.001           #ps
 ############################################################
@@ -39,7 +39,7 @@ for ((i=1;i<=$numofcycle;i++)); do
     else
         lastgro=./$rundir/nvt-step-$((i-1)).gro ; lastcpt=./$rundir/nvt-step-$((i-1)).cpt
     fi
-    tinit=`awk -v i=$i -v dt=$dt -v nsteps=$nsteps 'BEGIN{printf(%g,(i-1)*dt*nsteps);}'`
+    tinit=`awk -v i=$i -v dt=$dt -v nsteps=$nsteps 'BEGIN{printf("%g",(i-1)*dt*nsteps);}'`
     reset_tinit="tinit                    = $tinit"
     sed -i "/tinit/c${reset_tinit}" $mdpfile
 

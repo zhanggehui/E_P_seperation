@@ -7,7 +7,7 @@ awk -v boolpr=1 \
   if (boolpr==1) 
   {
     print $0;
-    if(match($0,/waterlayer/) {boolpr=0;}
+    if(match($0,"waterlayer") {boolpr=0;}
   }
 }
 ' $oldndxfile > $ndxfile

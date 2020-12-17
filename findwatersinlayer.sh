@@ -7,19 +7,18 @@ awk -v boolpr=1 \
   if (boolpr==1) 
   {
     print $0;
-    if(match($0,"waterlayer") {boolpr=0;}
+    if(match($0,"waterlayer"){boolpr=0;}
   }
 }
 ' $oldndxfile > $ndxfile
 mv $oldndxfile $ndxdir
 
 boxlengthline=`sed -n '$p' $lastgro`
-awk -v boxlengthline=$boxlengthline -v rundir=$rundir -v orientation=$orientation \
--v pressure=$pressure -v i=$i \ 
+awk -v boxlengthline=$boxlengthline -v rundir=$rundir -v orientation=$orientation -v pressure=$pressure -v i=$i \
 '
 BEGIN{
-  if(match(orientation,x))      {p1=21;pbox1=1;pbox2=11;pbox3=21;}
-  else if(match(orientation,y)) {p1=29;pbox1=11;pbox2=1;pbox3=21;}
+  if(match(orientation,"x"))      {p1=21;pbox1=1;pbox2=11;pbox3=21;}
+  else if(match(orientation,"y")) {p1=29;pbox1=11;pbox2=1;pbox3=21;}
   else                          {p1=37;pbox1=21;pbox2=1;pbox3=11;}
   len=substr(boxlengthline,pbox1,10); len=len+0;
   araalen1=substr(boxlengthline,pbox2,10); araalen1=araalen1+0;

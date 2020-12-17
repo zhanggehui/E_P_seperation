@@ -6,9 +6,9 @@
 
 numofcycle=10     
 nsteps=10000
-pressure=1000         #Mpa
+pressure=0         #Mpa
 nvtequdir=nvtequ
-dt=0.001           #ps
+dt=0.001              #ps
 ############################################################
 echo "pressure: $pressure" > ./$rundir/waternumber
 echo '' >> ./$rundir/waternumber

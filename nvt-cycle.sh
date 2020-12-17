@@ -48,7 +48,7 @@ for ((i=1;i<=$numofcycle;i++)); do
 
     gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o ./$rundir/$tprname.tpr \
     -po $mdpdir/step$i -n $ndxfile -maxwarn 1  
-    cd $rundir ; $gmxrun -v -deffnm tprname ; cd ..
+    cd $rundir ; $gmxrun -v -deffnm $tprname ; cd ..
 done
 
 # 进行多余文件的删除run

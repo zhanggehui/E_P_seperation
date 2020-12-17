@@ -4,8 +4,8 @@
 # orientation ; rundir ; runscript ; scriptsdir
 # run in root dir
 
-numofcycle=1     
-nsteps=10000000
+numofcycle=10     
+nsteps=10000
 pressure=0         #Mpa
 nvtequdir=nvtequ
 dt=0.001           #ps

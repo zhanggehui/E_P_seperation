@@ -13,16 +13,17 @@ awk -v boolpr=1 \
 ' $oldndxfile > $ndxfile
 mv $oldndxfile $ndxdir
 
-export boxlengthline=`sed -n '$p' $lastgro`
-awk -v rundir=$rundir -v orientation=$orientation -v pressure=$pressure -v i=$i \
+boxlengthline=`sed -n '$p' $lastgro`
+awk -v boxlengthline=\'$boxlengthline\' -v rundir=$rundir \
+-v orientation=$orientation -v pressure=$pressure -v i=$i \
 '
 BEGIN{
   if(match(orientation,"x"))      {p1=21;pbox1=1;pbox2=11;pbox3=21;}
   else if(match(orientation,"y")) {p1=29;pbox1=11;pbox2=1;pbox3=21;}
   else                          {p1=37;pbox1=21;pbox2=1;pbox3=11;}
-  len=substr(ENVIRON["boxlengthline"],pbox1,10); len=len+0;
-  araalen1=substr(ENVIRON["boxlengthline"],pbox2,10); araalen1=araalen1+0;
-  araalen2=substr(ENVIRON["boxlengthline"],pbox3,10); araalen2=araalen2+0;
+  len=substr(boxlengthline,pbox1,10); len=len+0;
+  araalen1=substr(boxlengthline,pbox2,10); araalen1=araalen1+0;
+  araalen2=substr(boxlengthline,pbox3,10); araalen2=araalen2+0;
   area=araalen1*araalen2;
   coord=0; count=0; acceleration=0;
   thick=2*len;

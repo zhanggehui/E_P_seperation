@@ -19,7 +19,6 @@ for((ioni=2;ioni<3;ioni++)); do
         #shut off electric-field-y
         word="electric-field-$orientation" ; new="electric-field-$orientation         = 0 0 0 0"
         sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp
-        rm -rf nvt-equ
         if [ $runscript == 'nvt-equ.sh' ]; then
             source ./$scriptsdir/auto-run.sh nvt-equ.sh nvtequ
         else

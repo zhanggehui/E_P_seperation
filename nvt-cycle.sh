@@ -6,7 +6,7 @@
 
 ncycles=100     
 nsteps=100000
-pressure=1000         #Mpa
+pressure=1900         #Mpa
 nvtequdir=nvtequ
 dt=0.00001              #ps
 ############################################################

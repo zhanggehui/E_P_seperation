@@ -24,7 +24,7 @@ for((ioni=2;ioni<3;ioni++)); do
         else
             if [ $subpressure -ne 0 ]; then
                 word='pressure='
-                for ((i=0;i<20;i++)); do
+                for ((i=10;i<11;i++)); do
                     export i 
                     pressure=`awk 'BEGIN{ i=ENVIRON["i"]; printf("%s",100*i); }'`   
                     new="pressure=${pressure}     #Mpa"

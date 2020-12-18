@@ -4,11 +4,11 @@
 # orientation ; rundir ; runscript ; scriptsdir
 # run in root dir
 
-ncycles=100     
-nsteps=100000
-pressure=1900           #Mpa
+ncycles=1    
+nsteps=10000000
+pressure=0           #Mpa
 nvtequdir=nvtequ
-dt=0.001              #ps
+dt=0.001             #ps
 ############################################################
 echo "pressure: $pressure" > ./$rundir/cyclelog
 echo '' >> ./$rundir/cyclelog

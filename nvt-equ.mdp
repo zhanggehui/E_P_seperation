@@ -1,4 +1,3 @@
-title                   = OPLS equilibration NVT 300k 2ns
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
 ; e.g.: -I/home/joe/doe -I/home/mary/roe

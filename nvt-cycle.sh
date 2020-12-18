@@ -8,7 +8,7 @@ ncycles=100
 nsteps=100000
 pressure=1900           #Mpa
 nvtequdir=nvtequ
-dt=0.00001              #ps
+dt=0.001              #ps
 ############################################################
 echo "pressure: $pressure" > ./$rundir/cyclelog
 echo '' >> ./$rundir/cyclelog
@@ -31,6 +31,13 @@ sed -i "/$dtline/c${reset_dt}" $mdpfile
 reset_nstxout="nstxout                  =$nsteps"
 nstxoutline='nstxout                  ='
 sed -i "/$nstxoutline/c${reset_nstxout}" $mdpfile
+
+if [ $pressure -gt 0 ]; then
+    key='acc-grps' new='acc-grps                 = waterlayer'
+    sed -i "/$key/c$new" $mdpfile
+    key='accelerate' new='accelerate               = 0 0 0'
+    sed -i "/$key/c$new" $mdpfile
+fi
 
 for ((i=1;i<=$ncycles;i++)); do
     tprname=nvt-step-$i

@@ -21,7 +21,7 @@ for((ioni=2;ioni<3;ioni++)); do
         sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp
 
         if [ $runscript == 'nvt-equ.sh' ]; then
-            source ./$scriptsdir/auto-run.sh nvt-equ.sh nvt-equ
+            source ./$scriptsdir/auto-run.sh nvt-equ.sh nvtequ
         else
             if [ $subpressure -ne 0 ]; then
                 word='pressure='

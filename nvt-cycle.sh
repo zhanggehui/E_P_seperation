@@ -46,8 +46,8 @@ for ((i=1;i<=$ncycles;i++)); do
     #重新给水加速度,更新mdp文件,更新ndx文件
     source ./$scriptsdir/pressure_on_water.sh
 
-    gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o ./$rundir/$tprname.tpr \
-    -po $mdpdir/step$i -n $ndxfile -maxwarn 1  
+    gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile \
+    -o ./$rundir/$tprname.tpr -po $mdpdir/step$i -n $ndxfile -maxwarn 1  
     cd $rundir ; $gmxrun -v -deffnm $tprname ; cd ..
 done
 
@@ -57,7 +57,7 @@ mv ./$rundir/nvt-step-$ncycles.tpr ./$rundir/traj.tpr
 if [ $ncycles -gt 1 ] ; then
     cd $rundir ; gmx trjcat -f *.trr -o nvt-pro-traj.trr ; cd ..
     rm -rf ./$rundir/*.edr
-    rm -rf ./$rundir/*.log
+    #rm -rf ./$rundir/*.log
     rm -rf ./$rundir/*.cpt
     rm -rf ./$rundir/nvt-step-*.trr
     rm -rf ./$rundir/nvt-step-*.gro

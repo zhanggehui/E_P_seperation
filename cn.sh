@@ -19,7 +19,7 @@ if [ $SLURM_JOB_PARTITION == cn_nl ]; then
     source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
 else
     source /appsnew/source/intel2019.sh
-    source /appsnew/mdapps/gromacs2020_cpu_intelmkl2019_cnscompat/bin/GMXRC
+    source /appsnew/mdapps/gromacs2020_cpu_intelmkl2019_cnscompat/bin/GMXRC.bash
 fi
 
 if [ $SLURM_JOB_NUM_NODES -eq 1 -a $Usempirun -eq 0 ]; then

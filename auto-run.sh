@@ -1,7 +1,7 @@
 #!/bin/bash
-#####  changable   ###################################################
-NodeNum=1           #由于后面有文件修改，故节点数只能用1
-export Usempirun=0  # mdrun or mdrun_mpi
+
+NodeNum=1             # 由于后面有文件修改，故节点数只能用1
+export Usempirun=1    # mdrun_mpi or mdrun
 export runscript=$1
 export rundir=$2
 export orientation=y

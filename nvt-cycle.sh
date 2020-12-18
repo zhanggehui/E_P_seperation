@@ -4,8 +4,8 @@
 # orientation ; rundir ; runscript ; scriptsdir
 # run in root dir
 
-ncycles=10     
-nsteps=10000
+ncycles=100     
+nsteps=100000
 pressure=1900         #Mpa
 nvtequdir=nvtequ
 dt=0.00001              #ps
@@ -48,7 +48,7 @@ for ((i=1;i<=$ncycles;i++)); do
 
     gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile \
     -o ./$rundir/$tprname.tpr -po $mdpdir/step$i -n $ndxfile -maxwarn 1  
-    echo "############################ This is the ${i}th run ############################"; echo '';
+    echo "############################ This is the ${i}th run ############################" >> ./$rundir/2.err
     cd $rundir ; $gmxrun -v -deffnm $tprname ; cd ..
 done
 

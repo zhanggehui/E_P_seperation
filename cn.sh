@@ -18,6 +18,7 @@ hosts=`scontrol show hostname $SLURM_JOB_NODELIST` ; echo $hosts
 if [ $SLURM_JOB_PARTITION == cn_nl ]; then
     source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
 else
+    export LD_LIBRARY_PATH=/appsnew/usr/gcc/gcc-7.4.0/lib64:$LD_LIBRARY_PATH
     source /appsnew/source/intel2019.sh
     source /appsnew/mdapps/gromacs2020_cpu_intelmkl2019_cnscompat/bin/GMXRC.bash
 fi

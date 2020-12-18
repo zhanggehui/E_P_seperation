@@ -6,9 +6,9 @@
 
 ncycles=10     
 nsteps=10000
-pressure=0         #Mpa
+pressure=1900         #Mpa
 nvtequdir=nvtequ
-dt=0.0001              #ps
+dt=0.00001              #ps
 ############################################################
 echo "pressure: $pressure" > ./$rundir/cyclelog
 echo '' >> ./$rundir/cyclelog
@@ -57,7 +57,7 @@ mv ./$rundir/nvt-step-$ncycles.tpr ./$rundir/traj.tpr
 if [ $ncycles -gt 1 ] ; then
     cd $rundir ; gmx trjcat -f *.trr -o nvt-pro-traj.trr ; cd ..
     rm -rf ./$rundir/*.edr
-    #rm -rf ./$rundir/*.log
+    rm -rf ./$rundir/*.log
     rm -rf ./$rundir/*.cpt
     rm -rf ./$rundir/nvt-step-*.trr
     rm -rf ./$rundir/nvt-step-*.gro

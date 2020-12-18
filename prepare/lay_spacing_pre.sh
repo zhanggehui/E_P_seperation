@@ -1,12 +1,12 @@
 source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
 
+odir=`pwd`
 ions=("CS" "LI" "NA" "K" "CA" "MG")
 for((ioni=2;ioni<3;ioni++)); do
   ion=${ions[${ioni}]}
     for((layi=7;layi<=13;layi++)); do
         lay=`awk -v layi=$layi 'BEGIN{printf("%2.1f",layi*0.1);}'` 
         dir=lay_spacing/$ion/$lay
-        odir=`pwd`
         if [ ! -d "./$dir" ];then
             mkdir -p ./$dir
             cp -r oplsaaGO.ff ./$dir

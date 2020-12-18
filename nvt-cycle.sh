@@ -46,9 +46,15 @@ for ((i=1;i<=$ncycles;i++)); do
     #重新给水加速度,更新mdp文件,更新ndx文件
     source ./$scriptsdir/pressure_on_water.sh
 
+    echo "######################################### \
+          This is the ${i}th grompp 
+          #########################################" >> ./$rundir/2.err
     gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile \
     -o ./$rundir/$tprname.tpr -po $mdpdir/step$i -n $ndxfile -maxwarn 1  
-    echo "############################ This is the ${i}th run ############################" >> ./$rundir/2.err
+    
+    echo "########################################## \
+          This is the ${i}th run \
+          ##########################################" >> ./$rundir/2.err
     cd $rundir ; $gmxrun -v -deffnm $tprname ; cd ..
 done
 

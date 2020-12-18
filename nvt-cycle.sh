@@ -48,6 +48,7 @@ for ((i=1;i<=$ncycles;i++)); do
 
     gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile \
     -o ./$rundir/$tprname.tpr -po $mdpdir/step$i -n $ndxfile -maxwarn 1  
+    echo "############################ This is the ${i}th run ############################"; echo '';
     cd $rundir ; $gmxrun -v -deffnm $tprname ; cd ..
 done
 

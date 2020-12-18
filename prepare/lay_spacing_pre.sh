@@ -16,9 +16,8 @@ for((ioni=2;ioni<3;ioni++)); do
             gmx make_ndx -f GO2-ion.gro -o waterlayer.ndx < $odir/receive/$ion/$lay/ndx.sh
             git clone https://github.com/zhanggehui/Gmx_GO_ubuntu.git
             mv Gmx_GO_ubuntu scripts
-            cp $odir/md_scripts/.git/config ./scripts/.git/config2
-            mv -f ./scripts/.git/config2 ./scripts/.git/config
-            #source ./scripts/auto-run.sh em.sh em
+            cp -rf $odir/md_scripts/.git/config ./scripts/.git/config
+            source ./scripts/auto-run.sh em.sh em
             cd $odir
         else
             echo 'already exist!'

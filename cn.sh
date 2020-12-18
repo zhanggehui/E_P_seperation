@@ -18,7 +18,7 @@ hosts=`scontrol show hostname $SLURM_JOB_NODELIST` ; echo $hosts
 if [ $SLURM_JOB_PARTITION == cn_nl ]; then
     source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
 else 
-    source /appsnew/mdapps/gromacs2019.3_cpu_intelmkl2019_cnscompat/bin/GMXRC2.bash
+    source /appsnew/mdapps/gromacs2020_cpu_intelmkl2019_cnscompat/bin/GMXRC
 fi
 
 if [ $SLURM_JOB_NUM_NODES -eq 1 -a $Usempirun -eq 0 ]; then

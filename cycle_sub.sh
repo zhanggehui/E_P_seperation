@@ -20,6 +20,7 @@ for((ioni=2;ioni<3;ioni++)); do
         word="electric-field-$orientation" ; new="electric-field-$orientation         = 0 0 0 0"
         sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp 
         if [ $runscript == 'nvt-equ.sh' ]; then
+            cd ./scripts && gitget && cd .. && \
             source ./$scriptsdir/auto-run.sh nvt-equ.sh nvtequ
         else
             if [ $subpressure -ne 0 ]; then
@@ -29,6 +30,7 @@ for((ioni=2;ioni<3;ioni++)); do
                     new="pressure=${pressure}     #Mpa"
                     sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.sh
                     rm -rf ${pressure}Mpa-0V
+                    cd ./scripts && gitget && cd .. && \
                     source ./$scriptsdir/auto-run.sh nvt-cycle.sh ${pressure}Mpa-0V
                 done
             else
@@ -42,6 +44,7 @@ for((ioni=2;ioni<3;ioni++)); do
                     new="electric-field-$orientation         = ${e_amplitude} 0 0 0" 
                     sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp
                     rm -rf 0Mpa-${e_amplitude}V
+                    cd ./scripts && gitget && cd .. && \
                     source ./$scriptsdir/auto-run.sh nvt-cycle.sh 0Mpa-${e_amplitude}V
                 done
             fi

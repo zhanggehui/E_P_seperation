@@ -18,7 +18,7 @@ for((ioni=2;ioni<3;ioni++)); do
         sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.sh
         #shut off electric-field-y
         word="electric-field-$orientation" ; new="electric-field-$orientation         = 0 0 0 0"
-        sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp
+        sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp 
         if [ $runscript == 'nvt-equ.sh' ]; then
             source ./$scriptsdir/auto-run.sh nvt-equ.sh nvtequ
         else
@@ -28,6 +28,7 @@ for((ioni=2;ioni<3;ioni++)); do
                     pressure=`awk -v i=$i 'BEGIN{ printf("%s",100*i); }'`   
                     new="pressure=${pressure}     #Mpa"
                     sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.sh
+                    rm -rf ${pressure}Mpa-0V
                     source ./$scriptsdir/auto-run.sh nvt-cycle.sh ${pressure}Mpa-0V
                 done
             else

@@ -70,7 +70,7 @@ if [ ! -d $rundir ]; then
     fi
 
     sbatch ./$scriptsdir/$submissionscript
-    echo "Submiting a job to ${NodeType}! Please wait!"
+    echo "Submiting a job to ${NodeType}, Please wait..."
     sleep 2s
 else
     echo 'Already exists! Please make sure!'

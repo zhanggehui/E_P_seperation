@@ -1,9 +1,9 @@
 runscript=$1
 scriptsdir='scripts'
 orientation='y'
-subpressure=1      #1代表压强任务，0代表电压任务
+subpressure=0      #1代表压强任务，0代表电压任务
 pvmix=0            #1代表压强,电场共同作用，此时电场反向
-pressure=1000         #共同作用:确定压强,变化电场，  记得改变一下压强
+pressure=0         #共同作用:确定压强,变化电场，  记得改变一下压强
 
 odir=`pwd`
 ions=("CS" "LI" "NA" "K" "CA" "MG")
@@ -33,7 +33,7 @@ for((ioni=2;ioni<3;ioni++)); do
                 done
             else
                 word="electric-field-$orientation"
-                for ((i=1;i<17;i++)); do
+                for ((i=10;i<11;i++)); do
                     export i 
                     if [ $pvmix -ne 0 ]; then
                         e_amplitude=`awk 'BEGIN{ i=ENVIRON["i"]; printf("%s",-0.1*i); }'`

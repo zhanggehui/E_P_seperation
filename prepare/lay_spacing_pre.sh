@@ -2,15 +2,16 @@ source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
 
 poolsimulation=1
 if [ $poolsimulation -eq 1 ]; then
-    dir1=pool
+    dir1=pool ; runscript=em_wall.sh
 else
-    dir1=lay_spacing
-fi 
+    dir1=lay_spacing ; runscript=em.sh
+fi
+
 odir=`pwd`
 ions=("CS" "LI" "NA" "K" "CA" "MG")
 for((ioni=2;ioni<3;ioni++)); do
     ion=${ions[${ioni}]}
-    for((layi=7;layi<=13;layi++)); do
+    for((layi=7;layi<=7;layi++)); do
         lay=`awk -v layi=$layi 'BEGIN{printf("%2.1f",layi*0.1);}'` 
         dir=$dir1/$ion/$lay
         if [ ! -d "./$dir" ];then
@@ -28,7 +29,7 @@ for((ioni=2;ioni<3;ioni++)); do
             git clone https://github.com/zhanggehui/Gmx_GO_ubuntu.git
             mv Gmx_GO_ubuntu scripts
             cp -rf $odir/md_scripts/.git/config ./scripts/.git/config
-            source ./scripts/auto-run.sh em.sh em
+            source ./scripts/auto-run.sh $runscript em
             cd $odir
         else
             echo 'already exist!'

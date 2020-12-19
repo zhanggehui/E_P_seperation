@@ -1,7 +1,7 @@
 runscript=$1
 scriptsdir='scripts'
 orientation='y'
-subpressure=1      #1代表压强任务，0代表电压任务
+subpressure=0      #1代表压强任务，0代表电压任务
 pvmix=0            #1代表压强,电场共同作用，此时电场反向
 pressure=0         #共同作用:确定压强,变化电场，  记得改变一下压强
 
@@ -41,6 +41,7 @@ for((ioni=2;ioni<3;ioni++)); do
                     fi
                     new="electric-field-$orientation         = ${e_amplitude} 0 0 0" 
                     sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp
+                    rm -rf 0Mpa-${e_amplitude}V
                     source ./$scriptsdir/auto-run.sh nvt-cycle.sh 0Mpa-${e_amplitude}V
                 done
             fi

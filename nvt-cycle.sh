@@ -51,7 +51,9 @@ for ((i=1;i<=$ncycles;i++)); do
     sed -i "/tinit/c${reset_tinit}" $mdpfile
 
     #重新给水加速度,更新mdp文件,更新ndx文件
-    source ./$scriptsdir/pressure_on_water.sh
+    if [ $pressure -gt 0 ]; then
+        source ./$scriptsdir/pressure_on_water.sh
+    fi
     echo "######################################### \
           This is the ${i}th grompp \
           #########################################" >> ./$rundir/2.err

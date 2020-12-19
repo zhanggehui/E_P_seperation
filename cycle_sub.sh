@@ -1,7 +1,7 @@
 runscript=$1
 scriptsdir='scripts'
 orientation='y'
-subpressure=0      #1代表压强任务，0代表电压任务
+subpressure=1      #1代表压强任务，0代表电压任务
 pvmix=0            #1代表压强,电场共同作用，此时电场反向
 pressure=0         #共同作用:确定压强,变化电场，  记得改变一下压强
 

@@ -21,7 +21,7 @@ else
         NodeType=cn_nl
     elif [ $ncns -gt $ncnnl ]; then
         NodeType=cn-short
-    else 
+    else
         NodeType=cn_nl
     fi
 fi

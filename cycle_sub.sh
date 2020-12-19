@@ -25,20 +25,18 @@ for((ioni=2;ioni<3;ioni++)); do
             if [ $subpressure -ne 0 ]; then
                 word='pressure='
                 for ((i=10;i<11;i++)); do
-                    export i 
-                    pressure=`awk 'BEGIN{ i=ENVIRON["i"]; printf("%s",100*i); }'`   
+                    pressure=`awk -v i=$i 'BEGIN{ printf("%s",100*i); }'`   
                     new="pressure=${pressure}     #Mpa"
                     sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.sh
                     source ./$scriptsdir/auto-run.sh nvt-cycle.sh ${pressure}Mpa-0V
                 done
             else
                 word="electric-field-$orientation"
-                for ((i=10;i<11;i++)); do
-                    export i 
+                for ((i=10;i<11;i++)); do 
                     if [ $pvmix -ne 0 ]; then
-                        e_amplitude=`awk 'BEGIN{ i=ENVIRON["i"]; printf("%s",-0.1*i); }'`
+                        e_amplitude=`awk -v i=$i 'BEGIN{ printf("%s",-0.1*i); }'`
                     else
-                        e_amplitude=`awk 'BEGIN{ i=ENVIRON["i"]; printf("%s",0.1*i); }'`
+                        e_amplitude=`awk -v i=$i 'BEGIN{ printf("%s",0.1*i); }'`
                     fi
                     new="electric-field-$orientation         = ${e_amplitude} 0 0 0" 
                     sed -i "/$word/c$new" ./$scriptsdir/nvt-cycle.mdp

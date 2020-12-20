@@ -21,7 +21,7 @@ freezedim       = Y Y Y
 ; Number of walls, type, atom types, densities and box-z scale factor for Ewald
 nwall                    = 2
 wall-type                = 12-6
-wall-r-linpot            = -1
+wall-r-linpot            = 0.3
 wall-atomtype            = opls_111 opls_111
 wall-density             = 
 wall-ewald-zfac          = 3

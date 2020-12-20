@@ -22,6 +22,6 @@ freezedim       = Y Y Y
 nwall                    = 2
 wall-type                = 12-6
 wall-r-linpot            = -1
-wall-atomtype            = opls_111
+wall-atomtype            = opls_111 opls_111
 wall-density             = 
 wall-ewald-zfac          = 3

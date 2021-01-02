@@ -1,0 +1,25 @@
+units real
+boundary p s p
+
+newton off
+pair_style lj/cut/coul/long 10.0
+pair_modify shift yes mix geometric
+kspace_style pppm 1e-6
+
+atom_style full
+bond_style harmonic
+angle_style harmonic
+special_bonds lj/coul 0.0 0.0 0.5
+
+read_data GO.data
+region ylo_p plane 0 $(ylo) 0 0 1 0
+region yhi_p plane 0 $(yhi) 0 0 -1 0
+fix wallylo all wall/region ylo_p lj126 0.1521 3.1505742268315 10
+fix wallyhi all wall/region yhi_p lj126 0.1521 3.1505742268315 10
+
+min_style cg
+minimize 0.0 1.0e-8 10000 20000
+
+velocity all create 300 30315 dist gaussian
+fix 1 all nvt temp 300 300 100.0
+run 2000000

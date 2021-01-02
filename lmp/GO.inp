@@ -1,10 +1,11 @@
 units real
-boundary p s p
+boundary p p f
 
 newton off
 pair_style lj/cut/coul/long 10.0
 pair_modify shift yes mix geometric
 kspace_style pppm 1e-6
+kspace_modify slab nozforce
 
 atom_style full
 bond_style harmonic
@@ -12,10 +13,10 @@ angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
 
 read_data GO.data
-region ylo_p plane 0 $(ylo) 0 0 1 0
-region yhi_p plane 0 $(yhi) 0 0 -1 0
-fix wallylo all wall/region ylo_p lj126 0.1521 3.1505742268315 10
-fix wallyhi all wall/region yhi_p lj126 0.1521 3.1505742268315 10
+region zlo_p plane 0 0 $(zlo) 0 0 1
+region zhi_p plane 0 0 $(zhi) 0 0 -1
+fix wallylo all wall/region zlo_p lj126 0.1521 3.1505742268315 10
+fix wallyhi all wall/region zhi_p lj126 0.1521 3.1505742268315 10
 
 min_style cg
 minimize 0.0 1.0e-8 10000 20000

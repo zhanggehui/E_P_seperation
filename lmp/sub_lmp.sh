@@ -11,8 +11,6 @@
 #SBATCH --exclusive
 
 hosts=`scontrol show hostname $SLURM_JOB_NODELIST`; echo $hosts
-
 source /home/liufeng_pkuhpc/lustre2/zgh/zgh_lmp/lmp_use/lammps_29Oct2020.sh auto
-#source /home/liufeng_pkuhpc/lustre2/zgh/zgh_lmp/lmp_use/lmp_modify.sh   #cns version
 
 mpirun -np $SLURM_NTASKS lmp -e screen -log none -in $1

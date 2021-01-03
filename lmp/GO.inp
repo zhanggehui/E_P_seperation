@@ -24,7 +24,7 @@ fix rigidgra gra setforce 0 0 0
 
 thermo 1000
 min_style sd
-minimize 0.0 1.0 10000 20000
+minimize 0.0 1.0e-8 10000 20000
 write_dump all atom min.dump
 
 velocity all create 300 30315 dist gaussian

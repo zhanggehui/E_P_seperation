@@ -23,7 +23,7 @@ fix wallyhi all wall/region zhi_p lj126 0.1521 3.1505742268315 10
 fix rigidgra gra setforce 0 0 0
 
 thermo 1000
-min_style sd
+min_style cg
 minimize 0.0 1.0e-8 10000 20000
 write_dump all atom min.dump
 

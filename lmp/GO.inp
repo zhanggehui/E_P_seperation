@@ -15,16 +15,17 @@ special_bonds lj/coul 0.0 0.0 0.5
 read_data GO.data
 
 group gra type 1
-
 region zlo_p plane 0 0 $(zlo) 0 0 1
 region zhi_p plane 0 0 $(zhi) 0 0 -1
 fix wallylo all wall/region zlo_p lj126 0.1521 3.1505742268315 10
 fix wallyhi all wall/region zhi_p lj126 0.1521 3.1505742268315 10
+fix rigidgra gra setforce 0 0 0
 
-fix rigidgra gra setforce 0 0 0 
-min_style cg
-minimize 0.0 1.0e-8 10000 20000
+min_style sd
+minimize 0.0 1.0 10000 20000
+write_dump all atom min.dump
 
 velocity all create 300 30315 dist gaussian
 fix 1 all nvt temp 300 300 100.0
 run 2000000
+write_dump all atom nvt.dump

@@ -12,5 +12,5 @@
 
 hosts=`scontrol show hostname $SLURM_JOB_NODELIST`; echo $hosts
 source /home/liufeng_pkuhpc/lustre2/zgh/zgh_lmp/lmp_use/lammps_29Oct2020.sh auto
-
-mpirun -np $SLURM_NTASKS lmp -e screen -log none -in ./$rundir/$runscript
+cd ./$rundir
+mpirun -np $SLURM_NTASKS lmp -e screen -log none -in $runscript

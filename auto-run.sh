@@ -55,7 +55,7 @@ if [ ! -d $rundir ]; then
         sed -i "/$keyword/c$newline" $submissionscript
     fi
     #####################################################################
-    jobname="${md_code}_$2" ; keyword="#SBATCH -J" ; newline="#SBATCH -J $jobname"
+    jobname="${md_code}_$3" ; keyword="#SBATCH -J" ; newline="#SBATCH -J $jobname"
     sed -i "/$keyword/c$newline" $submissionscript
     oname="./$rundir/1.out" ; keyword="#SBATCH -o" ; newline="#SBATCH -o $oname"
     sed -i "/$keyword/c$newline" $submissionscript

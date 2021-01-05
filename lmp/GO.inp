@@ -29,10 +29,9 @@ min_style sd
 minimize 0.0 1.0e-8 10000 20000
 write_dump all atom min.dump
 
-velocity all create 300 30315 dist gaussian
-fix 1 all nvt temp 300 300 100.0
+velocity water create 300 30315 dist gaussian
+fix 1 water nvt temp 300 300 100.0
 fix 2 water shake 0.0001 20 100 b 9 a 11
-fix rigidgra2 gra smd/setvel 0 0 0
 
 thermo 1000
 timestep 0.1

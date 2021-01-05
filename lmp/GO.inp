@@ -24,7 +24,7 @@ fix rigidgra gra setforce 0 0 0
 
 thermo 10
 dump check all atom 10 check.dump
-dump check gra atom 100 check.dump
+dump check2 gra atom 100 check2.dump
 min_style sd
 minimize 0.0 1.0e-8 10000 20000
 write_dump all atom min.dump

@@ -2,7 +2,7 @@ units real
 boundary p p f
 
 newton off
-pair_style lj/cut/coul/cut 15.0
+pair_style lj/cut/coul/cut 10.0
 pair_modify shift yes mix geometric
 #kspace_style pppm 1e-6
 #kspace_modify slab 3.0

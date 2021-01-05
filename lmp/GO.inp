@@ -18,8 +18,8 @@ group gra type 1:11
 group water type 12 13
 region zlo_p plane 0 0 $(zlo) 0 0 1
 region zhi_p plane 0 0 $(zhi) 0 0 -1
-fix wallylo all wall/region zlo_p lj126 0.1521 3.1505742268315 10
-fix wallyhi all wall/region zhi_p lj126 0.1521 3.1505742268315 10
+fix wallylo all wall/region zlo_p lj126 $(2*0.1521) 3.1505742268315 15
+fix wallyhi all wall/region zhi_p lj126 $(2*0.1521) 3.1505742268315 15
 fix rigidgra gra setforce 0 0 0
 
 thermo 10

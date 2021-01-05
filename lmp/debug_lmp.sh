@@ -5,7 +5,6 @@
 #SBATCH -o ./1.out
 #SBATCH -e ./2.err
 #SBATCH --no-requeue
-#SBATCH -A liufeng_g1
 #SBATCH --ntasks-per-node=24
 #SBATCH --exclusive
 

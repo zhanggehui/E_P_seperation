@@ -38,7 +38,7 @@ fi
 if [ ! -d $rundir ]; then
     mkdir $rundir
     ##choose proper node setting ########################################
-    if [ ${debug_flag} -ge 0 ]; then
+    if [ ${debug_flag} -gt 0 ]; then
         submissionscript="$scriptsdir/debug_${md_code}.sh"
         NodeType='debug'
     else

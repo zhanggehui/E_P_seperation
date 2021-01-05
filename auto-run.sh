@@ -1,4 +1,5 @@
 md_code=$1
+debug_flag=1
 export runscript=$2
 export rundir=$3
 if [ ${md_code} == 'lmp' ]; then
@@ -37,23 +38,28 @@ fi
 if [ ! -d $rundir ]; then
     mkdir $rundir
     ##choose proper node setting ########################################
-    submissionscript="$scriptsdir/cn_${md_code}.sh"
-    keyword="#SBATCH -p"; newline="#SBATCH -p $NodeType"
-    sed -i "/$keyword/c$newline" $submissionscript
-    keyword="#SBATCH -N"; newline="#SBATCH -N $NodeNum"
-    sed -i "/$keyword/c$newline" $submissionscript
-    keyword="#SBATCH --ntasks-per-node"; newline="#SBATCH --ntasks-per-node=$NtasksPerNode"
-    sed -i "/$keyword/c$newline" $submissionscript
-    if [ "$NodeType" == cn-short ]; then
-        keyword="#SBATCH --qos"; newline="#SBATCH --qos=liufengcns"
+    if [ debug_flag -eq 1 ]; then
+        submissionscript="$scriptsdir/debug_${md_code}.sh"
+    else
+        submissionscript="$scriptsdir/cn_${md_code}.sh"
+        keyword="#SBATCH -p"; newline="#SBATCH -p $NodeType"
         sed -i "/$keyword/c$newline" $submissionscript
-    elif [ "$NodeType" == cn_nl ]; then
-        keyword="#SBATCH --qos"; newline="#SBATCH --qos=liufengcnnl"
+        keyword="#SBATCH -N"; newline="#SBATCH -N $NodeNum"
         sed -i "/$keyword/c$newline" $submissionscript
-    elif [ "$NodeType" == cn-long ]; then
-        keyword="#SBATCH --qos"; newline="#SBATCH --qos=liufengcnl"
+        keyword="#SBATCH --ntasks-per-node"; newline="#SBATCH --ntasks-per-node=$NtasksPerNode"
         sed -i "/$keyword/c$newline" $submissionscript
+        if [ "$NodeType" == cn-short ]; then
+            keyword="#SBATCH --qos"; newline="#SBATCH --qos=liufengcns"
+            sed -i "/$keyword/c$newline" $submissionscript
+        elif [ "$NodeType" == cn_nl ]; then
+            keyword="#SBATCH --qos"; newline="#SBATCH --qos=liufengcnnl"
+            sed -i "/$keyword/c$newline" $submissionscript
+        elif [ "$NodeType" == cn-long ]; then
+            keyword="#SBATCH --qos"; newline="#SBATCH --qos=liufengcnl"
+            sed -i "/$keyword/c$newline" $submissionscript
+        fi
     fi
+
     #####################################################################
     jobname="${md_code}_$3" ; keyword="#SBATCH -J" ; newline="#SBATCH -J $jobname"
     sed -i "/$keyword/c$newline" $submissionscript

@@ -32,6 +32,8 @@ write_dump all atom min.dump
 velocity all create 300 30315 dist gaussian
 fix 1 all nvt temp 300 300 100.0
 fix 2 water shake 0.0001 20 100 b 9 a 11
+fix rigidgra2 gra smd/setvel 0 0 0
+
 thermo 1000
 timestep 0.1
 run 2000000

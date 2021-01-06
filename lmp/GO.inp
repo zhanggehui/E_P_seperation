@@ -14,7 +14,7 @@ special_bonds lj/coul 0.0 0.0 0.5
 
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/GO.data
 
-group gra type 1
+group gra type 1:11
 fix freeze_gra gra setforce 0 0 0
 region zlo_p plane 0 0 $(zlo) 0 0 1
 region zhi_p plane 0 0 $(zhi) 0 0 -1

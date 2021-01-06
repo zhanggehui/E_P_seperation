@@ -28,7 +28,7 @@ minimize 0.0 1.0e-8 10000 20000
 write_dump all atom min.dump
 
 group water type 12 13
-group notgra subtract all gra
+group notgra subtract all gra_and_func
 velocity notgra create 300 30315 dist gaussian
 fix 1 notgra nvt temp 300 300 100.0
 fix 2 all shake 0.0001 20 1000 b 5 9 a 11

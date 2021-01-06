@@ -35,7 +35,7 @@ group water type 12 13
 group notgra subtract all gra
 velocity notgra create 300 30315 dist gaussian
 fix 1 notgra nvt temp 300 300 100.0
-fix 2 all shake 0.0001 20 1000 b 5 8 a 11
+fix 2 all shake 0.0001 20 1000 b 5 9 a 11
 dump check all atom 100 check.dump
 thermo 1000
 timestep 1

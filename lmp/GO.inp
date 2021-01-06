@@ -25,13 +25,13 @@ if "${debug} > 0" then &
 "dump checkmin all atom 10 checkmin.dump"
 
 thermo 100
+thermo_style custom step temp epair emol etotal press fmax
 min_style sd
 group gra_and_HCAR type 1 11
 fix freeze gra_and_HCAR setforce 0 0 0
 minimize 0.0 1.0e-5 10000 20000
 group gra type 1
 fix freeze gra setforce 0 0 0
-thermo_style custom step temp epair emol etotal press fmax
 minimize 0.0 1.0e-5 10000 20000
 
 group water type 12 13

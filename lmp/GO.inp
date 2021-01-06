@@ -31,6 +31,7 @@ fix freeze gra_and_HCAR setforce 0 0 0
 minimize 0.0 1.0e-6 10000 20000
 group gra type 1
 fix freeze gra setforce 0 0 0
+thermo_style custom step temp epair emol etotal press fmax
 minimize 0.0 1.0e-6 10000 20000
 
 group water type 12 13
@@ -42,6 +43,7 @@ fix 2 all shake 0.0001 20 1000 b 5 9 a 11
 if "${debug} > 0" then &
 "dump checknvt all atom 100 checknvt.dump"
 
+thermo_style one
 thermo 1000
 timestep 1
 run 10000

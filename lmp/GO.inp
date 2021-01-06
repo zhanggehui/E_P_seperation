@@ -2,10 +2,10 @@ units real
 boundary p p f
 
 newton off
-pair_style lj/cut/coul/long 10.0
+pair_style lj/cut/coul/cut 10.0
 pair_modify shift yes mix geometric
-kspace_style pppm 1e-6
-kspace_modify slab 3.0
+#kspace_style pppm 1e-6
+#kspace_modify slab 3.0
 
 atom_style full
 bond_style harmonic
@@ -14,23 +14,27 @@ special_bonds lj/coul 0.0 0.0 0.5
 
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/GO.data
 
-group gra type 1:11
-fix freeze_gra gra setforce 0 0 0
+group gra_and_func type 1:11
+fix freeze_gra gra_and_func setforce 0 0 0
 region zlo_p plane 0 0 $(zlo) 0 0 1
 region zhi_p plane 0 0 $(zhi) 0 0 -1
-fix wallylo all wall/region zlo_p lj126 0.1521 3.1505742268315 10
-fix wallyhi all wall/region zhi_p lj126 0.1521 3.1505742268315 10
+fix wallzlo all wall/region zlo_p lj126 0.1521 3.1505742268315 10
+fix wallzhi all wall/region zhi_p lj126 0.1521 3.1505742268315 10
 
 thermo 10
 min_style sd
-minimize 0.0 1.0e-8 10000 20000
+minimize 1.0e-8 1.0e-8 10000 20000
 write_dump all atom min.dump
 
+group gra type 1
+fix freeze_gra gra setforce 0 0 0 
 group water type 12 13
 group notgra subtract all gra
 velocity notgra create 300 30315 dist gaussian
 fix 1 notgra nvt temp 300 300 100.0
-fix 2 water shake 0.0001 20 100 b 9 a 11
+fix 2 water shake 0.0001 20 1000 b 9 a 11
+fix 3 all shake 0.0001 20 1000 t 6 m 1.008
+fix 4 all shake 0.0001 20 1000 t 10 m 1.008
 dump check all atom 1000 check.dump
 thermo 1000
 timestep 1

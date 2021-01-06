@@ -32,7 +32,7 @@ minimize 0.0 1.0e-6 10000 20000
 group gra type 1
 fix freeze gra setforce 0 0 0
 thermo_style custom step temp epair emol etotal press fmax
-minimize 0.0 1.0e-6 10000 20000
+minimize 0.0 1.0e-5 10000 20000
 
 group water type 12 13
 group notgra subtract all gra

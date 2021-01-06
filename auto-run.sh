@@ -3,7 +3,7 @@ debug_flag=0
 export runscript=$2
 export rundir=$3
 if [ ${md_code} == 'lmp' ]; then
-    NodeNum=2
+    NodeNum=4
     scriptsdir='/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp'
 else
     NodeNum=1             # 由于后面有文件修改，故节点数只能用1

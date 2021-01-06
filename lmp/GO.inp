@@ -39,7 +39,7 @@ fix 2 all shake 0.0001 20 100 b 5 9 a 11
 dump check all atom 100 check.dump
 thermo 1000
 timestep 1
-run 50000
+run 5000
 
 fix 2 all shake 0.0001 20 1000 b 5 8 9 a 11
 dump nvt all atom 1000 nvt.dump

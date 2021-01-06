@@ -28,7 +28,7 @@ thermo 100
 min_style sd
 group gra_and_HCAR type 1 11
 fix freeze gra_and_HCAR setforce 0 0 0
-minimize 0.0 1.0e-6 10000 20000
+minimize 0.0 1.0e-5 10000 20000
 group gra type 1
 fix freeze gra setforce 0 0 0
 thermo_style custom step temp epair emol etotal press fmax

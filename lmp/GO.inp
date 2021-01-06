@@ -22,6 +22,7 @@ fix wallzlo all wall/region zlo_p lj126 0.1521 3.1505742268315 10
 fix wallzhi all wall/region zhi_p lj126 0.1521 3.1505742268315 10
 
 thermo 10
+dump check1 all atom 10 min.dump
 min_style sd
 minimize 0.0 1.0e-8 10000 20000
 write_dump all atom min.dump

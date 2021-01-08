@@ -49,6 +49,7 @@ thermo 1000
 timestep 1
 run 10000
 
+unfix down
 fix 2 all shake 0.0001 20 100 b 5 8 9 a 11
 dump nvt all atom 100 nvt.dump
 thermo 10000

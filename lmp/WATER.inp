@@ -10,4 +10,5 @@ fix removeMomentum all momentum 100 linear 1 1 1
 fix constrain all shake 1.0e-4 20 100 b 1 a 1
 fix room all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
 thermo 100
+timestep 2
 run 100000

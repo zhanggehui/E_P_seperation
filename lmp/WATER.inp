@@ -2,15 +2,16 @@ units real
 atom_style full
 
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/singleTIP3P.data
-replicate 1 1 1
+replicate 20 20 20
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/TIP3P.forcefield
 
 velocity all create 300 1234
-group water type 1 2
 fix removeMomentum all momentum 100 linear 1 1 1
-fix constrain water shake 1.0e-6 100 100 b 1 a 1 
-fix nve all nve
-#fix room all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
+fix constrain all shake 1.0e-6 100 100 b 1 a 1 
+#fix nve all nve
+fix room all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
+run 0 
+write dump all atom water.dump
 thermo 100
 thermo_style custom step temp epair emol etotal press vol atoms
 run 100000

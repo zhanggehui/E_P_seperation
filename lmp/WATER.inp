@@ -1,11 +1,11 @@
 units real
 atom_style full
 
-#read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/singleTIP3P.data
-read_data singleTIP3P.data
+read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/singleTIP3P.data
+#read_data singleTIP3P.data
 replicate 20 20 20
-#include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/TIP3P.forcefield
-include TIP3P.forcefield
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/TIP3P.forcefield
+#include TIP3P.forcefield
 
 velocity all create 300 1234
 fix removeMomentum all momentum 100 linear 1 1 1

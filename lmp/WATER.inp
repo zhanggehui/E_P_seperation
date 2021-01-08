@@ -10,4 +10,5 @@ fix removeMomentum all momentum 100 linear 1 1 1
 fix constrain all rattle 1.0e-4 20 100 t 2 m 1
 fix room all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
 thermo 100
+thermo_style custom step temp epair emol etotal press vol atoms
 run 100000

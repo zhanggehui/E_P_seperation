@@ -35,11 +35,12 @@ fix freeze gra setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
 
 group water type 12 13
+group HCAR type 11
 group notgra subtract all gra
 velocity notgra create 300 30315 dist gaussian
 fix 1 notgra nvt temp 300 300 100.0
 fix 2 all shake 0.0001 20 1000 b 5 9 a 11
-fix down flow viscous 0.5
+fix down HCAR flow viscous 0.5
 
 if "${debug} > 0" then &
 "dump checknvt all atom 100 checknvt.dump"

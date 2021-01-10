@@ -13,13 +13,33 @@ atom_style full
 bond_style harmonic
 angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
-
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data
 
-region zlo_p plane 0 0 $(zlo) 0 0 1
-region zhi_p plane 0 0 $(zhi) 0 0 -1
-fix wallzlo all wall/region zlo_p lj126 0.1521 3.1505742268315 10
-fix wallzhi all wall/region zhi_p lj126 0.1521 3.1505742268315 10
+region zlo_plane plane 0 0 $(zlo) 0 0 1
+region zhi_plane plane 0 0 $(zhi) 0 0 -1
+fix wallzlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10
+fix wallzhi all wall/region zhi_plane lj126 0.1521 3.1505742268315 10
+
+group go type 1:11
+group notgo subtract all go
+variable go_zlo equal bound(go,zmin)
+variable go_zhi equal bound(go,zmax)
+region upbox EDGE EDGE EDGE EDGE v_go_zhi EDGE
+region lowbox EDGE EDGE EDGE EDGE EDGE v_go_zlo
+variable upa atom grmask(notgo,upbox)
+variable lowa atom grmask(notgo,lowbox)
+group upwater variable upa
+group lowwater variable lowa
+
+variable up_vol equal "(zhi-v_go_zhi)/(zhi-zlo)*vol"
+compute upwater_peratom all stress/atom thermo_temp
+compute upwater_p all reduce sum c_upwater_peratom[1] c_upwater_peratom[2] c_upwater_peratom[3]
+variable upwater_press equal -(c_upwater_p[1]+c_upwater_p[2]+c_upwater_p[3])/(3*v_up_vol)
+
+variable low_vol equal "(v_go_zlo-zlo)/(zhi-zlo)*vol"
+compute lowwater_peratom all stress/atom thermo_temp
+compute lowwater_p all reduce sum c_lowwater_peratom[1] c_lowwater_peratom[2] c_lowwater_peratom[3]
+variable lowwater_press equal -(c_lowwater_p[1]+c_lowwater_p[2]+c_lowwater_p[3])/(3*v_low_vol)
 
 if "${debug} > 0" then &
 "dump checkmin all atom 10 checkmin.dump"
@@ -27,12 +47,13 @@ if "${debug} > 0" then &
 thermo 100
 thermo_style custom step temp epair emol etotal press fmax
 min_style sd
-group gra_and_HCAR type 1 11
+group gra_and_HCAR type 1:4 11
 fix freeze gra_and_HCAR setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
-group gra type 1
+group gra type 1:4
 fix freeze gra setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
+
 
 group water type 12 13
 group HCAR type 11
@@ -45,7 +66,7 @@ fix down HCAR viscous 0.5
 if "${debug} > 0" then &
 "dump checknvt all atom 100 checknvt.dump"
 
-thermo_style one
+thermo_style custom step temp etotal press v_upwater_press v_lowwater_press
 thermo 1000
 timestep 0.1
 run 10000

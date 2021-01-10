@@ -24,8 +24,8 @@ group go type 1:11
 group notgo subtract all go
 variable go_zlo equal bound(go,zmin)
 variable go_zhi equal bound(go,zmax)
-region upbox block EDGE EDGE EDGE EDGE v_go_zhi EDGE
-region lowbox block EDGE EDGE EDGE EDGE EDGE v_go_zlo
+region upbox block EDGE EDGE EDGE EDGE $(v_go_zhi) EDGE
+region lowbox block EDGE EDGE EDGE EDGE EDGE $(v_go_zlo)
 variable upa atom grmask(notgo,upbox)
 variable lowa atom grmask(notgo,lowbox)
 group upwater variable upa

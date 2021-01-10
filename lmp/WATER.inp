@@ -1,31 +1,13 @@
-variable local equal 1
-
 units real
 atom_style full
 
-if "${local} > 0" then &
-"read_data singleTIP3P.data" &
-"include TIP3P.forcefield" &
-else &
-"read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/singleTIP3P.data" &
-"include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/TIP3P.forcefield"
+read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/singleTIP3P.data
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/TIP3P.forcefield
 replicate 20 20 20
 
 velocity all create 300 1234
-#fix removeMomentum all momentum 100 linear 1 1 1
-#fix constrain all shake 1.0e-4 20 100 b 1 a 1
-#fix room all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
-
-fix freeze all setforce 0 0 0
-fix nve all nve
-compute mypress all pressure thermo_temp ke
-compute mypress2 all pressure NULL ke 
-compute peratom all stress/atom NULL
-compute p all reduce sum c_peratom[1] c_peratom[2] c_peratom[3]
-variable press equal -(c_p[1]+c_p[2]+c_p[3])/(3*vol)
-thermo_style   custom step temp etotal press v_press c_mypress c_mypress2
-
-#pair bond angle dihedral improper kspace fix
-
+fix removeMomentum all momentum 100 linear 1 1 1
+fix constrain all shake 1.0e-4 20 100 b 1 a 1
+fix room all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
 thermo 100
 run 1000000

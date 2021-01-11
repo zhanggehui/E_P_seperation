@@ -30,13 +30,9 @@ write_data system.data
 #fix wallzlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10
 #fix wallzhi all wall/region zhi_plane lj126 0.1521 3.1505742268315 10
 
-variable upw atom "z==zhi"
-variable loww atom "z==zlo"
-
 group go type 1:11
-group upwall variable upw
-group lowwall variable loww
-group notgo subtract all go upwall lowwall
+group walls type 16
+group notgo subtract all go walls
 variable go_zlo equal bound(go,zmin)
 variable go_zhi equal bound(go,zmax)
 region upbox block EDGE EDGE EDGE EDGE $(v_go_zhi) EDGE
@@ -64,7 +60,7 @@ thermo_style custom step temp epair emol etotal press fmax
 min_style sd
 group gra_and_HCAR type 1:4 11
 group gra type 1:4
-group fixatoms union gra_and_HCAR upwall lowwall
+group fixatoms union gra_and_HCAR walls
 
 fix freeze fixatoms setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000

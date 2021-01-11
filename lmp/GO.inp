@@ -1,11 +1,9 @@
 variable debug equal 1
 
 ### build system ################################################################
-
 units real
 boundary p p f
 newton off
-
 pair_style lj/cut/coul/cut 10.0
 pair_modify shift yes mix geometric
 #kspace_style pppm 1e-6
@@ -15,8 +13,7 @@ bond_style harmonic
 angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
-
-### 在两侧建立原子墙
+### 在两侧建立原子墙 ####
 mass 16 15.9994  # wall atom, same as O
 pair_coeff 16 16 0.1521 3.1505742268315 10.0
 lattice sc 2
@@ -24,7 +21,6 @@ variable zz internal 0.0
 variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
 create_atoms 16 box var v set z zz
 lattice none 1
-
 change_box all boundary p p s
 
 if "${debug} > 0" then &
@@ -36,10 +32,9 @@ if "${debug} > 0" then &
 group gra type 1:4
 group go type 1:11
 group walls type 16
-#group water type 12 13
+group water type 12 13
 
-### 定义上下压强 #####
-
+### 定义上下压强 ###
 group sol subtract all go walls
 variable go_zlo equal bound(go,zmin)
 variable go_zhi equal bound(go,zmax)
@@ -67,16 +62,15 @@ group upwall variable upa
 group lowwall variable lowa
 
 ##### minimize #########################################################
-
 if "${debug} > 0" then &
 "dump check all atom 100 check.dump"
 
-thermo_style custom step temp epair emol etotal press fmax
-thermo 100
-min_style sd
 group gra_and_HCAR type 1:4 11
 group fix_atoms union gra_and_HCAR walls
 fix freeze fix_atoms setforce 0 0 0
+thermo_style custom step temp epair emol etotal press fmax
+thermo 100
+min_style sd
 minimize 0.0 1.0e-8 2000 20000
 unfix freeze
 group gra_and_HCAR delete
@@ -84,17 +78,17 @@ group fix_atoms delete
 
 group fix_atoms union gra walls
 group free_atoms subtract all fix_atoms
-
+group fix_atoms delete
 fix freeze gra setforce 0 0 0
 fix nfwall walls nve/noforce
 velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
 fix rigid_water all shake 0.0001 20 1000 b 5 9 a 11
 group HCAR type 11
-fix down HCAR viscous 1
+fix down HCAR viscous 10
 variable fupwall equal fcm(walls,z,upbox)
 variable flowwall equal fcm(walls,z,lowbox)
-thermo_style custom step temp etotal press v_upwater_press v_lowwater_press v_fupwall v_flowwall
+thermo_style custom step temp etotal press v_upwater_press v_lowwater_press v_fupwall v_flowwall vol
 thermo 1000
 thermo_modify lost/bond warn
 timestep 0.1

@@ -2,7 +2,6 @@ variable debug equal 0
 
 units real
 boundary p p f
-
 newton off
 pair_style lj/cut/coul/cut 10.0
 pair_modify shift yes mix geometric
@@ -15,13 +14,26 @@ angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data
 
-region zlo_plane plane 0 0 $(zlo) 0 0 1
-region zhi_plane plane 0 0 $(zhi) 0 0 -1
-fix wallzlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10
-fix wallzhi all wall/region zhi_plane lj126 0.1521 3.1505742268315 10
+lattice sc 2
+variable zz internal 0.0
+variable v equal "v_zz == zlo || v_zz == zlo+zlat*(floor(lz/zlat)-1)"
+create_atoms 12 box var v set z zz
+lattice none 1
+
+change_box all boundary p p s
+
+#region zlo_plane plane 0 0 $(zlo) 0 0 1
+#region zhi_plane plane 0 0 $(zhi) 0 0 -1
+#fix wallzlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10
+#fix wallzhi all wall/region zhi_plane lj126 0.1521 3.1505742268315 10
+
+variable upw atom "z==zhi"
+variable loww atom "z==zlo"
 
 group go type 1:11
-group notgo subtract all go
+group upwall variable upw
+group lowwall variable loww
+group notgo subtract all go upwall lowwall
 variable go_zlo equal bound(go,zmin)
 variable go_zhi equal bound(go,zmax)
 region upbox block EDGE EDGE EDGE EDGE $(v_go_zhi) EDGE
@@ -32,12 +44,12 @@ group upwater variable upa
 group lowwater variable lowa
 
 variable up_vol equal "(zhi-v_go_zhi)/(zhi-zlo)*vol"
-compute upwater_peratom all stress/atom thermo_temp
+compute upwater_peratom all stress/atom NULL
 compute upwater_p all reduce sum c_upwater_peratom[1] c_upwater_peratom[2] c_upwater_peratom[3]
 variable upwater_press equal -(c_upwater_p[1]+c_upwater_p[2]+c_upwater_p[3])/(3*v_up_vol)
 
 variable low_vol equal "(v_go_zlo-zlo)/(zhi-zlo)*vol"
-compute lowwater_peratom all stress/atom thermo_temp
+compute lowwater_peratom all stress/atom NULL
 compute lowwater_p all reduce sum c_lowwater_peratom[1] c_lowwater_peratom[2] c_lowwater_peratom[3]
 variable lowwater_press equal -(c_lowwater_p[1]+c_lowwater_p[2]+c_lowwater_p[3])/(3*v_low_vol)
 
@@ -48,10 +60,15 @@ thermo 100
 thermo_style custom step temp epair emol etotal press fmax
 min_style sd
 group gra_and_HCAR type 1:4 11
-fix freeze gra_and_HCAR setforce 0 0 0
-minimize 0.0 1.0e-8 2000 20000
 group gra type 1:4
-fix freeze gra setforce 0 0 0
+group fixatoms union gra_and_HCAR upwater lowwater
+
+fix freeze fixatoms setforce 0 0 0
+minimize 0.0 1.0e-8 2000 20000
+group gra_and_HCAR delete
+group fixatoms delete
+group fixatoms union gra upwater lowwater
+fix freeze fixatoms setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
 
 

@@ -49,6 +49,7 @@ variable upa atom grmask(sol,upbox)
 variable lowa atom grmask(sol,lowbox)
 group upwater variable upa
 group lowwater variable lowa
+group sol delete
 
 variable up_vol equal "(zhi-v_go_zhi)/lz*vol"
 compute upwater_peratom all stress/atom NULL
@@ -91,10 +92,10 @@ thermo_modify lost/bond warn
 timestep 0.1
 run 20000
 
-group HCAR delete
 unfix nvt
 unfix rigid_water
 unfix down
+group HCAR delete
 minimize 0.0 1.0e-8 2000 20000
 
 write_dump all atom equ.data

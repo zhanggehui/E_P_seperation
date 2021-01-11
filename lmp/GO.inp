@@ -26,6 +26,10 @@ change_box all boundary p p s
 
 write_data system.data
 write_coeff system.coeff
+
+group gra type 1:4
+
+#group water type 12 13
 #region zlo_plane plane 0 0 $(zlo) 0 0 1
 #region zhi_plane plane 0 0 $(zhi) 0 0 -1
 #fix wallzlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10
@@ -53,46 +57,48 @@ compute lowwater_peratom all stress/atom NULL
 compute lowwater_p all reduce sum c_lowwater_peratom[1] c_lowwater_peratom[2] c_lowwater_peratom[3]
 variable lowwater_press equal -(c_lowwater_p[1]+c_lowwater_p[2]+c_lowwater_p[3])/(3*v_low_vol)
 
-##################################################################
+##### minimize ###########################################
 if "${debug} > 0" then &
-"dump checkmin all atom 50 checkmin.dump"
+"dump check all atom 100 check.dump"
+
 thermo 100
 thermo_style custom step temp epair emol etotal press fmax
 min_style sd
 group gra_and_HCAR type 1:4 11
-group gra type 1:4
-group fixatoms union gra_and_HCAR walls
-
-fix freeze fixatoms setforce 0 0 0
+group fix_atoms union gra_and_HCAR walls
+fix freeze fix_atoms setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
+
 unfix freeze
 group gra_and_HCAR delete
-group fixatoms delete
-group fixatoms union gra walls
-fix freeze fixatoms setforce 0 0 0
-minimize 0.0 1.0e-8 2000 20000
+group fix_atoms delete
+group fix_atoms union gra walls
+fix freeze fix_atoms setforce 0 0 0
+group free_atoms subtract all fix_atoms
 
-####################################################################
-group water type 12 13
+velocity free_atoms create 300 30315 dist gaussian
+fix nvt free_atoms nvt temp 300 300 100.0
+fix rigid_water all shake 0.0001 20 1000 b 5 9 a 11
 group HCAR type 11
-group notgra subtract all fixatoms
-velocity notgra create 300 30315 dist gaussian
-fix 1 notgra nvt temp 300 300 100.0
-fix 2 all shake 0.0001 20 1000 b 5 9 a 11
 fix down HCAR viscous 0.5
-
-if "${debug} > 0" then &
-"dump checknvt all atom 100 checknvt.dump"
-
 thermo_style custom step temp etotal press v_upwater_press v_lowwater_press
 thermo 1000
 thermo_modify lost/bond warn
 timestep 0.1
-run 10000
+run 50000
 
+group HCAR delete
+unfix nvt
+unfix rigid_water
 unfix down
-fix 2 all shake 0.0001 20 100 b 5 8 9 a 11
-dump nvt all atom 100 nvt.dump
+minimize 0.0 1.0e-8 2000 20000
+
+if "${debug} > 0" then &
+"undump check"
+##### pressure control ###########################################
+fix nvt free_atoms nvt temp 300 300 100.0
+fix h_bonds_shake all shake 0.0001 20 100 b 5 8 9 a 11
+dump nvt all atom 10000s nvt.dump
 thermo_modify lost/bond error
 thermo 10000
 run 2000000

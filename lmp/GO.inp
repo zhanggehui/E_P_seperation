@@ -62,6 +62,10 @@ compute lowwater_p all reduce sum c_lowwater_peratom[1] c_lowwater_peratom[2] c_
 variable lowwater_press equal -(c_lowwater_p[1]+c_lowwater_p[2]+c_lowwater_p[3])/(3*v_low_vol)
 
 ##### minimize ###########################################
+variable upa atom grmask(walls,upbox)
+variable lowa atom grmask(walls,lowbox) 
+group upwall variable upa
+group lowwall variable lowa
 
 if "${debug} > 0" then &
 "dump check all atom 100 check.dump"
@@ -81,7 +85,8 @@ group fix_atoms union gra walls
 group free_atoms subtract all fix_atoms
 
 fix freeze gra setforce 0 0 0
-fix wf walls aveforce 0 0 0
+fix upaf upwall aveforce 0 0 0
+fix lowaf lowwall aveforce 0 0 0
 fix freeze_wall walls setforce 0 0 NULL
 fix nve walls nve
 #fix wf walls nve/noforce

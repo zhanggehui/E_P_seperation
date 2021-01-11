@@ -14,6 +14,8 @@ angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
 mass 16 15.9994 # O
+pair_coeff 16 16 0.1521 3.1505742268315 10.0
+
 lattice sc 2
 variable zz internal 0.0
 variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"

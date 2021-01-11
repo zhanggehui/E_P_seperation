@@ -85,7 +85,7 @@ if "${debug} > 0" then &
 
 thermo_style custom step temp etotal press v_upwater_press v_lowwater_press
 thermo 1000
-thermo_modify lost warn
+thermo_modify lost/bond warn
 timestep 0.1
 run 10000
 

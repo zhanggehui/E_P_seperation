@@ -12,12 +12,12 @@ atom_style full
 bond_style harmonic
 angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
-read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data
-
+read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
+mass 16 15.9994 # O
 lattice sc 2
 variable zz internal 0.0
 variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
-create_atoms 12 box var v set z zz
+create_atoms 16 box var v set z zz
 lattice none 1
 
 change_box all boundary p p s
@@ -56,7 +56,7 @@ variable lowwater_press equal -(c_lowwater_p[1]+c_lowwater_p[2]+c_lowwater_p[3])
 
 ##################################################################
 if "${debug} > 0" then &
-"dump checkmin all atom 10 checkmin.dump"
+"dump checkmin all atom 50 checkmin.dump"
 thermo 100
 thermo_style custom step temp epair emol etotal press fmax
 min_style sd
@@ -65,9 +65,6 @@ group gra type 1:4
 group fixatoms union gra_and_HCAR upwater lowwater
 
 fix freeze fixatoms setforce 0 0 0
-variable zero equal 0
-fix zerocg upwall adapt 0 atom charge v_zero
-fix zerocg lowwall adapt 0 atom charge v_zero
 minimize 0.0 1.0e-8 2000 20000
 unfix freeze
 group gra_and_HCAR delete

@@ -67,7 +67,7 @@ minimize 0.0 1.0e-8 2000 20000
 unfix freeze
 group gra_and_HCAR delete
 group fixatoms delete
-group fixatoms union gra upwall lowwall
+group fixatoms union gra walls
 fix freeze fixatoms setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
 

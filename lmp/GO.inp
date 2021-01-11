@@ -64,14 +64,14 @@ thermo_style custom step temp epair emol etotal press fmax
 min_style sd
 group gra_and_HCAR type 1:4 11
 group gra type 1:4
-group fixatoms union gra_and_HCAR upwater lowwater
+group fixatoms union gra_and_HCAR upwall lowwall
 
 fix freeze fixatoms setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
 unfix freeze
 group gra_and_HCAR delete
 group fixatoms delete
-group fixatoms union gra upwater lowwater
+group fixatoms union gra upwall lowwall
 fix freeze fixatoms setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
 

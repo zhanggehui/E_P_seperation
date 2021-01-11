@@ -85,7 +85,7 @@ velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
 fix rigid_water all shake 0.0001 20 1000 b 5 9 a 11
 group HCAR type 11
-fix down HCAR viscous 0.5
+fix down HCAR viscous 1
 thermo_style custom step temp etotal press v_upwater_press v_lowwater_press
 thermo 1000
 thermo_modify lost/bond warn
@@ -100,6 +100,8 @@ minimize 0.0 1.0e-8 2000 20000
 
 write_dump all atom equ.data
 
+unfix freeze
+
 if "${debug} > 0" then &
 "undump check"
 
@@ -107,7 +109,10 @@ if "${debug} > 0" then &
 
 fix nvt free_atoms nvt temp 300 300 100.0
 fix h_bonds_shake all shake 0.0001 20 100 b 5 8 9 a 11
-dump nvt all atom 10000s nvt.dump
-thermo_modify lost/bond error
+dump nvt all atom 10000 nvt.dump
+variable fupwall equal fcm(walls,z,upbox)
+variable flowwall equal fcm(walls,z,lowbox)
+fix freeze fix_atoms setforce 0 0 0
+thermo_style custom step temp etotal press v_upwater_press v_lowwater_press v_fupwall v_flowwall
 thermo 10000
 run 2000000

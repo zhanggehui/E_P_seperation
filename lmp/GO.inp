@@ -82,6 +82,7 @@ group free_atoms subtract all fix_atoms
 
 fix freeze gra setforce 0 0 0
 fix wf walls aveforce 0 0 0
+fix freeze_wall walls setforce 0 0 NULL
 fix nve walls nve
 #fix wf walls nve/noforce
 velocity free_atoms create 300 30315 dist gaussian

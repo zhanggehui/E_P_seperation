@@ -1,4 +1,4 @@
-variable debug equal 0
+variable debug equal 1
 
 units real
 boundary p p f
@@ -54,9 +54,9 @@ compute lowwater_peratom all stress/atom NULL
 compute lowwater_p all reduce sum c_lowwater_peratom[1] c_lowwater_peratom[2] c_lowwater_peratom[3]
 variable lowwater_press equal -(c_lowwater_p[1]+c_lowwater_p[2]+c_lowwater_p[3])/(3*v_low_vol)
 
+##################################################################
 if "${debug} > 0" then &
 "dump checkmin all atom 10 checkmin.dump"
-
 thermo 100
 thermo_style custom step temp epair emol etotal press fmax
 min_style sd
@@ -73,7 +73,7 @@ group fixatoms union gra upwater lowwater
 fix freeze fixatoms setforce 0 0 0
 minimize 0.0 1.0e-8 2000 20000
 
-
+####################################################################
 group water type 12 13
 group HCAR type 11
 group notgra subtract all gra

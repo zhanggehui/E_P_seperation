@@ -65,6 +65,9 @@ group gra type 1:4
 group fixatoms union gra_and_HCAR upwater lowwater
 
 fix freeze fixatoms setforce 0 0 0
+variable zero equal 0
+fix zerocg upwall adapt 0 atom charge v_zero
+fix zerocg lowwall adapt 0 atom charge v_zero
 minimize 0.0 1.0e-8 2000 20000
 unfix freeze
 group gra_and_HCAR delete

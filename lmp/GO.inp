@@ -1,21 +1,24 @@
 variable debug equal 1
 
+### build system ################################################################
+
 units real
 boundary p p f
 newton off
+
 pair_style lj/cut/coul/cut 10.0
 pair_modify shift yes mix geometric
 #kspace_style pppm 1e-6
 #kspace_modify slab nozforce
-
 atom_style full
 bond_style harmonic
 angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
-mass 16 15.9994 # O
-pair_coeff 16 16 0.1521 3.1505742268315 10.0
 
+### 在两侧建立原子墙
+mass 16 15.9994 # wall atom, same as O
+pair_coeff 16 16 0.1521 3.1505742268315 10.0
 lattice sc 2
 variable zz internal 0.0
 variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
@@ -24,40 +27,41 @@ lattice none 1
 
 change_box all boundary p p s
 
-write_data system.data
-write_coeff system.coeff
+if "${debug} > 0" then &
+"write_data system.data" &
+"write_coeff system.coeff"
+
+### group definition ####################################################
 
 group gra type 1:4
-
-#group water type 12 13
-#region zlo_plane plane 0 0 $(zlo) 0 0 1
-#region zhi_plane plane 0 0 $(zhi) 0 0 -1
-#fix wallzlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10
-#fix wallzhi all wall/region zhi_plane lj126 0.1521 3.1505742268315 10
-
 group go type 1:11
 group walls type 16
-group notgo subtract all go walls
+#group water type 12 13
+
+### 定义上下压强 ################################################################
+
+group sol subtract all go walls
 variable go_zlo equal bound(go,zmin)
 variable go_zhi equal bound(go,zmax)
 region upbox block EDGE EDGE EDGE EDGE $(v_go_zhi) EDGE
 region lowbox block EDGE EDGE EDGE EDGE EDGE $(v_go_zlo)
-variable upa atom grmask(notgo,upbox)
-variable lowa atom grmask(notgo,lowbox)
+variable upa atom grmask(sol,upbox)
+variable lowa atom grmask(sol,lowbox)
 group upwater variable upa
 group lowwater variable lowa
 
-variable up_vol equal "(zhi-v_go_zhi)/(zhi-zlo)*vol"
+variable up_vol equal "(zhi-v_go_zhi)/lz*vol"
 compute upwater_peratom all stress/atom NULL
 compute upwater_p all reduce sum c_upwater_peratom[1] c_upwater_peratom[2] c_upwater_peratom[3]
 variable upwater_press equal -(c_upwater_p[1]+c_upwater_p[2]+c_upwater_p[3])/(3*v_up_vol)
 
-variable low_vol equal "(v_go_zlo-zlo)/(zhi-zlo)*vol"
+variable low_vol equal "(v_go_zlo-zlo)/lz*vol"
 compute lowwater_peratom all stress/atom NULL
 compute lowwater_p all reduce sum c_lowwater_peratom[1] c_lowwater_peratom[2] c_lowwater_peratom[3]
 variable lowwater_press equal -(c_lowwater_p[1]+c_lowwater_p[2]+c_lowwater_p[3])/(3*v_low_vol)
 
 ##### minimize ###########################################
+
 if "${debug} > 0" then &
 "dump check all atom 100 check.dump"
 
@@ -93,9 +97,13 @@ unfix rigid_water
 unfix down
 minimize 0.0 1.0e-8 2000 20000
 
+write_dump all atom equ.data
+
 if "${debug} > 0" then &
 "undump check"
+
 ##### pressure control ###########################################
+
 fix nvt free_atoms nvt temp 300 300 100.0
 fix h_bonds_shake all shake 0.0001 20 100 b 5 8 9 a 11
 dump nvt all atom 10000s nvt.dump

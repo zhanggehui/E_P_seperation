@@ -89,7 +89,7 @@ thermo_style custom step temp etotal press v_upwater_press v_lowwater_press
 thermo 1000
 thermo_modify lost/bond warn
 timestep 0.1
-run 50000
+run 20000
 
 group HCAR delete
 unfix nvt

@@ -22,6 +22,7 @@ lattice none 1
 
 change_box all boundary p p s
 
+write_data system.data
 #region zlo_plane plane 0 0 $(zlo) 0 0 1
 #region zhi_plane plane 0 0 $(zhi) 0 0 -1
 #fix wallzlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10

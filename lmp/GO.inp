@@ -15,7 +15,7 @@ special_bonds lj/coul 0.0 0.0 0.5
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
 ### 在两侧建立原子墙 ####
 mass 16 15.9994  # wall atom, same as O
-pair_coeff 16 16 0.1521 3.1505742268315 10.0
+pair_coeff 16 16 0.1521 3.1505742268315 10.08212847
 lattice sc 2
 variable zz internal 0.0
 variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
@@ -27,8 +27,7 @@ if "${debug} > 0" then &
 "write_data system.data" &
 "write_coeff system.coeff"
 
-### group definition ####################################################
-
+### group definition ########################################################
 group gra type 1:4
 group go type 1:11
 group walls type 16
@@ -61,7 +60,7 @@ variable lowa atom grmask(walls,lowbox)
 group upwall variable upa
 group lowwall variable lowa
 
-##### minimize #########################################################
+### minimize #############################################################
 if "${debug} > 0" then &
 "dump check all atom 100 check.dump"
 
@@ -103,14 +102,11 @@ write_dump all atom equ.data
 if "${debug} > 0" then &
 "undump check"
 
-##### pressure control ###########################################
-
+### pressure control ###################################################
 variable pressuredown equal 1.0
 variable pressureup equal 1.0
-
 variable ratio equal 1.013*6.02*1e-5/4.186
 variable xy_area equal lx*ly
-
 variable f_pressdown equal -v_pressuredown*v_xy_area*v_ratio
 variable f_pullup equal v_pressureup*v_xy_area*v_ratio
 

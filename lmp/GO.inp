@@ -83,7 +83,7 @@ group control_atoms delete
 fix upaf upwall aveforce 0 0 -10
 #fix lowaf lowwall aveforce 0 0 10
 fix freeze_lowwall lowwall setforce 0 0 0
-fix freeze_upwall upaf setforce 0 0 NULL
+fix freeze_upwall upwall setforce 0 0 NULL
 fix nve walls nve
 
 fix freeze gra setforce 0 0 0

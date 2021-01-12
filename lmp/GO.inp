@@ -81,17 +81,18 @@ group control_atoms delete
 fix nfwall walls nve/noforce
 
 fix freeze gra setforce 0 0 0
+fix h_bonds_shake all shake 0.0001 20 100 b 5 8 9 a 11
 velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
-fix h_bonds_shake all shake 0.0001 20 100 b 5 8 9 a 11
 
 variable fupwall equal fcm(walls,z,upbox)
 variable flowwall equal fcm(walls,z,lowbox)
 thermo_style custom step temp etotal press v_upwater_press v_lowwater_press v_fupwall v_flowwall vol
-thermo 1000
+thermo 100
 run 20000
 
 unfix nfwall
+unfix h_bonds_shake
 
 write_dump all atom equ.data
 if "${debug} > 0" then &

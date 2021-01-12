@@ -78,16 +78,10 @@ group control_atoms union gra walls
 group free_atoms subtract all control_atoms
 group control_atoms delete
 
-#fix nfwall walls nve/noforce
+fix nfwall walls nve/noforce
 
-fix upaf upwall aveforce 0 0 -10
-#fix lowaf lowwall aveforce 0 0 10
-fix freeze_lowwall lowwall setforce 0 0 0
-fix freeze_upwall upwall setforce 0 0 NULL
-fix nve walls nve
-
-fix freeze gra setforce 0 0 0
-fix h_bonds_shake all shake 0.0001 20 100 b 5 8 9 a 11
+fix fix_gra gra setforce 0 0 0
+fix h_bonds_shake all shake 0.0001 20 10000 b 5 8 9 a 11
 velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
 
@@ -95,10 +89,9 @@ variable fupwall equal fcm(walls,z,upbox)
 variable flowwall equal fcm(walls,z,lowbox)
 thermo_style custom step temp etotal press v_upwater_press v_lowwater_press v_fupwall v_flowwall vol
 thermo 100
-run 20000
+run 10
 
-#unfix nfwall
-unfix h_bonds_shake
+unfix nfwall
 
 write_dump all atom equ.data
 if "${debug} > 0" then &
@@ -114,9 +107,26 @@ variable f_pullup equal v_pressureup*v_xy_area*v_ratio
 
 fix upaf upwall aveforce 0 0 v_f_pressdown
 fix lowaf lowwall aveforce 0 0 v_f_pullup
-fix freeze_wall walls setforce 0 0 NULL
+fix fix_xy_wall walls setforce 0 0 NULL
 fix nve walls nve
 
-dump nvt all atom 10000 nvt.dump
+dump pressure_control all atom 10000 pressure_control.dump
 thermo 10000
-run 1000000
+run 10
+
+undump pressure_control
+unfix upaf
+unfix lowaf
+unfix fix_xy_wall
+unfix nve
+
+### press down #########################################################
+variable pressuredown equal 1e5
+fix upaf upwall aveforce 0 0 v_f_pressdown
+fix freeze_upwall upwall setforce 0 0 NULL
+fix nve upwall nve
+fix nfwall lowwall nve/noforce
+
+dump press all atom 10000 press.dump
+thermo 10000
+run 10

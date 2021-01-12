@@ -78,7 +78,12 @@ group control_atoms union gra walls
 group free_atoms subtract all control_atoms
 group control_atoms delete
 
-fix nfwall walls nve/noforce
+#fix nfwall walls nve/noforce
+
+fix upaf upwall aveforce 0 0 -10
+fix lowaf lowwall aveforce 0 0 10
+fix freeze_wall walls setforce 0 0 NULL
+fix nve walls nve
 
 fix freeze gra setforce 0 0 0
 fix h_bonds_shake all shake 0.0001 20 100 b 5 8 9 a 11
@@ -91,7 +96,7 @@ thermo_style custom step temp etotal press v_upwater_press v_lowwater_press v_fu
 thermo 100
 run 20000
 
-unfix nfwall
+#unfix nfwall
 unfix h_bonds_shake
 
 write_dump all atom equ.data

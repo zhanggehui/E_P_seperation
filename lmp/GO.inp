@@ -89,7 +89,10 @@ variable fupwall equal fcm(walls,z,upbox)
 variable flowwall equal fcm(walls,z,lowbox)
 thermo_style custom step temp etotal press v_upwater_press v_lowwater_press v_fupwall v_flowwall vol
 thermo 100
-run 10
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 100000"
 
 unfix nfwall
 
@@ -112,7 +115,10 @@ fix nve walls nve
 
 dump pressure_control all atom 10000 pressure_control.dump
 thermo 10000
-run 10
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 1000000"
 
 undump pressure_control
 unfix upaf
@@ -126,7 +132,10 @@ fix upaf upwall aveforce 0 0 v_f_pressdown
 fix freeze_upwall upwall setforce 0 0 NULL
 fix nve upwall nve
 fix nfwall lowwall nve/noforce
-
+#fix 3 water gcmc 10 100 100 0 3456543 3.0 -2.5 0.1 mol my_one_water maxangle 180 full_energy
 dump press all atom 10000 press.dump
 thermo 10000
-run 10
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 1000000"

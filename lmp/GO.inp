@@ -99,10 +99,11 @@ fix h_bonds_shake all shake 0.0001 20 10000 b 5 8 9 a 11
 velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
 
-variable up_move equal ramp($(zhi),up_z)
-variable low_move equal ramp($(zlo),low_z)
-fix move_upwall up_wall move variable NULL 0.0 NULL 0.0 v_up_move NULL
-fix move_lowwall up_wall move variable NULL 0.0 NULL 0.0 v_low_move NULL
+variable up_move equal ramp($(zhi),$(up_z))
+variable low_move equal ramp($(zlo),$(low_z))
+variable zero_move equal 0.0
+fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
+fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_move NULL
 
 thermo 1000
 if "${debug} > 0" then &

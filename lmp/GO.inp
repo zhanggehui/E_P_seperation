@@ -107,7 +107,7 @@ fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_
 
 thermo 1000
 if "${debug} > 0" then &
-"run 0" &
+"run 100000" &
 else &
 "run 100000"
 

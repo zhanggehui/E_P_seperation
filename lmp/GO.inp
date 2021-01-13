@@ -81,6 +81,7 @@ variable f_lowwall equal fcm(low_wall,z)
 
 variable den_ratio equal 10/6.022
 variable xy_area equal lx*ly
+
 variable up_vol equal "(zhi-v_gra_zhi)/lz*vol"
 variable low_vol equal "(v_gra_zlo-zlo)/lz*vol"
 variable den_up equal mass(up_sol)/v_up_vol*v_den_ratio
@@ -92,15 +93,16 @@ variable target_den equal 1.0 #g/cm3
 variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
 variable low_z equal v_gra_zlo-mass(low_sol)/(v_xy_area*(v_target_den/v_den_ratio))
 
-variable up_move equal ramp($(zhi),up_z)
-variable low_move equal ramp($(zlo),low_z)
-fix move_upwall up_wall move variable NULL 0.0 NULL 0.0 v_up_move NULL
-fix move_lowwall up_wall move variable NULL 0.0 NULL 0.0 v_low_move NULL
 
 fix fix_gra gra setforce 0 0 0
 fix h_bonds_shake all shake 0.0001 20 10000 b 5 8 9 a 11
 velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
+
+variable up_move equal ramp($(zhi),up_z)
+variable low_move equal ramp($(zlo),low_z)
+fix move_upwall up_wall move variable NULL 0.0 NULL 0.0 v_up_move NULL
+fix move_lowwall up_wall move variable NULL 0.0 NULL 0.0 v_low_move NULL
 
 thermo 1000
 if "${debug} > 0" then &

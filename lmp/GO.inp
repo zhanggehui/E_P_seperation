@@ -93,23 +93,24 @@ variable target_den equal 1.0 #g/cm3
 variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
 variable low_z equal v_gra_zlo-mass(low_sol)/(v_xy_area*(v_target_den/v_den_ratio))
 
+variable step_move index 100000
+variable up_move equal ($(v_up_z)-$(zhi))/${step_move}
+variable low_move equal ($(v_low_z)-$(zlo))/${step_move}
+variable zero_move equal 0.0
+fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
+fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_move NULL
+
 
 fix fix_gra gra setforce 0 0 0
 fix h_bonds_shake all shake 0.0001 20 10000 b 5 8 9 a 11
 velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
 
-variable up_move equal ramp($(zhi),$(v_up_z))
-variable low_move equal ramp($(zlo),$(v_low_z))
-variable zero_move equal 0.0
-fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
-fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_move NULL
-
 thermo 1000
 if "${debug} > 0" then &
-"run 1000000" &
+"run ${step_move}" &
 else &
-"run 100000"
+"run ${step_move}"
 
 write_dump all atom equ.data
 if "${debug} > 0" then &

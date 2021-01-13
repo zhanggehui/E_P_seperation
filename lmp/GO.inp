@@ -37,20 +37,20 @@ region up_box block EDGE EDGE EDGE EDGE $(v_gra_zhi) EDGE
 region low_box block EDGE EDGE EDGE EDGE EDGE $(v_gra_zlo)
 
 ### wall group ###
-variable g_atom_v atom grmask(walls, up_box)
+variable g_atom_v atom grmask(walls,up_box)
 group up_wall variable g_atom_v
 
-variable g_atom_v atom grmask(walls, low_box) 
+variable g_atom_v atom grmask(walls,low_box) 
 group low_wall variable g_atom_v
 
 ### sol group ###
 group sol subtract all go walls
 
-variable g_atom_v atom grmask(sol, up_box)
+variable g_atom_v atom grmask(sol,up_box)
 group up_sol variable g_atom_v
 group up_sol include molecule
 
-variable g_atom_v atom grmask(sol, low_box)
+variable g_atom_v atom grmask(sol,low_box)
 group low_sol variable g_atom_v
 group low_sol include molecule
 

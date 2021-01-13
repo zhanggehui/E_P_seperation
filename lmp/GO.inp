@@ -76,18 +76,22 @@ group control_atoms union gra walls
 group free_atoms subtract all control_atoms
 group control_atoms delete
 
+variable xy_area equal lx*ly
+
 variable f_upwall equal fcm(up_wall,z)
 variable f_lowwall equal fcm(low_wall,z)
+variable p_ratio equal 1.013*6.022*1e-5/4.186
+variable up_p equal v_f_upwall/(v_xy_area*v_p_ratio)
+variable low_p equal v_f_lowwall/(v_xy_area*v_p_ratio)
 
 variable den_ratio equal 10/6.022
-variable xy_area equal lx*ly
 
 variable up_vol equal "(zhi-v_gra_zhi)/lz*vol"
 variable low_vol equal "(v_gra_zlo-zlo)/lz*vol"
 variable den_up equal mass(up_sol)/v_up_vol*v_den_ratio
 variable den_low equal mass(low_sol)/v_low_vol*v_den_ratio
 
-thermo_style custom step temp etotal press v_f_upwall v_f_lowwall v_den_up v_den_low vol
+thermo_style custom step temp etotal press v_up_p v_low_p v_den_up v_den_low vol
 
 variable target_den equal 1.2 #g/cm3
 variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi

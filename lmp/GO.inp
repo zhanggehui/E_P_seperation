@@ -1,13 +1,11 @@
-variable debug equal 0
+variable debug equal 1
 
 ### build system ################################################################
 units real
-boundary p p f
 newton off
+boundary p p f
 pair_style lj/cut/coul/cut 10.0
 pair_modify shift yes mix geometric
-#kspace_style pppm 1e-6
-#kspace_modify slab nozforce
 atom_style full
 bond_style harmonic
 angle_style harmonic
@@ -15,7 +13,7 @@ special_bonds lj/coul 0.0 0.0 0.5
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
 ### build atom walls ####
 mass 16 15.9994  # wall atom, same as O
-pair_coeff 16 16 0.1521 3.1505742268315 10.08212847
+pair_coeff 16 16 0.1521 3.1505742268315 10.0
 lattice sc 2
 variable zz internal 0.0
 variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
@@ -33,32 +31,32 @@ group go type 1:11
 group walls type 16
 group water type 12 13
 
-### define pressure in two boxes ###
+variable gra_zhi equal bound(gra,zmax)
+variable gra_zlo equal bound(gra,zmin)
+region up_box block EDGE EDGE EDGE EDGE $(v_gra_zhi) EDGE
+region low_box block EDGE EDGE EDGE EDGE EDGE $(v_gra_zlo)
+
+### wall group ###
+variable g_atom_v atom grmask(walls, up_box)
+group up_wall variable g_atom_v
+
+variable g_atom_v atom grmask(walls, low_box) 
+group low_wall variable g_atom_v
+
+### sol group ###
 group sol subtract all go walls
-variable go_zlo equal bound(go,zmin)
-variable go_zhi equal bound(go,zmax)
-region upbox block EDGE EDGE EDGE EDGE $(v_go_zhi) EDGE
-region lowbox block EDGE EDGE EDGE EDGE EDGE $(v_go_zlo)
-variable upa atom grmask(sol,upbox)
-variable lowa atom grmask(sol,lowbox)
-group upwater variable upa
-group lowwater variable lowa
+
+variable g_atom_v atom grmask(sol, up_box)
+group up_sol variable g_atom_v
+group up_sol include molecule
+
+variable g_atom_v atom grmask(sol, low_box)
+group low_sol variable g_atom_v
+group low_sol include molecule
+
+group mid_sol subtract sol up_sol low_sol
+
 group sol delete
-
-variable up_vol equal "(zhi-v_go_zhi)/lz*vol"
-compute upwater_peratom all stress/atom NULL
-compute upwater_p all reduce sum c_upwater_peratom[1] c_upwater_peratom[2] c_upwater_peratom[3]
-variable upwater_press equal -(c_upwater_p[1]+c_upwater_p[2]+c_upwater_p[3])/(3*v_up_vol)
-
-variable low_vol equal "(v_go_zlo-zlo)/lz*vol"
-compute lowwater_peratom all stress/atom NULL
-compute lowwater_p all reduce sum c_lowwater_peratom[1] c_lowwater_peratom[2] c_lowwater_peratom[3]
-variable lowwater_press equal -(c_lowwater_p[1]+c_lowwater_p[2]+c_lowwater_p[3])/(3*v_low_vol)
-
-variable upa atom grmask(walls,upbox)
-variable lowa atom grmask(walls,lowbox) 
-group upwall variable upa
-group lowwall variable lowa
 
 ### minimize #############################################################
 if "${debug} > 0" then &
@@ -78,64 +76,43 @@ group control_atoms union gra walls
 group free_atoms subtract all control_atoms
 group control_atoms delete
 
-fix nfwall walls nve/noforce
+variable f_upwall equal fcm(up_wall,z)
+variable f_lowwall equal fcm(low_wall,z)
+
+variable den_ratio equal 10/6.022
+variable xy_area equal lx*ly
+variable up_vol equal "(zhi-v_gra_zhi)/lz*vol"
+variable low_vol equal "(v_gra_zlo-zlo)/lz*vol"
+variable den_up equal mass(up_sol)/v_up_vol*v_den_ratio
+variable den_low equal mass(low_sol)/v_low_vol*v_den_ratio
+
+thermo_style custom step temp etotal press v_f_upwall v_f_lowwall v_den_up v_den_low vol
+
+variable target_den equal 1.0 #g/cm3
+variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
+variable low_z equal v_gra_zlo-mass(low_sol)/(v_xy_area*(v_target_den/v_den_ratio))
+
+variable up_move equal ramp($(zhi),up_z)
+variable low_move equal ramp($(zlo),low_z)
+fix move_upwall up_wall move variable NULL 0.0 NULL 0.0 v_up_move NULL
+fix move_lowwall up_wall move variable NULL 0.0 NULL 0.0 v_low_move NULL
 
 fix fix_gra gra setforce 0 0 0
 fix h_bonds_shake all shake 0.0001 20 10000 b 5 8 9 a 11
 velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
 
-variable fupwall equal fcm(walls,z,upbox)
-variable flowwall equal fcm(walls,z,lowbox)
-thermo_style custom step temp etotal press v_upwater_press v_lowwater_press v_fupwall v_flowwall vol
-thermo 100
+thermo 1000
 if "${debug} > 0" then &
 "run 0" &
 else &
 "run 100000"
-
-unfix nfwall
 
 write_dump all atom equ.data
 if "${debug} > 0" then &
 "undump check"
 
 ### pressure control ###################################################
-variable pressuredown equal 1.0
-variable pressureup equal 1.0
-variable ratio equal 1.013*6.02*1e-5/4.186
-variable xy_area equal lx*ly
-variable f_pressdown equal -v_pressuredown*v_xy_area*v_ratio
-variable f_pullup equal v_pressureup*v_xy_area*v_ratio
-
-fix upaf upwall aveforce 0 0 v_f_pressdown
-fix lowaf lowwall aveforce 0 0 v_f_pullup
-fix fix_xy_wall walls setforce 0 0 NULL
-fix nve walls nve
-
-dump pressure_control all atom 10000 pressure_control.dump
-thermo 10000
-if "${debug} > 0" then &
-"run 0" &
-else &
-"run 1000000"
-
-undump pressure_control
-unfix upaf
-unfix lowaf
-unfix fix_xy_wall
-unfix nve
 
 ### press down #########################################################
-variable pressuredown equal 1e5
-fix upaf upwall aveforce 0 0 v_f_pressdown
-fix freeze_upwall upwall setforce 0 0 NULL
-fix nve upwall nve
-fix nfwall lowwall nve/noforce
-#fix 3 water gcmc 10 100 100 0 3456543 3.0 -2.5 0.1 mol my_one_water maxangle 180 full_energy
-dump press all atom 10000 press.dump
-thermo 10000
-if "${debug} > 0" then &
-"run 0" &
-else &
-"run 1000000"
+

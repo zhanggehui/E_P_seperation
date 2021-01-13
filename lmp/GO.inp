@@ -89,7 +89,7 @@ variable den_low equal mass(low_sol)/v_low_vol*v_den_ratio
 
 thermo_style custom step temp etotal press v_f_upwall v_f_lowwall v_den_up v_den_low vol
 
-variable target_den equal 1.0 #g/cm3
+variable target_den equal 1.2 #g/cm3
 variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
 variable low_z equal v_gra_zlo-mass(low_sol)/(v_xy_area*(v_target_den/v_den_ratio))
 

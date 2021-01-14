@@ -1,5 +1,5 @@
 md_code=$1
-debug_flag=0
+debug_flag=1
 export runscript=$2
 export rundir=$3
 if [ ${md_code} == 'lmp' ]; then

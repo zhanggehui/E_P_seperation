@@ -10,10 +10,11 @@ fix removeMomentum all momentum 1000 linear 1 1 1
 fix constrain all shake 1.0e-4 20 10000 b 1 a 1
 fix npt all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
 thermo 10000
-run 100000
+run 0
 unfix npt
 
-set group all x xu y yu z zu
+variable z1 euaql zu
+set group all z v_z1
 change_box all boundary p p s 
 region zlo_plane plane 0 0 $(zlo-2) 0 0 1
 fix wall_zlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10

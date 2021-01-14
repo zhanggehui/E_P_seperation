@@ -13,7 +13,8 @@ thermo 10000
 run 0
 unfix npt
 
-variable z1 euaql zu
+#write_dump all custom zu tmp.dump
+variable z1 atom zu
 set group all z v_z1
 change_box all boundary p p s 
 region zlo_plane plane 0 0 $(zlo-2) 0 0 1

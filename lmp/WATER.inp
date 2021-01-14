@@ -1,9 +1,6 @@
 units real
 boundary p p p
 atom_style full
-pair_style lj/cut/coul/cut 10.0
-pair_modify shift yes mix geometric
-special_bonds lj/coul 0.0 0.0 0.5
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/singleTIP3P.data
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/TIP3P.forcefield
 replicate 30 30 30

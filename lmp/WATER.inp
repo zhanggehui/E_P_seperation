@@ -13,7 +13,7 @@ thermo 10000
 run 0
 unfix npt
 
-write_dump all custom tmp.dump zu 
+write_dump all custom tmp.dump id zu 
 variable laststep file tmp.dump
 next laststep
 read_dump tmp.dump ${laststep} z

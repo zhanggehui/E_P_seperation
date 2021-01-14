@@ -16,7 +16,7 @@ unfix npt
 write_dump all custom tmp.dump id zu 
 variable laststep file tmp.dump
 next laststep
-read_dump tmp.dump ${laststep} z
+read_dump tmp.dump ${laststep} z wrapped no
 change_box all boundary p p s 
 region zlo_plane plane 0 0 $(zlo-2) 0 0 1
 fix wall_zlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10

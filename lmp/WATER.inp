@@ -13,6 +13,7 @@ thermo 10000
 run 1000
 unfix npt
 
+change_box all boundary p p s
 write_dump all custom tmp.dump id zu 
 variable laststep file tmp.dump
 next laststep

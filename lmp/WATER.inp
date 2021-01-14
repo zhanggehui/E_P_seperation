@@ -13,9 +13,10 @@ thermo 10000
 run 0
 unfix npt
 
-#write_dump all custom zu tmp.dump
-variable z1 atom zu
-set group all z v_z1
+write_dump all custom zu tmp.dump
+variable laststep file tmp.dump
+next laststep
+read_dump tmp.dump laststep zu replice yes
 change_box all boundary p p s 
 region zlo_plane plane 0 0 $(zlo-2) 0 0 1
 fix wall_zlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10

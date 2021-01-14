@@ -14,7 +14,7 @@ run 100000
 unfix npt
 
 change_box all boundary p p s 
-region zlo_plane plane 0 0 $(zlo) 0 0 1
+region zlo_plane plane 0 0 $(zlo-2) 0 0 1
 fix wall_zlo all wall/region zlo_plane lj126 0.1521 3.1505742268315 10
 fix nvt all nvt temp 300 300 100.0
 dump check all atom 10000 water.dump

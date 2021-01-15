@@ -19,7 +19,7 @@ if [ -z "$ncnnl" ] && [ -z "$ncns" ]; then #-n是否为非空串,-z是否为空�
 elif [ -z "$ncnnl" ] && [ -n "$ncns" ]; then
     NodeType=cn-short
 elif [ -n "$ncnnl" ] && [ -z "$ncns" ]; then
-    NodeType=cn-short
+    NodeType=cn_nl
 else
     if [ $ncnnl -ge 10 ]; then
         NodeType=cn_nl

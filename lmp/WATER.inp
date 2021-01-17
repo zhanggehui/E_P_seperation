@@ -11,11 +11,11 @@ fix removeMomentum all momentum 1000 linear 1 1 1
 fix constrain all shake 1.0e-4 20 10000 b 1
 fix npt all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
 thermo 10000
-run 100000
+run 1000
 unfix npt
 
 write_dump all custom tmp.dump id xu yu zu 
-change_box all boundary p p sf z delta 0 10
+change_box all boundary p p sf z delta 0 -10
 variable laststep file tmp.dump
 next laststep
 read_dump tmp.dump ${laststep} x y z replace yes box no

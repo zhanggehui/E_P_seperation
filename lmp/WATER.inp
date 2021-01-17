@@ -8,7 +8,7 @@ replicate 30 30 30
 velocity all create 300 1234
 fix removeMomentum all momentum 1000 linear 1 1 1
 #fix constrain all shake 1.0e-4 20 10000 b 1 a 1
-fix constrain all shake 1.0e-4 20 10000 b 1
+#fix constrain all shake 1.0e-4 20 10000 b 1
 fix npt all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
 thermo 10000
 run 1000

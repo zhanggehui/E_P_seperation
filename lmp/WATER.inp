@@ -13,16 +13,20 @@ fix npt all npt temp 300 300 100.0 iso 1.0 1.0 1000.0
 thermo 10000
 run 1000
 unfix npt
+unfix removeMomentum
 
 write_dump all custom tmp.dump id xu yu zu 
-change_box all boundary p p sf z delta 0 -10
+change_box all boundary p p sf z delta 0 10
 variable laststep file tmp.dump
 next laststep
 read_dump tmp.dump ${laststep} x y z replace yes box no
 
 region zlo_plane plane 0 0 $(zlo-2) 0 0 1
 fix wall_zlo all wall/region zlo_plane lj126 0.102 3.188 10
-fix nvt all nvt temp 300 300 100.0
+variable up_move equal 0.1
+variable zero_move equal 0.0
+fix move_up all move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
+#fix nvt all nvt temp 300 300 100.0
 thermo_modify lost warn lost/bond warn
 dump check all atom 10000 water.dump
 run 5000000

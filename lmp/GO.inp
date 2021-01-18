@@ -112,7 +112,7 @@ fix nvt free_atoms nvt temp 300 300 100.0
 
 thermo 1000
 if "${debug} > 0" then &
-"run 0" &
+"run 10000" &
 else &
 "run 100000"
 

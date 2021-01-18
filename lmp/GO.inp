@@ -47,7 +47,6 @@ group low_wall variable g_atom_v
 
 ### sol group ###
 group sol subtract all go walls
-
 variable g_atom_v atom grmask(sol,up_box)
 group up_sol variable g_atom_v
 group up_sol include molecule
@@ -57,7 +56,6 @@ group low_sol variable g_atom_v
 group low_sol include molecule
 
 group mid_sol subtract sol up_sol low_sol
-
 group sol delete
 
 ### minimize #############################################################
@@ -136,7 +134,7 @@ fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_mov
 fix up_sol_shake up_sol shake 0.0001 20 10000 b 9
 fix nvt up_sol nvt temp 300 300 100.0
 
-dump pressure_control all atom 50000 pressure_control.dump
+dump pressure_control all atom 1000 pressure_control.dump
 if "${debug} > 0" then &
 "thermo 1000" &
 "run 100000" &

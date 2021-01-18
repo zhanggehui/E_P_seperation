@@ -111,7 +111,7 @@ fix nvt free_atoms nvt temp 300 300 100.0
 
 thermo 1000
 if "${debug} > 0" then &
-"run 10000" &
+"run 1000" &
 else &
 "run 100000"
 
@@ -134,7 +134,7 @@ fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_mov
 fix up_sol_shake up_sol shake 0.0001 20 10000 b 9
 fix nvt up_sol nvt temp 300 300 100.0
 
-dump pressure_control all atom 1000 pressure_control.dump
+dump pressure_control all atom 100 pressure_control.dump
 if "${debug} > 0" then &
 "thermo 1000" &
 "run 100000" &

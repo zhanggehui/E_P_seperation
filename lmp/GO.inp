@@ -33,6 +33,10 @@ group go type 1:11
 group walls type 16
 group water type 12 13
 
+group control_atoms union gra walls
+group free_atoms subtract all control_atoms
+group control delete
+
 variable gra_zhi equal bound(gra,zmax)
 variable gra_zlo equal bound(gra,zmin)
 region up_box block EDGE EDGE EDGE EDGE $(v_gra_zhi) EDGE
@@ -79,8 +83,8 @@ variable xy_area equal lx*ly
 variable f_upwall equal fcm(up_wall,z)
 variable f_lowwall equal fcm(low_wall,z)
 variable p_ratio equal 1.013*6.022*1e-5/4.186
-variable up_p equal v_f_upwall/(v_xy_area*v_p_ratio)
-variable low_p equal v_f_lowwall/(v_xy_area*v_p_ratio)
+variable p_up equal v_f_upwall/(v_xy_area*v_p_ratio)
+variable p_low equal v_f_lowwall/(v_xy_area*v_p_ratio)
 
 variable den_ratio equal 10/6.022
 variable up_vol equal "(v_up_wall_z-v_gra_zhi)/lz*vol"
@@ -88,11 +92,10 @@ variable low_vol equal "(v_gra_zlo-v_low_wall_z)/lz*vol"
 variable den_up equal mass(up_sol)/v_up_vol*v_den_ratio
 variable den_low equal mass(low_sol)/v_low_vol*v_den_ratio
 
-thermo_style custom step temp etotal press v_up_p v_low_p v_den_up v_den_low vol
+thermo_style custom step temp etotal press v_p_up v_p_low v_den_up v_den_low vol
 
 ### euqilibrium #############################################################
-group control_atoms union gra walls
-group free_atoms subtract all control_atoms
+
 
 variable target_den equal 1.0 #g/cm3
 variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
@@ -120,8 +123,9 @@ unfix move_lowwall
 #unfix fix_gra
 unfix h_bonds_shake
 unfix nvt
-group control_atoms delete
-group free_atoms delete
+
+change_box all boundary p p s
+change_box all boundary p p f
 
 write_dump all atom equ.data
 if "${debug} > 0" then &
@@ -134,10 +138,12 @@ fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_mov
 fix up_sol_shake up_sol shake 0.0001 20 10000 b 9
 fix nvt up_sol nvt temp 300 300 100.0
 
-dump pressure_control all atom 100 pressure_control.dump
+dump pressure_control all atom 10000 pressure_control.dump
+
 if "${debug} > 0" then &
+"dump_modify pressure_control every 100" &
 "thermo 1000" &
-"run 100000" &
+"run 0" &
 else &
 "thermo 10000" &
 "run 100000" &
@@ -149,12 +155,8 @@ unfix nvt
 undump pressure_control
 
 ### Non-euqilibrium simulation #################################################
-group control_atoms union gra walls
-group free_atoms subtract all control_atoms
-group control_atoms delete
-
 fix upaf up_wall aveforce 0 0 v_f_upwall
-fix fix_xy_up_wall up_wall setforce 0 0 NULL
+fix fix_xy_upw up_wall setforce 0 0 NULL
 fix nve up_wall nve
 #fix 3 water gcmc 10 100 100 0 3456543 3.0 -2.5 0.1 mol my_one_water maxangle 180 full_energy
 fix nvt free_atoms nvt temp 300 300 100.0

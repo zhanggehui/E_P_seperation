@@ -94,7 +94,6 @@ thermo_style custom step temp etotal press v_up_p v_low_p v_den_up v_den_low vol
 ### euqilibrium #############################################################
 group control_atoms union gra walls
 group free_atoms subtract all control_atoms
-group control_atoms delete
 
 variable target_den equal 1.0 #g/cm3
 variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
@@ -122,6 +121,7 @@ unfix move_lowwall
 #unfix fix_gra
 unfix h_bonds_shake
 unifx nvt
+group control_atoms delete
 group free_atoms delete
 
 write_dump all atom equ.data
@@ -147,6 +147,8 @@ else &
 unfix move_upwall
 unfix up_sol_shake
 unfix nvt
+group control_atoms delete
+group free_atoms delete
 undump pressure_control
 
 ### Non-euqilibrium simulation #################################################

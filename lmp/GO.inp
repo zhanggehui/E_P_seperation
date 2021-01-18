@@ -120,7 +120,7 @@ unfix move_upwall
 unfix move_lowwall
 #unfix fix_gra
 unfix h_bonds_shake
-unifx nvt
+unfix nvt
 group control_atoms delete
 group free_atoms delete
 

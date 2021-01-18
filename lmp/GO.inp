@@ -11,6 +11,7 @@ bond_style harmonic
 angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
 read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
+
 ### build atom walls ####
 mass 16 15.9994  # wall atom, same as O
 pair_coeff 16 16 0.1521 3.1505742268315 10.0
@@ -19,7 +20,7 @@ variable zz internal 0.0
 variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
 create_atoms 16 box var v set z zz
 lattice none 1
-change_box all boundary p p s
+#change_box all boundary p p s
 
 if "${debug} > 0" then &
 "write_data system.data" &
@@ -71,13 +72,11 @@ minimize 0.0 1.0e-8 2000 20000
 unfix freeze
 group fix_atoms delete
 
-### euqilibrium #############################################################
-group control_atoms union gra walls
-group free_atoms subtract all control_atoms
-group control_atoms delete
+### define compute #######################################
+variable up_wall_z equal bound(up_wall,zmax)
+variable low_wall_z equal bound(low_wall,zmin)
 
 variable xy_area equal lx*ly
-
 variable f_upwall equal fcm(up_wall,z)
 variable f_lowwall equal fcm(low_wall,z)
 variable p_ratio equal 1.013*6.022*1e-5/4.186
@@ -85,39 +84,85 @@ variable up_p equal v_f_upwall/(v_xy_area*v_p_ratio)
 variable low_p equal v_f_lowwall/(v_xy_area*v_p_ratio)
 
 variable den_ratio equal 10/6.022
-
-variable up_vol equal "(zhi-v_gra_zhi)/lz*vol"
-variable low_vol equal "(v_gra_zlo-zlo)/lz*vol"
+variable up_vol equal "(v_up_wall_z-v_gra_zhi)/lz*vol"
+variable low_vol equal "(v_gra_zlo-v_low_wall_z)/lz*vol"
 variable den_up equal mass(up_sol)/v_up_vol*v_den_ratio
 variable den_low equal mass(low_sol)/v_low_vol*v_den_ratio
 
 thermo_style custom step temp etotal press v_up_p v_low_p v_den_up v_den_low vol
 
-variable target_den equal 1.2 #g/cm3
+### euqilibrium #############################################################
+group control_atoms union gra walls
+group free_atoms subtract all control_atoms
+group control_atoms delete
+
+variable target_den equal 1.0 #g/cm3
 variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
 variable low_z equal v_gra_zlo-mass(low_sol)/(v_xy_area*(v_target_den/v_den_ratio))
 
-variable up_move equal ramp($(zhi),$(v_up_z))-$(zhi)
-variable low_move equal ramp($(zlo),$(v_low_z))-$(zlo)
+variable up_move equal ramp($(v_up_wall_z),$(v_up_z))-$(v_up_wall_z)
+variable low_move equal ramp($(v_low_wall_z),$(v_low_z))-$(v_low_wall_z)
 variable zero_move equal 0.0
 fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
 fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_move NULL
 
-fix fix_gra gra setforce 0 0 0
+#fix fix_gra gra setforce 0 0 0
 fix h_bonds_shake all shake 0.0001 20 10000 b 5 8 9 a 11
 velocity free_atoms create 300 30315 dist gaussian
 fix nvt free_atoms nvt temp 300 300 100.0
 
 thermo 1000
 if "${debug} > 0" then &
-"run 100000" &
+"run 0" &
 else &
 "run 100000"
+
+unfix move_upwall
+unfix move_lowwall
+#unfix fix_gra
+unfix h_bonds_shake
+unifx nvt
+group free_atoms delete
 
 write_dump all atom equ.data
 if "${debug} > 0" then &
 "undump check"
 
-### pressure control ###################################################
+### pressure control ############################################################
+variable target_den equal 1.3 #g/cm3
+group control_atoms subtract all up_sol up_wall
+group free_atoms subtract all control_atoms
 
-### press down #########################################################
+fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
+fix up_sol_shake all shake 0.0001 20 10000 b 9
+fix nvt up_sol nvt temp 300 300 100.0
+
+thermo 10000
+dump pressure_control all atom 50000 pressure_control.dump
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 1000000"
+
+unfix move_upwall
+unfix up_sol_shake
+unfix nvt
+undump pressure_control
+
+### Non-euqilibrium simulation #################################################
+group control_atoms union gra walls
+group free_atoms subtract all control_atoms
+group control_atoms delete
+
+fix upaf up_wall aveforce 0 0 v_f_upwall
+fix fix_xy_up_wall up_wall setforce 0 0 NULL
+fix nve up_wall nve
+#fix 3 water gcmc 10 100 100 0 3456543 3.0 -2.5 0.1 mol my_one_water maxangle 180 full_energy
+fix nvt free_atoms nvt temp 300 300 100.0
+
+dump NEMD all atom 50000 NEMD.dump
+thermo 100000
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 5000000"

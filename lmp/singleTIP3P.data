@@ -5,7 +5,7 @@ LAMMPS 'data.' description
        1 angles
 
        2 atom types
-       2 bond types
+       1 bond types
        1 angle types
 
     0.0 3.1      xlo xhi
@@ -21,7 +21,7 @@ Atoms
 Bonds
 
       1   1      1      2
-      2   2      1      3
+      2   1      1      3
 
 Angles
 

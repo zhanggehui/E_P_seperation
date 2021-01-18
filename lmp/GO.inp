@@ -35,7 +35,7 @@ group water type 12 13
 
 group control_atoms union gra walls
 group free_atoms subtract all control_atoms
-group control delete
+group control_atoms delete
 
 variable gra_zhi equal bound(gra,zmax)
 variable gra_zlo equal bound(gra,zmin)

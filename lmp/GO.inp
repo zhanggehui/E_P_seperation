@@ -129,8 +129,9 @@ write_dump all atom equ.data
 
 ### pressure control ############################################################
 variable target_den equal 1.5 #g/cm3
+variable up_move equal ramp($(v_up_wall_z),$(v_up_z))-$(v_up_wall_z)
 fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
-fix up_sol_shake up_sol shake 0.0001 20 10000 b 9
+fix up_sol_shake up_sol shake 0.0001 20 1000000 b 9
 fix nvt up_sol nvt temp 300 300 100.0
 
 if "${debug} > 0" then &

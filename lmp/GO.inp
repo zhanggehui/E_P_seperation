@@ -1,5 +1,5 @@
 variable debug equal 0
-variable NEMD equal 1
+variable NEMD equal 0
 
 ### build system ################################################################
 units real
@@ -121,11 +121,12 @@ else &
 unfix move_upwall
 unfix move_lowwall
 #unfix fix_gra
+if "${debug} == 0" then &
+"run 1000000" &
 unfix h_bonds_shake
 unfix nvt
 change_box all boundary p p s
 change_box all boundary p p f
-write_dump all atom equ.data
 
 ### pressure control ############################################################
 variable target_den equal 1.5 #g/cm3
@@ -147,12 +148,11 @@ if "${debug} == 0" then &
 unfix up_sol_shake
 unfix nvt
 
+write_dump all atom ready.data
 ### production run ################################################################
 if "${NEMD} > 0" then &
-"include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/NEMD.inp" &
-else &
-"include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/PV_relation.inp"
+"include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/NEMD.inp" 
 
-################################################################
+####################################################################################
 if "${debug} > 0" then &
 "undump check"

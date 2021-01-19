@@ -29,7 +29,7 @@ else
         NodeType=cn_nl
     fi
 fi
-NodeType=cn-short
+#NodeType=cn-short
 if [ $NodeType == 'cn_nl' ]; then
     NtasksPerNode=28
 else

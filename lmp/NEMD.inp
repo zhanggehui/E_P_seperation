@@ -1,0 +1,13 @@
+### Non-euqilibrium simulation #################################################
+fix upaf up_wall aveforce 0 0 v_f_upwall
+fix fix_xy_upw up_wall setforce 0 0 NULL
+fix nve up_wall nve
+#fix 3 water gcmc 10 100 100 0 3456543 3.0 -2.5 0.1 mol my_one_water maxangle 180 full_energy
+fix nvt free_atoms nvt temp 300 300 100.0
+
+thermo 100000
+if "${debug} > 0" then &
+"run 0" &
+else &
+"dump NEMD all atom 50000 NEMD.dump" &
+"run 5000000"

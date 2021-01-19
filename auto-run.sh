@@ -35,6 +35,7 @@ else
     NtasksPerNode=20
 fi
 #rm -rf $rundir
+NodeType=cn-short
 if [ ! -d $rundir ]; then
     mkdir $rundir
     ##choose proper node setting ########################################

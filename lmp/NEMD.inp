@@ -4,7 +4,7 @@ fix fix_xy_upw up_wall setforce 0 0 NULL
 fix nve up_wall nve
 fix h_bonds_shake all shake 0.0001 20 1000000 b 5 8 9
 #fix gcmc_low_water low_sol gcmc 100 100 100 0 3456543 300.0 -2.5 0.1 maxangle 180 &
-mol /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/singleTIP3P.data
+mol /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/shake_TIP3P.data
 fix nvt free_atoms nvt temp 300 300 100.0
 
 thermo 100000

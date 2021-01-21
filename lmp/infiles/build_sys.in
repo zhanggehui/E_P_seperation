@@ -1,0 +1,25 @@
+units real
+newton off
+boundary p p f
+pair_style lj/cut/coul/cut 10.0
+pair_modify shift yes mix geometric
+atom_style full
+bond_style harmonic
+angle_style harmonic
+special_bonds lj/coul 0.0 0.0 0.5
+read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
+
+### build atom walls ####
+mass 16 15.9994  # wall atom, same as O
+pair_coeff 16 16 0.1521 3.1505742268315 10.0
+lattice sc 2
+variable zz internal 0.0
+variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
+create_atoms 16 box var v set z zz
+lattice none 1
+
+change_box all boundary p p s
+change_box all boundary p p f
+
+write_data system.data
+write_coeff system.coeff

@@ -1,0 +1,18 @@
+### define compute #######################################
+variable up_wall_z equal bound(up_wall,zmax)
+variable low_wall_z equal bound(low_wall,zmin)
+
+variable xy_area equal lx*ly
+variable f_upwall equal fcm(up_wall,z)
+variable f_lowwall equal fcm(low_wall,z)
+variable p_ratio equal 1.013*6.022*1e-5/4.186
+variable p_up equal v_f_upwall/(v_xy_area*v_p_ratio)
+variable p_low equal v_f_lowwall/(v_xy_area*v_p_ratio)
+
+variable den_ratio equal 10/6.022
+variable up_vol equal "(v_up_wall_z-v_gra_zhi)/lz*vol"
+variable low_vol equal "(v_gra_zlo-v_low_wall_z)/lz*vol"
+variable den_up equal mass(up_sol)/v_up_vol*v_den_ratio
+variable den_low equal mass(low_sol)/v_low_vol*v_den_ratio
+
+thermo_style custom step temp etotal press v_p_up v_p_low v_den_up v_den_low vol

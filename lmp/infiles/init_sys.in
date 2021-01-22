@@ -1,3 +1,0 @@
-include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/global_setting.in
-include ../build/system.data
-include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/global_definition.in

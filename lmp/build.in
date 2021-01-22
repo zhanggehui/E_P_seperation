@@ -1,3 +1,37 @@
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/global_setting.in
+read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
+
+### build atom walls ####
+mass 16 15.9994  # wall atom, same as O
+pair_coeff 16 16 0.1521 3.1505742268315 10.0
+lattice sc 2
+variable zz internal 0.0
+variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
+create_atoms 16 box var v set z zz
+lattice none 1
+
+change_box all boundary p p s
+change_box all boundary p p f
+
+write_data system.data
+write_coeff system.coeff
+
+### minimize #############################################################
+if "${debug} > 0" then &
+"dump check all atom 100 check.dump"
+group fix_atoms union gra walls
+fix freeze fix_atoms setforce 0 0 0
+thermo_style custom step temp epair emol etotal press fmax
+thermo 10
+min_style sd
+minimize 0.0 1.0e-8 2000 20000
+unfix freeze
+group fix_atoms delete
+
+###########################################################################
+
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/global_definition.in
+
 ### euqilibrium #############################################################
 variable target_den equal 1.0 #g/cm3
 variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi

@@ -1,4 +1,6 @@
 ### define compute #######################################
+variable zhi0 equal $(zhi)
+
 variable up_wall_z equal bound(up_wall,zmax)
 variable low_wall_z equal bound(low_wall,zmin)
 

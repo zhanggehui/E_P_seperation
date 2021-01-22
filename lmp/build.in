@@ -67,4 +67,4 @@ run 1000000
 undump pressure
 unfix up_sol_shake
 unfix nvt
-write_dump all atom ready.data
+write_dump all custom ready.dump id type x y z vx vy vz ix iy iz

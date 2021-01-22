@@ -3,14 +3,24 @@ include ../build/system.data
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_grps.in
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_comp.in
 
+variable laststep file ../build/ready.dump
+next laststep
+read_dump ../build/ready.dump ${laststep} x y z vx vy vz replace yes box yes
+
+#molecule water /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/datafiles/shake_TIP3P.data
+
+change_box all z delta $(v_gra_zhi-v_zhi0) 0 
+
 ### Non-euqilibrium simulation #################################################
 
+fix bl all balance 1000 1.0 shift z 20 1.05
 fix upaf up_wall aveforce 0 0 v_f_upwall
-fix fix_xy_upw up_wall setforce 0 0 NULL
-fix nve up_wall nve
+fix lowaf low_wall aveforce 0 0 v_f_lowwall
+fix fix_xy_upw walls setforce 0 0 NULL
+fix nve walls nve
 fix h_bonds_shake all shake 0.0001 20 1000000 b 5 8 9
-#fix gcmc_low_water low_sol gcmc 100 100 100 0 3456543 300.0 -2.5 0.1 maxangle 180 &
-mol /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/shake_TIP3P.data
+
+#fix gcmc_low_water low_sol gcmc 100 100 100 0 3456543 300.0 -2.5 0.1 maxangle 180 mol water
 fix nvt free_atoms nvt temp 300 300 100.0
 
 thermo 100000

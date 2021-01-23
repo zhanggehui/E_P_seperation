@@ -1,4 +1,4 @@
-### group definition ########################################################
+### group definition #############################################
 group gra type 1:4
 group go type 1:11
 group walls type 16
@@ -20,15 +20,8 @@ group up_wall variable g_atom_v
 variable g_atom_v atom grmask(walls,low_box) 
 group low_wall variable g_atom_v
 
-### sol group ###
-group sol subtract all go walls
-variable g_atom_v atom grmask(sol,up_box)
-group up_sol variable g_atom_v
-group up_sol include molecule
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_sol_grps.in
 
-variable g_atom_v atom grmask(sol,low_box)
-group low_sol variable g_atom_v
-group low_sol include molecule
-
-group mid_sol subtract sol up_sol low_sol
-group sol delete
+################################################################
+group go delete
+group water delete

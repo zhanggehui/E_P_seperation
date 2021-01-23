@@ -1,0 +1,12 @@
+### sol group ###
+group sol subtract all go walls
+variable g_atom_v atom grmask(sol,up_box)
+group up_sol variable g_atom_v
+group up_sol include molecule
+
+variable g_atom_v atom grmask(sol,low_box)
+group low_sol variable g_atom_v
+group low_sol include molecule
+
+group mid_sol subtract sol up_sol low_sol
+group sol delete

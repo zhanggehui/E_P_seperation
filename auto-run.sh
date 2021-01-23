@@ -40,15 +40,12 @@ else
     echo "Unknown NodeType!"
 fi
 
-
-
 #rm -rf $rundir
 if [ ! -d $rundir ]; then
-    mkdir $rundir
-    ##choose proper node setting ########################################
     if [ $NodeType == 'Unknown' ]; then
         echo "Do nothing!"
     else
+        mkdir $rundir
         if [ $NodeType == 'debug' ]; then
             submissionscript="$scriptsdir/debug_${md_code}.sh"
         else 
@@ -87,7 +84,7 @@ if [ ! -d $rundir ]; then
         if [ $runscript == 'nvt-cycle.sh' ]; then
             cp $scriptsdir/nvt-cycle.mdp ./$rundir
         fi
-        
+
         sbatch $submissionscript
         echo "Submiting a job to ${NodeType}, Please wait..."
         sleep 2s

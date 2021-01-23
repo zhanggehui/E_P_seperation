@@ -49,8 +49,8 @@ fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_mov
 fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_move NULL
 
 fix h_bonds_shake all shake 0.0001 20 1000000 b 5 8 9
-velocity free_atoms create 300 30315 dist gaussian
-fix nvt free_atoms nvt temp 300 300 100.0
+velocity free_atoms create 500 30315 dist gaussian
+fix nvt free_atoms nvt temp 500 500 100.0
 thermo 100000
 dump pressure all atom 10000 pressure.dump
 
@@ -65,7 +65,21 @@ unfix move_lowwall
 if "${debug} > 0" then &
 "run 0" &
 else &
-"run 1000000"
+"run 500000"
+
+unfix nvt
+fix nvt free_atoms nvt temp 500 300 100.0
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 500000"
+
+unfix nvt
+fix nvt free_atoms nvt temp 300 300 100.0
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 500000"
 
 unfix h_bonds_shake
 unfix nvt

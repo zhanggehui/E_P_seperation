@@ -23,5 +23,5 @@ group low_wall variable g_atom_v
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_sol_grps.in
 
 ################################################################
-group go delete
-group water delete
+#group go delete
+#group water delete

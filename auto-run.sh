@@ -1,7 +1,6 @@
 md_code=$1
-debug_flag=1
-export runscript=$2
-export rundir=$3
+export runscript=$3
+export rundir=$4
 if [ ${md_code} == 'lmp' ]; then
     NodeNum=2
     scriptsdir='/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp'
@@ -12,29 +11,41 @@ else
     export scriptsdir='/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx'
 fi
 
-ncnnl=`sinfo | grep 'idle' | grep 'cn_nl' | awk '{print $4}'`
-ncns=`sinfo | grep 'idle' | grep 'cn-short' | awk '{print $4}'`
-if [ -z "$ncnnl" ] && [ -z "$ncns" ]; then #-n是否为非空串,-z是否为空串,判断必须加引号
-    NodeType=cn_nl
-elif [ -z "$ncnnl" ] && [ -n "$ncns" ]; then
-    NodeType=cn-short
-elif [ -n "$ncnnl" ] && [ -z "$ncns" ]; then
-    NodeType=cn_nl
-else
-    if [ $ncnnl -ge 10 ]; then
+debug_flag=0
+if [ $2 == 'auto' ]; then
+    ncnnl=`sinfo | grep 'idle' | grep 'cn_nl' | awk '{print $4}'`
+    ncns=`sinfo | grep 'idle' | grep 'cn-short' | awk '{print $4}'`
+    if [ -z "$ncnnl" ] && [ -z "$ncns" ]; then #-n是否为非空串,-z是否为空串,判断必须加引号
         NodeType=cn_nl
-    elif [ $ncns -gt $ncnnl ]; then
+    elif [ -z "$ncnnl" ] && [ -n "$ncns" ]; then
         NodeType=cn-short
-    else
+    elif [ -n "$ncnnl" ] && [ -z "$ncns" ]; then
         NodeType=cn_nl
+    else
+        if [ $ncnnl -ge 10 ]; then
+            NodeType=cn_nl
+        elif [ $ncns -gt $ncnnl ]; then
+            NodeType=cn-short
+        else
+            NodeType=cn_nl
+        fi
     fi
+elif [ $2 == 'cn-short' ]; then
+    NodeType=cn-short
+elif [ $2 == 'cn_nl' ]; then
+    NodeType=cn_nl
+elif [ $2 == 'debug' ]; then
+    debug_flag=1
+else
+    echo "Unknown NodeType!"
 fi
-#NodeType=cn-short
+
 if [ $NodeType == 'cn_nl' ]; then
     NtasksPerNode=28
 else
     NtasksPerNode=20
 fi
+
 #rm -rf $rundir
 if [ ! -d $rundir ]; then
     mkdir $rundir
@@ -63,7 +74,7 @@ if [ ! -d $rundir ]; then
     fi
 
     #####################################################################
-    jobname="${md_code}_$3" ; keyword="#SBATCH -J" ; newline="#SBATCH -J $jobname"
+    jobname="${md_code}_$4" ; keyword="#SBATCH -J" ; newline="#SBATCH -J $jobname"
     sed -i "/$keyword/c$newline" $submissionscript
     oname="./$rundir/1.out" ; keyword="#SBATCH -o" ; newline="#SBATCH -o $oname"
     sed -i "/$keyword/c$newline" $submissionscript

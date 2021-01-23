@@ -40,12 +40,7 @@ else
     echo "Unknown NodeType!"
 fi
 
-if [ $NodeType == 'cn_nl' ]; then
-    NtasksPerNode=28
-elif [ $NodeType == 'cn-short' ]; then
-    NtasksPerNode=20
-else
-fi
+
 
 #rm -rf $rundir
 if [ ! -d $rundir ]; then
@@ -57,6 +52,11 @@ if [ ! -d $rundir ]; then
         if [ $NodeType == 'debug' ]; then
             submissionscript="$scriptsdir/debug_${md_code}.sh"
         else 
+            if [ $NodeType == 'cn_nl' ]; then
+                NtasksPerNode=28
+            elif [ $NodeType == 'cn-short' ]; then
+                NtasksPerNode=20
+            fi
             submissionscript="$scriptsdir/cn_${md_code}.sh"
             keyword="#SBATCH -p"; newline="#SBATCH -p $NodeType"
             sed -i "/$keyword/c$newline" $submissionscript
@@ -75,8 +75,6 @@ if [ ! -d $rundir ]; then
                 sed -i "/$keyword/c$newline" $submissionscript
             fi
         fi
-
-        #####################################################################
         jobname="${md_code}_$4" ; keyword="#SBATCH -J" ; newline="#SBATCH -J $jobname"
         sed -i "/$keyword/c$newline" $submissionscript
         oname="./$rundir/1.out" ; keyword="#SBATCH -o" ; newline="#SBATCH -o $oname"
@@ -89,7 +87,7 @@ if [ ! -d $rundir ]; then
         if [ $runscript == 'nvt-cycle.sh' ]; then
             cp $scriptsdir/nvt-cycle.mdp ./$rundir
         fi
-
+        
         sbatch $submissionscript
         echo "Submiting a job to ${NodeType}, Please wait..."
         sleep 2s

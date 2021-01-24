@@ -65,6 +65,7 @@ else &
 "run 500000"
 
 unfix nvt
+fix nvt free_atoms nvt temp 500 300 100.0
 if "${debug} > 0" then &
 "run 0" &
 else &
@@ -98,19 +99,18 @@ fix lowaf low_wall aveforce 0 0 v_f_lowwall
 fix fix_xy_upw walls setforce 0 0 NULL
 fix viscous_wall walls viscous 0.5
 fix nve walls nve
-fix nvt free_atoms nvt temp 500 300 100.0
 if "${debug} > 0" then &
 "run 0" &
 else &
 "run 500000"
 
+unfix h_bonds_shake
+unfix nvt
 unfix upaf
 unfix lowaf
 unfix fix_xy_upw
 unfix viscous_wall
 unfix nve
-unfix h_bonds_shake
-unfix nvt
 
 change_box all boundary p p s
 change_box all boundary p p f

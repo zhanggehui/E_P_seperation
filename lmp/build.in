@@ -37,12 +37,28 @@ group low_sol delete
 group mid_sol delete
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_sol_grps.in
 
+variable target_den equal 1.0 #g/cm3
+variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
+variable low_z equal v_gra_zlo-mass(low_sol)/(v_xy_area*(v_target_den/v_den_ratio))
+variable up_move equal ramp($(v_up_wall_z),$(v_up_z))-$(v_up_wall_z)
+variable low_move equal ramp($(v_low_wall_z),$(v_low_z))-$(v_low_wall_z)
+variable zero_move equal 0.0
+fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
+fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_move NULL
+
 fix h_bonds_shake all shake 0.0001 20 1000000 b 5 8 9
 velocity free_atoms create 500 30315 dist gaussian
 fix nvt free_atoms nvt temp 500 500 100.0
 thermo 100000
 dump pressure all atom 10000 pressure.dump
 
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 200000"
+
+unfix move_upwall
+unfix move_lowwall
 if "${debug} > 0" then &
 "run 0" &
 else &
@@ -83,25 +99,18 @@ group mid_sol delete
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_sol_grps.in
 
 variable target_den equal 1.5 #g/cm3
-variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
-variable low_z equal v_gra_zlo-mass(low_sol)/(v_xy_area*(v_target_den/v_den_ratio))
 variable up_move equal ramp($(v_up_wall_z),$(v_up_z))-$(v_up_wall_z)
-variable low_move equal ramp($(v_low_wall_z),$(v_low_z))-$(v_low_wall_z)
-variable zero_move equal 0.0
-
 fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
 fix up_sol_shake up_sol shake 0.0001 20 1000000 b 9
 fix nvt up_sol nvt temp 300 300 100.0
 
 thermo 100000
-
 if "${debug} > 0" then &
 "run 0" &
 else &
 "run 1000000"
 
 unfix move_upwall
-
 if "${debug} > 0" then &
 "run 0" &
 else &

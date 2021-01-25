@@ -79,7 +79,7 @@ else &
 "run 500000"
 
 variable up_sol_z equal bound(up_sol,zmax)
-variable low_sol_z equal bound(low_sol,zmax)
+variable low_sol_z equal bound(low_sol,zmin)
 variable up_move equal ramp($(v_up_wall_z),$(v_up_sol_z+2))-$(v_up_wall_z)
 variable low_move equal ramp($(v_low_wall_z),$(v_low_sol_z-2))-$(v_low_wall_z)
 variable zero_move equal 0.0

@@ -3,6 +3,7 @@ group gra type 1:4
 group go type 1:11
 group walls type 16
 group water type 12 13
+group ions type 14 15
 
 group control_atoms union gra walls
 group free_atoms subtract all control_atoms
@@ -21,7 +22,3 @@ variable g_atom_v atom grmask(walls,low_box)
 group low_wall variable g_atom_v
 
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_sol_grps.in
-
-################################################################
-#group go delete
-#group water delete

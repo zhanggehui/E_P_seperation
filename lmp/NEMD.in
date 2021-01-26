@@ -1,3 +1,5 @@
+variable debug equal 0
+
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_setting.in
 include ../build/system.data
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_grps.in
@@ -25,4 +27,8 @@ fix nvt free_atoms nvt temp 300 300 100.0
 
 thermo 100000
 dump NEMD all atom 50000 NEMD.dump
-run 5000000
+
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 5000000"

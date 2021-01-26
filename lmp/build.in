@@ -15,11 +15,9 @@ lattice none 1
 change_box all boundary p p s
 change_box all boundary p p f
 write_data system.data
-#include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_grps.in
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_grps.in
 
 ### minimize #############################################################
-group gra type 1:4
-group walls type 16
 
 group fixed_atoms union gra walls
 fix freeze fixed_atoms setforce 0 0 0
@@ -30,8 +28,8 @@ minimize 0.0 1.0e-8 2000 20000
 unfix freeze
 group fixed_atoms delete
 
-###########################################################################
-include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_grps.in
+#############################################################################
+
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_comp.in
 
 ### equilibrium #############################################################

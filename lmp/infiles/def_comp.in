@@ -15,8 +15,10 @@ variable p_up equal v_f_upwall/(v_xy_area*v_p_ratio)
 variable p_low equal v_f_lowwall/(v_xy_area*v_p_ratio)
 
 ##################
-variable vol_up equal (v_up_wall_z-v_gra_zhi)*v_xy_area
-variable vol_low equal (v_gra_zlo-v_low_wall_z)*v_xy_area
+#variable vol_up equal (v_up_wall_z-v_gra_zhi)*v_xy_area
+#variable vol_low equal (v_gra_zlo-v_low_wall_z)*v_xy_area
+variable vol_up equal (v_up_wall_z-v_gra_zhi)/lz*vol
+variable vol_low equal (v_gra_zlo-v_low_wall_z)/lz*vol
 
 variable den_ratio equal 10/6.022
 variable den_up equal mass(up_sol)/v_vol_up*v_den_ratio

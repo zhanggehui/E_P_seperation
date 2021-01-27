@@ -11,7 +11,7 @@ read_dump ../build/ready.dump ${laststep} x y z vx vy vz replace yes box yes
 
 #molecule water /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/datafiles/shake_TIP3P.data
 
-change_box all z delta $(v_gra_zhi-v_zhi0) 0 
+change_box all z delta $(v_gra_zhi-v_zhi0) 0
 
 ### Non-euqilibrium simulation #################################################
 
@@ -29,7 +29,7 @@ thermo 100000
 dump NEMD all atom 50000 NEMD.dump
 
 if "${debug} > 0" then &
-"run 1000" &
+"run 100" &
 else &
 "run 5000000"
 write_dump all custom a.dump id type x y z vx vy vz ix iy iz

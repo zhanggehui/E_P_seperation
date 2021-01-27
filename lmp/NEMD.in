@@ -29,6 +29,7 @@ thermo 100000
 dump NEMD all atom 50000 NEMD.dump
 
 if "${debug} > 0" then &
-"run 10" &
+"run 1000" &
 else &
 "run 5000000"
+write_dump all custom a.dump id type x y z vx vy vz ix iy iz

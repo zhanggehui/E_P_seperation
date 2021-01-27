@@ -1,7 +1,7 @@
 variable debug equal 1
 
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_setting.in
-include ../build/system.data
+read_data ../build/system.data
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_grps.in
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_comp.in
 

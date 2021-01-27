@@ -69,6 +69,7 @@ else &
 unfix nvt
 
 ### 400 -> 300 ###
+velocity ions create 300 30315 dist gaussian
 fix nvt h_temp_grp nvt temp 400 300 100.0
 fix nvt_ions ions nvt temp 300 300 100.0
 if "${debug} > 0" then &

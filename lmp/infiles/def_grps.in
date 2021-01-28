@@ -2,8 +2,8 @@
 group gra type 1:4
 group go type 1:11
 group walls type 16
-group water type 12 13
-group ions type 14 15
+#group water type 12 13
+#group ions type 14 15
 
 group control_atoms union gra walls
 group free_atoms subtract all control_atoms

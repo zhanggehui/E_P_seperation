@@ -15,8 +15,8 @@ change_box all z delta $(v_gra_zhi-v_zhi0) 0
 ### Non-euqilibrium simulation #################################################
 
 fix bl all balance 1000 1.0 shift z 20 1.05
-fix upaf up_wall aveforce 0 0 v_f_upwall
-fix lowaf low_wall aveforce 0 0 v_f_lowwall
+fix upaf up_wall aveforce 0 0 $(-1*v_f_upwall)
+fix lowaf low_wall aveforce 0 0 $(-1*v_f_lowwall)
 fix fix_xy_upw walls setforce 0 0 NULL
 fix nve walls nve
 fix h_bonds_shake all shake 0.0001 20 1000000 b 5 8 9

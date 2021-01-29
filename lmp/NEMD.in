@@ -27,6 +27,7 @@ fix nvt free_atoms nvt temp 300 300 100.0
 thermo 100000
 dump NEMD all atom 50000 NEMD.dump
 
+run 0
 if "${debug} > 0" then &
 "thermo 10" &
 "run 100" &

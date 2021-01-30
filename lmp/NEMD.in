@@ -13,7 +13,7 @@ include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_comp.i
 change_box all z delta $(v_gra_zhi-v_zhi0) 0
 
 ### Non-euqilibrium simulation #################################################
-
+run 0
 fix bl all balance 1000 1.0 shift z 20 1.05
 fix upaf up_wall aveforce 0 0 $(-1*v_f_upwall)
 fix lowaf low_wall aveforce 0 0 $(-1*v_f_lowwall)
@@ -27,7 +27,6 @@ fix nvt free_atoms nvt temp 300 300 100.0
 thermo 100000
 dump NEMD all atom 50000 NEMD.dump
 
-run 0
 if "${debug} > 0" then &
 "thermo 10" &
 "run 100" &

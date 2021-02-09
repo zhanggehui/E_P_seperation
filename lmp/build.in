@@ -1,5 +1,6 @@
 variable debug equal 0
-variable lay_spacing index 1.0
+variable lay_spacing index 0.7
+variable NEMD_tmp index 500
 variable target_density index 1.175
 
 ###########################################################################
@@ -69,16 +70,16 @@ else &
 "run 500000"
 unfix nvt
 
-### 500 -> 300 ###
-fix nvt free_atoms nvt temp 500 300 100.0
+### 500 -> ${NEMD_tmp} ###
+fix nvt free_atoms nvt temp 500 ${NEMD_tmp} 100.0
 if "${debug} > 0" then &
 "run 0" &
 else &
 "run 500000"
 unfix nvt
 
-### 300 equ ###
-fix nvt free_atoms nvt temp 300 300 100.0
+### ${NEMD_tmp} equ ###
+fix nvt free_atoms nvt temp ${NEMD_tmp} ${NEMD_tmp} 100.0
 if "${debug} > 0" then &
 "run 0" &
 else &
@@ -131,7 +132,7 @@ variable target_den equal ${target_density} #g/cm3
 variable up_move equal ramp($(v_up_wall_z),$(v_up_z))-$(v_up_wall_z)
 fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
 fix up_sol_shake up_sol shake 0.0001 20 1000000 b 9
-fix nvt up_sol nvt temp 300 300 100.0
+fix nvt up_sol nvt temp ${NEMD_tmp} ${NEMD_tmp} 100.0
 
 thermo 100000
 if "${debug} > 0" then &

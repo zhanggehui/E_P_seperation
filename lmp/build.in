@@ -1,9 +1,10 @@
 variable debug equal 0
+variable lay_spacing index 1.0
 
 ###########################################################################
 
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_setting.in
-read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/0.7/GO.data extra/atom/types 1
+read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/${lay_spacing}/GO.data extra/atom/types 1
 ### build atom walls ####
 mass 16 15.9994  # wall atom, same as O
 pair_coeff 16 16 0.1521 3.1505742268315 10.0

@@ -1,5 +1,5 @@
 variable debug equal 0
-variable build_dir equal build300
+variable build_dir index build300
 
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_setting.in
 read_data ../${build_dir}/system.data

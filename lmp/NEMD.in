@@ -1,10 +1,11 @@
 variable debug equal 0
+variable build_dir equal build300
 
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_setting.in
-read_data ../build/system.data
-variable laststep file ../build/ready.dump
+read_data ../${build_dir}/system.data
+variable laststep file ../${build_dir}/ready.dump
 next laststep
-read_dump ../build/ready.dump ${laststep} x y z vx vy vz replace yes box yes
+read_dump ../${build_dir}/ready.dump ${laststep} x y z vx vy vz replace yes box yes
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_grps.in
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_comp.in
 

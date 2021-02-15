@@ -1,8 +1,7 @@
 variable debug equal 0
-variable lay_spacing index 0.7
-variable NEMD_tmp index 500
-#variable target_density index 1.175
-variable target_density index 1.5
+variable lay_spacing index 1.0
+variable NEMD_tmp index 300
+variable target_density index 1.5 #1.175
 
 ###########################################################################
 

@@ -1,7 +1,7 @@
 variable debug equal 0
-variable lay_spacing index 1.0
-variable NEMD_tmp index 300
-variable target_density index 1.5 #1.175
+variable lay_spacing index 0.7
+variable NEMD_tmp index 500
+variable target_density index 1.175 #1.5
 
 ###########################################################################
 
@@ -100,24 +100,11 @@ else &
 unfix move_upwall
 unfix move_lowwall
 
-### nve walls ###
-fix upaf up_wall aveforce 0 0 v_f_upwall
-fix lowaf low_wall aveforce 0 0 v_f_lowwall
-fix fix_xy_upw walls setforce 0 0 NULL
-fix viscous_wall walls viscous 0.5
-fix nve walls nve
-if "${debug} > 0" then &
-"run 0" &
-else &
-"run 500000"
+if "${NEMD_tmp} <= 300" then &
+"include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/nve_walls.in"
 
 unfix h_bonds_shake
 unfix nvt
-unfix upaf
-unfix lowaf
-unfix fix_xy_upw
-unfix viscous_wall
-unfix nve
 
 change_box all boundary p p s
 change_box all boundary p p f

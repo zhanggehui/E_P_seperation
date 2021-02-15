@@ -1,0 +1,16 @@
+### nve walls ###
+fix upaf up_wall aveforce 0 0 v_f_upwall
+fix lowaf low_wall aveforce 0 0 v_f_lowwall
+fix fix_xy_upw walls setforce 0 0 NULL
+fix viscous_wall walls viscous 0.5
+fix nve walls nve
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 500000"
+
+unfix upaf
+unfix lowaf
+unfix fix_xy_upw
+unfix viscous_wall
+unfix nve

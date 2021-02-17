@@ -85,23 +85,8 @@ if "${debug} > 0" then &
 else &
 "run 500000"
 
-### move walls ###
-variable up_sol_z equal bound(up_sol,zmax)
-variable low_sol_z equal bound(low_sol,zmin)
-variable up_move equal ramp($(v_up_wall_z),$(v_up_sol_z+2))-$(v_up_wall_z)
-variable low_move equal ramp($(v_low_wall_z),$(v_low_sol_z-2))-$(v_low_wall_z)
-variable zero_move equal 0.0
-fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
-fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_move NULL
-if "${debug} > 0" then &
-"run 0" &
-else &
-"run 1"
-unfix move_upwall
-unfix move_lowwall
-
-if "${NEMD_tmp} <= 300" then &
-"include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/nve_walls.in"
+if "${NEMD_tmp} <= 400" then &
+"include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/handle_walls.in"
 
 unfix h_bonds_shake
 unfix nvt

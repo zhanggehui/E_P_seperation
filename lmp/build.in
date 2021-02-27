@@ -1,6 +1,6 @@
 variable debug equal 0
-variable lay_spacing index 0.7
-variable NEMD_tmp index 500
+variable lay_spacing index 1.0
+variable NEMD_tmp index 400
 variable target_density index 1.175 #1.5
 
 ###########################################################################
@@ -85,7 +85,7 @@ if "${debug} > 0" then &
 else &
 "run 500000"
 
-if "${NEMD_tmp} <= 400" then &
+if "${NEMD_tmp} <= 350" then &
 "include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/handle_walls.in"
 
 unfix h_bonds_shake

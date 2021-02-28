@@ -1,5 +1,5 @@
 variable debug equal 0
-variable temperature index 410
+variable temperature index 420
 variable build_dir index build_1.175_${temperature}
 
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_setting.in

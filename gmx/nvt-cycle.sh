@@ -1,9 +1,6 @@
-#!/bin/bash
+# rundir的上层目录执行
 
-# environment variable: 
-# orientation ; rundir ; runscript ; scriptsdir
-# run in root dir
-
+orientation=y
 ncycles=1    
 nsteps=10000000
 pressure=0           #Mpa

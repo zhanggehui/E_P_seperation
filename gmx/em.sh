@@ -1,8 +1,3 @@
-#!/bin/bash
-
-# environment variable:
-# orientation ; rundir ; runscript ; scriptsdir
-
 gmx grompp -f $scriptsdir/em.mdp -c GO_ion.gro -p GO_ion_pp.top \
 -o ./$rundir/em.tpr -po ./$rundir/em-out -n waterlayer.ndx #-maxwarn 1
 

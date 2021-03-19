@@ -1,8 +1,3 @@
-#!/bin/bash
-
-# environment variable:
-# orientation ; rundir ; runscript ; scriptsdir
-
 gmx grompp -f $scriptsdir/nvt-equ.mdp -c GO2-afterem.gro -p GO_ion_pp.top \
 -o ./$rundir/nvt-equ.tpr -po ./$rundir/nvt-equ-out -n waterlayer.ndx #-maxwarn 1
 

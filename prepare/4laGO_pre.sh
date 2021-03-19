@@ -18,4 +18,3 @@ if [ ! -d "./$ion" ];then
 else
    echo 'already exist!'
 fi
-

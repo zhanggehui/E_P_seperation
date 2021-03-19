@@ -1,0 +1,124 @@
+variable debug equal 0
+variable lay_spacing index 1.0
+variable NEMD_tmp index 450
+variable target_density index 1.175 #1.5
+
+###########################################################################
+
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_setting.in
+read_data /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/receive/NA_pool/${lay_spacing}/GO.data extra/atom/types 1
+### build atom walls ####
+mass 16 15.9994  # wall atom, same as O
+pair_coeff 16 16 0.1521 3.1505742268315 10.0
+lattice sc 2
+variable zz internal 0.0
+variable v equal "v_zz == -zlat*floor(-zlo/zlat) || v_zz == zlat*floor(zhi/zlat)"
+create_atoms 16 box var v set z zz
+lattice none 1
+change_box all boundary p p s
+change_box all boundary p p f
+write_data system.data
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_grps.in
+
+### minimize #############################################################
+
+group fixed_atoms union gra walls
+fix freeze fixed_atoms setforce 0 0 0
+thermo_style custom step temp epair emol etotal press fmax
+thermo 10
+min_style sd
+minimize 0.0 1.0e-8 2000 20000
+unfix freeze
+group fixed_atoms delete
+
+#############################################################################
+
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_comp.in
+
+### equilibrium #############################################################
+group up_sol delete
+group low_sol delete
+group mid_sol delete
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_sol_grps.in
+
+variable target_den equal 1.0 #g/cm3
+variable up_z equal mass(up_sol)/(v_xy_area*(v_target_den/v_den_ratio))+v_gra_zhi
+variable low_z equal v_gra_zlo-mass(low_sol)/(v_xy_area*(v_target_den/v_den_ratio))
+variable up_move equal ramp($(v_up_wall_z),$(v_up_z))-$(v_up_wall_z)
+variable low_move equal ramp($(v_low_wall_z),$(v_low_z))-$(v_low_wall_z)
+variable zero_move equal 0.0
+fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
+fix move_lowwall low_wall move variable NULL NULL v_low_move v_zero_move v_zero_move NULL
+
+fix h_bonds_shake all shake 0.0001 20 1000000 b 5 8 9
+velocity free_atoms create 500 30315 dist gaussian
+fix nvt free_atoms nvt temp 500 500 100.0
+thermo 100000
+dump pressure all atom 10000 pressure.dump
+
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 200000"
+
+### 500 equ ###
+unfix move_upwall
+unfix move_lowwall
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 500000"
+unfix nvt
+
+### 500 -> ${NEMD_tmp} ###
+fix nvt free_atoms nvt temp 500 ${NEMD_tmp} 100.0
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 500000"
+unfix nvt
+
+### ${NEMD_tmp} equ ###
+fix nvt free_atoms nvt temp ${NEMD_tmp} ${NEMD_tmp} 100.0
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 500000"
+
+if "${NEMD_tmp} <= 350" then &
+"include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/handle_walls.in"
+
+unfix h_bonds_shake
+unfix nvt
+
+change_box all boundary p p s
+change_box all boundary p p f
+
+### pressure control ############################################################
+group up_sol delete
+group low_sol delete
+group mid_sol delete
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp/infiles/def_sol_grps.in
+
+variable target_den equal ${target_density} #g/cm3
+variable up_move equal ramp($(v_up_wall_z),$(v_up_z))-$(v_up_wall_z)
+fix move_upwall up_wall move variable NULL NULL v_up_move v_zero_move v_zero_move NULL
+fix up_sol_shake up_sol shake 0.0001 20 1000000 b 9
+fix nvt up_sol nvt temp ${NEMD_tmp} ${NEMD_tmp} 100.0
+
+thermo 100000
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 1000000"
+
+unfix move_upwall
+if "${debug} > 0" then &
+"run 0" &
+else &
+"run 1000000"
+
+undump pressure
+unfix up_sol_shake
+unfix nvt
+write_dump all custom ready.dump id type x y z vx vy vz ix iy iz

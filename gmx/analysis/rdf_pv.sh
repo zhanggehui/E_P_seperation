@@ -12,7 +12,7 @@ if [ ! -d $rdfdir ] ; then
             pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`   
             cd ${pressure}Mpa-0V ; ffile=nvt-pro-traj.trr
             xvgfile=${ion}_${pressure}Mpa.xvg
-            gmx make_ndx -f last.gro < ../../md_scripts/rdf_ndx.sh
+            echo -e "a OW\ndel 8\ndel 8\ndel 8\nq" | gmx make_ndx -f last.gro
             gmx rdf -f $ffile -n index.ndx -ref $ion -sel OW -selrpos atom -seltype atom -o $xvgfile -b 0 -e 5000
             #-bin 0.01
             cp $xvgfile ../../$rdfdir/$ion

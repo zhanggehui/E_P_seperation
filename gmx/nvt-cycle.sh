@@ -2,7 +2,7 @@
 
 orientation=y
 ncycles=1    
-nsteps=10000000
+nsteps=5000000
 pressure=0           #Mpa
 nvtequdir=nvtequ
 dt=0.001             #ps
@@ -17,22 +17,16 @@ ndxdir=./$rundir/ndxs ; mkdir -p $ndxdir
 
 mdpfile=./$rundir/nvt-cycle.mdp
 ndxfile=./$rundir/waterlayer.ndx 
-topfile=GO2.top
+topfile=GO_ion_pp.top
 
 #修改每个循环步数,步长
 reset_nsteps="nsteps                   = $nsteps"
 sed -i "/nsteps/c${reset_nsteps}" $mdpfile
-reset_dt="dt                       = $dt"
-dtline='dt                       ='
-sed -i "/$dtline/c${reset_dt}" $mdpfile
-reset_nstxout="nstxout                  =$nsteps"
-nstxoutline='nstxout                  ='
-sed -i "/$nstxoutline/c${reset_nstxout}" $mdpfile
 
 if [ $pressure -gt 0 ]; then
-    key='acc-grps' new='acc-grps                 = waterlayer'
+    key='acc-grps' ; new='acc-grps                 = waterlayer'
     sed -i "/$key/c$new" $mdpfile
-    key='accelerate' new='accelerate               = 0 0 0'
+    key='accelerate' ; new='accelerate               = 0 0 0'
     sed -i "/$key/c$new" $mdpfile
 fi
 

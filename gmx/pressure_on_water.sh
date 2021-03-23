@@ -1,5 +1,3 @@
-#!/bin/bash
-
 oldndxfile="./$rundir/step$((i-1)).ndx"
 mv $ndxfile $oldndxfile
 awk -v boolpr=1 \

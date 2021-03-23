@@ -307,6 +307,7 @@ userreal1                = 0
 userreal2                = 0
 userreal3                = 0
 userreal4                = 0
+
 ; Electric fields
 ; Format for electric-field-x, etc. is: four real variables:
 ; amplitude (V/nm), frequency omega (1/ps), time for the pulse peak (ps),

@@ -1,4 +1,4 @@
-# rundir的上层目录执行
+#在rundir的上层目录执行
 
 orientation=y
 ncycles=1    
@@ -62,7 +62,7 @@ for ((i=1;i<=$ncycles;i++)); do
     cd $rundir ; $gmxrun -v -deffnm $tprname ; cd ..
 done
 
-# 进行多余文件的删除run
+#删除多余的输出文件
 mv ./$rundir/nvt-step-$ncycles.gro ./$rundir/last.gro
 mv ./$rundir/nvt-step-$ncycles.tpr ./$rundir/traj.tpr
 if [ $ncycles -gt 1 ] ; then

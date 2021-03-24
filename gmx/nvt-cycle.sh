@@ -14,7 +14,7 @@ mdpdir=./mdps ; mkdir -p $mdpdir
 ndxdir=./ndxs ; mkdir -p $ndxdir
 
 mdpfile=./nvt-cycle.mdp
-ndxfile=waterlayer.ndx 
+ndxfile=./waterlayer.ndx 
 topfile=../GO_ion_pp.top
 
 #修改每个循环的总步数（模拟时长）

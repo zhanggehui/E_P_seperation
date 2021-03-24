@@ -20,7 +20,7 @@ topfile=../GO_ion_pp.top
 
 break_flag=0
 
-if [ $pressure - 0 ]; then
+if [ $pressure -gt 0 ]; then
     key='acc-grps'  ; new='acc-grps                 = waterlayer'
     sed -i "/$key/c$new" $mdpfile
     key='accelerate'; new='accelerate               = 0 0 0'

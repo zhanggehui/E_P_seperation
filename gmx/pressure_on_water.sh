@@ -45,7 +45,8 @@ END{
   print acceleration > tmp;
   print (i, count, len, araalen1, araalen2, area, acceleration) >> cyclelog;
 }
-' $lastgro >> $ndxfile
+' /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/periodic/NA/1.0/nvtequ/nvt-equ.gro >> $ndxfile
+#$lastgro >> $ndxfile
 echo '' >> $ndxfile #最后一行没有换行符会不读
 
 acceleration=`sed -n '1p' ./tmp`

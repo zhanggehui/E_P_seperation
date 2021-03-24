@@ -5,6 +5,7 @@ nsteps=1000
 nvtequdir=../nvtequ
 pressure=0           #Mpa
 dt=0.001             #ps
+acc_water=all
 ############################################################
 echo "pressure: $pressure" > cyclelog
 echo 'stepnum   count   len   lenv1   lenv2   area   acceleration' >> cyclelog
@@ -17,24 +18,29 @@ mdpfile=./nvt-cycle.mdp
 ndxfile=./waterlayer.ndx 
 topfile=../GO_ion_pp.top
 
-#修改每个循环的总步数（模拟时长）
-reset_nsteps="nsteps                   = $nsteps"
-sed -i "/nsteps/c${reset_nsteps}" $mdpfile
-
-if [ $pressure -gt 0 ]; then
+break_flag=0
+if [ $pressure -gt 0 ] && [ $acc_water !== 'all' ] ; then
     key='acc-grps'  ; new='acc-grps                 = waterlayer'
     sed -i "/$key/c$new" $mdpfile
     key='accelerate'; new='accelerate               = 0 0 0'
     sed -i "/$key/c$new" $mdpfile
+else
+    nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%g",nsteps*ncycles);}'`
+    break_flag=1
 fi
 
+#修改每个循环的总步数（模拟时长）
+reset_nsteps="nsteps                   = $nsteps"
+sed -i "/nsteps/c${reset_nsteps}" $mdpfile
+
+tprname=nvt-production
 for ((i=1;i<=$ncycles;i++)); do
-    tprname=nvt-step-1
     if [ $i -eq 1 ]; then
         lastgro=$nvtequdir/nvt-equ.gro ; lastcpt=$nvtequdir/nvt-equ.cpt
     else
-        lastgro=./nvt-step-1.gro ; lastcpt=./nvt-step-1.cpt
+        lastgro=./nvt-production.gro ; lastcpt=./nvt-production.cpt
     fi
+
     tinit=`awk -v i=$i -v dt=$dt -v nsteps=$nsteps 'BEGIN{printf("%g",(i-1)*dt*nsteps);}'`
     reset_tinit="tinit                    = $tinit"
     sed -i "/tinit/c${reset_tinit}" $mdpfile
@@ -51,16 +57,20 @@ for ((i=1;i<=$ncycles;i++)); do
     echo "########################################## This is the ${i}th run ##########################################" >> ./2.err
     if [ $i -eq 1 ]; then
         $gmxrun -v -deffnm $tprname
+        if [ break_flag -eq 1 ]; then
+            break
+        fi
     else
         #分开输出到不同文件，以part.XXXX结尾，补0方法awk 'BEGIN{printf("%04d\n",100)}'
         #$gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend
         
         #连续输出到一个文件
-        $gmxrun -v -deffnm nvt-step-1 -cpi nvt-step-1.cpt -cpt 120
+        $gmxrun -v -deffnm nvt-production -cpi nvt-production.cpt -cpt 120
     fi  
 done
 
 #删除多余的输出文件
+rm -rf \#*
 # mv ./nvt-step-$ncycles.gro ./last.gro
 # mv ./nvt-step-$ncycles.cpt ./last.cpt
 # mv ./nvt-step-$ncycles.tpr ./traj.tpr
@@ -70,8 +80,9 @@ done
 #     rm -rf ./nvt-step-*.gro
 #     rm -rf ./nvt-step-*.cpt
 #     rm -rf ./nvt-step-*.tpr
-#     gmx trjcat -f *.trr -o nvt-pro-traj.trr
+# 拼接轨迹，由于可以连续输出，不再需要
+# gmx trjcat -f *.trr -o nvt-pro-traj.trr
 #     rm -rf ./nvt-step-*.trr
 # else
-#     mv ./nvt-step-1.trr ./nvt-pro-traj.trr
+#     mv ./nvt-production.trr ./nvt-pro-traj.trr
 # fi

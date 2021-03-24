@@ -1,11 +1,11 @@
 #在rundir中运行
 orientation=y
-ncycles=5    
+ncycles=10    
 nsteps=1000
 nvtequdir=../nvtequ
 pressure=0           #Mpa
 dt=0.001             #ps
-acc_water=notall
+acc_water=all
 ############################################################
 echo "pressure: $pressure" > cyclelog
 echo 'stepnum   count   len   lenv1   lenv2   area   acceleration' >> cyclelog
@@ -18,8 +18,6 @@ mdpfile=./nvt-cycle.mdp
 ndxfile=./waterlayer.ndx 
 topfile=../GO_ion_pp.top
 
-break_flag=0
-
 if [ $pressure -gt 0 ]; then
     key='acc-grps'  ; new='acc-grps                 = waterlayer'
     sed -i "/$key/c$new" $mdpfile
@@ -27,6 +25,7 @@ if [ $pressure -gt 0 ]; then
     sed -i "/$key/c$new" $mdpfile
 fi
 
+break_flag=0
 if [ $pressure -eq 0 ] || [ $acc_water == 'all' ]; then
     nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%g",nsteps*ncycles);}'`
     break_flag=1
@@ -73,18 +72,8 @@ done
 
 #删除多余的输出文件
 rm -rf \#*
-# mv ./nvt-step-$ncycles.gro ./last.gro
-# mv ./nvt-step-$ncycles.cpt ./last.cpt
-# mv ./nvt-step-$ncycles.tpr ./traj.tpr
-# rm -rf ./*.edr
-# rm -rf ./*.log
-# if [ $ncycles -gt 1 ]; then
-#     rm -rf ./nvt-step-*.gro
-#     rm -rf ./nvt-step-*.cpt
-#     rm -rf ./nvt-step-*.tpr
 # 拼接轨迹，由于可以连续输出，不再需要
 # gmx trjcat -f *.trr -o nvt-pro-traj.trr
-#     rm -rf ./nvt-step-*.trr
-# else
-#     mv ./nvt-production.trr ./nvt-pro-traj.trr
-# fi
+
+# mv ./nvt-step-$ncycles.gro ./last.gro
+# mv ./nvt-step-$ncycles.tpr ./traj.tpr

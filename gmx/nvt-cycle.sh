@@ -19,16 +19,18 @@ ndxfile=./waterlayer.ndx
 topfile=../GO_ion_pp.top
 
 break_flag=0
-if [ $pressure -gt 0 ] && [ $acc_water != 'all' ]; then
+
+if [ $pressure - 0 ]; then
     key='acc-grps'  ; new='acc-grps                 = waterlayer'
     sed -i "/$key/c$new" $mdpfile
     key='accelerate'; new='accelerate               = 0 0 0'
     sed -i "/$key/c$new" $mdpfile
-else
+fi
+
+if [ $pressure -eq 0 ] || [ $acc_water == 'all' ]; then
     nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%g",nsteps*ncycles);}'`
     break_flag=1
 fi
-
 #修改每个循环的总步数（模拟时长）
 reset_nsteps="nsteps                   = $nsteps"
 sed -i "/nsteps/c${reset_nsteps}" $mdpfile

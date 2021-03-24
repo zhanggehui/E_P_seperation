@@ -26,9 +26,7 @@ BEGIN{
   araalen2=substr(boxlengthline,pbox3,10); araalen2=araalen2+0;
   area=araalen1*araalen2;
   count=0; acceleration=0;
-  thick=2*len; pressure=pressure+0;
-  print len;
-}
+  thick=2*len;
 /OW/{
   coord=substr($0,p1,8); coord=coord+0;
   if( coord<thick || coord>(len-thick) )
@@ -44,7 +42,7 @@ END{
   print acceleration > tmp;
   print (i, count, len, araalen1, araalen2, area, acceleration) >> cyclelog;
 }
-' $lastgro >> $ndxfile
+' $lastgro > 1.txt
 echo '' >> $ndxfile #最后一行没有换行符会不读
 
 acceleration=`sed -n '1p' ./tmp`

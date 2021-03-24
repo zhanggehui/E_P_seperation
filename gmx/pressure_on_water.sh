@@ -27,6 +27,7 @@ BEGIN{
   area=araalen1*araalen2;
   count=0; acceleration=0;
   thick=2*len;
+}
 /OW/{
   coord=substr($0,p1,8); coord=coord+0;
   if( coord<thick || coord>(len-thick) )

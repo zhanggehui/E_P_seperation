@@ -1,7 +1,7 @@
 #在rundir中运行
 orientation=y
-ncycles=1    
-nsteps=5000000
+ncycles=5    
+nsteps=1000
 nvtequdir=../nvtequ
 pressure=0           #Mpa
 dt=0.001             #ps

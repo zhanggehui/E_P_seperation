@@ -33,7 +33,7 @@ for ((i=1;i<=$ncycles;i++)); do
     if [ $i -eq 1 ]; then
         lastgro=$nvtequdir/nvt-equ.gro ; lastcpt=$nvtequdir/nvt-equ.cpt
     else
-        lastgro=./nvt-step-$((i-1)).gro ; lastcpt=./nvt-step-$((i-1)).cpt
+        lastgro=./nvt-step-1.gro ; lastcpt=./nvt-step-1.cpt
     fi
     tinit=`awk -v i=$i -v dt=$dt -v nsteps=$nsteps 'BEGIN{printf("%g",(i-1)*dt*nsteps);}'`
     reset_tinit="tinit                    = $tinit"
@@ -52,9 +52,11 @@ for ((i=1;i<=$ncycles;i++)); do
     if [ $i -eq 1 ]; then
         $gmxrun -v -deffnm $tprname
     else
-        $gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend
-        #可以连续输出到一个文件
-        #$gmxrun -v -deffnm nvt-step-1 -cpi nvt-step-1.cpt -cpt 120
+        #分开输出到不同文件，以part.XXXX结尾，补0方法awk 'BEGIN{printf("%04d\n",100)}'
+        #$gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend
+        
+        #连续输出到一个文件
+        $gmxrun -v -deffnm nvt-step-1 -cpi nvt-step-1.cpt -cpt 120
     fi  
 done
 

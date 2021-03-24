@@ -49,7 +49,11 @@ for ((i=1;i<=$ncycles;i++)); do
     gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o $tprname.tpr -po $mdpdir/step$i -n $ndxfile #-maxwarn 1 
 
     echo "########################################## This is the ${i}th run ##########################################" >> ./2.err
-    $gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend
+    if [ $i -eq 1 ]; then
+        $gmxrun -v -deffnm $tprname
+    else
+        $gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend
+    fi  
 done
 
 #删除多余的输出文件

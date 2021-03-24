@@ -41,7 +41,7 @@ for ((i=1;i<=$ncycles;i++)); do
 
     #重新给水加速度,更新mdp文件,更新ndx文件
     if [ $pressure -gt 0 ]; then
-        source ./$scriptsdir/pressure_on_water.sh
+        source $scriptsdir/pressure_on_water.sh
     fi
     echo "######################################### This is the ${i}th grompp  #########################################" >> ./2.err
 

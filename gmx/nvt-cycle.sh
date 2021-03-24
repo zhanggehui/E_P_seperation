@@ -52,8 +52,9 @@ for ((i=1;i<=$ncycles;i++)); do
     if [ $i -eq 1 ]; then
         $gmxrun -v -deffnm $tprname
     else
-        #$gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 # -noappend
-        $gmxrun -v -deffnm nvt-step-1 -cpi nvt-step-1.cpt -cpt 120 # -noappend
+        $gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend
+        #可以连续输出到一个文件
+        #$gmxrun -v -deffnm nvt-step-1 -cpi nvt-step-1.cpt -cpt 120
     fi  
 done
 

@@ -39,8 +39,8 @@ BEGIN{
 }
 END{
   acceleration=0.602*pressure*area/(count*18);
-  print acceleration > tmp;
-  print (i, count, len, araalen1, araalen2, area, acceleration) >> cyclelog;
+  print acceleration > ./tmp;
+  print (i, count, len, araalen1, araalen2, area, acceleration) >> ./cyclelog;
 }
 ' $lastgro >> $ndxfile
 echo '' >> $ndxfile #最后一行没有换行符会不读

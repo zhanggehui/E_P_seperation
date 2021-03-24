@@ -29,7 +29,7 @@ if [ $pressure -gt 0 ]; then
 fi
 
 for ((i=1;i<=$ncycles;i++)); do
-    tprname=nvt-step-$i
+    tprname=nvt-step-1
     if [ $i -eq 1 ]; then
         lastgro=$nvtequdir/nvt-equ.gro ; lastcpt=$nvtequdir/nvt-equ.cpt
     else

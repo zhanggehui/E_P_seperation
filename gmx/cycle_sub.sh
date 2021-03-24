@@ -12,7 +12,7 @@ vmax_i=`get_i $vmax 0.1`
 scriptsdir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx
 orientation='y'
 
-if [ pmax -gt 0 ] && [ vmax -gt 0 ]; then
+if [ $pmax -gt 0 ] && [ $vmax -gt 0 ]; then
     pvmix=1
 else
     pvmix=0

@@ -13,7 +13,7 @@ awk -v boolpr=1 \
 mv $oldndxfile $ndxdir
 
 boxlengthline=`sed -n '$p' $lastgro`
-echo $boxlengthline
+
 awk -v boxlengthline="$boxlengthline" \
 -v orientation=$orientation -v pressure=$pressure -v i=$i \
 '
@@ -27,6 +27,7 @@ BEGIN{
   area=araalen1*araalen2;
   count=0; acceleration=0;
   thick=2*len; pressure=pressure+0;
+  print len;
 }
 /OW/{
   coord=substr($0,p1,8); coord=coord+0;

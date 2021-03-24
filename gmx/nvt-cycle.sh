@@ -5,7 +5,7 @@ nsteps=1000
 nvtequdir=../nvtequ
 pressure=0           #Mpa
 dt=0.001             #ps
-acc_water=all
+acc_water=notall
 ############################################################
 echo "pressure: $pressure" > cyclelog
 echo 'stepnum   count   len   lenv1   lenv2   area   acceleration' >> cyclelog

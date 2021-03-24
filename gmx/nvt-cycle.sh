@@ -46,12 +46,12 @@ for ((i=1;i<=$ncycles;i++)); do
     echo "######################################### This is the ${i}th grompp  #########################################" >> ./2.err
 
     #不需要提供-c只有当cpt文件中没有信息会使用-c的gro文件，如果top没有改变也无需提供-p的top文件
-    gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o $tprname.tpr -po $mdpdir/step$i -n $ndxfile #-maxwarn 1
+    gmx grompp -f $mdpfile -t $lastcpt -p $topfile -o $tprname.tpr -po $mdpdir/step$i -n $ndxfile #-maxwarn 1 -c $lastgro
 
     # gmx grompp -f $mdpfile -t $lastcpt -o $tprname.tpr -p $topfile -po $mdpdir/step$i -n $ndxfile #-maxwarn 1
 
     echo "########################################## This is the ${i}th run ##########################################" >> ./2.err
-    $gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend flag
+    $gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend
 done
 
 #删除多余的输出文件

@@ -59,7 +59,7 @@ for ((i=1;i<=$ncycles;i++)); do
     echo "########################################## This is the ${i}th run ##########################################" >> ./2.err
     if [ $i -eq 1 ]; then
         $gmxrun -v -deffnm $tprname
-        if [ break_flag -eq 1 ]; then
+        if [ $break_flag -eq 1 ]; then
             break
         fi
     else

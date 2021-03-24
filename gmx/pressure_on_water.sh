@@ -14,6 +14,8 @@ mv $oldndxfile $ndxdir
 
 boxlengthline=`sed -n '$p' $lastgro`
 echo $ndxfile
+
+pwd
 awk -v boxlengthline="$boxlengthline" \
 -v orientation=$orientation -v pressure=$pressure -v i=$i \
 '

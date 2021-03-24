@@ -57,17 +57,17 @@ for ((i=1;i<=$ncycles;i++)); do
 done
 
 #删除多余的输出文件
-mv ./nvt-step-$ncycles.gro ./last.gro
-mv ./nvt-step-$ncycles.cpt ./last.cpt
-mv ./nvt-step-$ncycles.tpr ./traj.tpr
-rm -rf ./*.edr
-rm -rf ./*.log
-if [ $ncycles -gt 1 ]; then
-    rm -rf ./nvt-step-*.gro
-    rm -rf ./nvt-step-*.cpt
-    rm -rf ./nvt-step-*.tpr
-    gmx trjcat -f *.trr -o nvt-pro-traj.trr
-    rm -rf ./nvt-step-*.trr
-else
-    mv ./nvt-step-1.trr ./nvt-pro-traj.trr
-fi
+# mv ./nvt-step-$ncycles.gro ./last.gro
+# mv ./nvt-step-$ncycles.cpt ./last.cpt
+# mv ./nvt-step-$ncycles.tpr ./traj.tpr
+# rm -rf ./*.edr
+# rm -rf ./*.log
+# if [ $ncycles -gt 1 ]; then
+#     rm -rf ./nvt-step-*.gro
+#     rm -rf ./nvt-step-*.cpt
+#     rm -rf ./nvt-step-*.tpr
+#     gmx trjcat -f *.trr -o nvt-pro-traj.trr
+#     rm -rf ./nvt-step-*.trr
+# else
+#     mv ./nvt-step-1.trr ./nvt-pro-traj.trr
+# fi

@@ -43,7 +43,7 @@ END{
   print acceleration > tmp;
   print (i, count, len, araalen1, araalen2, area, acceleration) >> cyclelog;
 }
-' $lastgro >> $ndxfile
+' $lastgro > 1.txt
 echo '' >> $ndxfile #最后一行没有换行符会不读
 
 acceleration=`sed -n '1p' ./tmp`

@@ -1,10 +1,9 @@
 #在rundir中运行
-
 orientation=y
 ncycles=1    
 nsteps=5000000
+nvtequdir=../nvtequ
 pressure=0           #Mpa
-nvtequdir=nvtequ
 dt=0.001             #ps
 ############################################################
 echo "pressure: $pressure" > cyclelog
@@ -23,16 +22,16 @@ reset_nsteps="nsteps                   = $nsteps"
 sed -i "/nsteps/c${reset_nsteps}" $mdpfile
 
 if [ $pressure -gt 0 ]; then
-    key='acc-grps' ; new='acc-grps                 = waterlayer'
+    key='acc-grps'  ; new='acc-grps                 = waterlayer'
     sed -i "/$key/c$new" $mdpfile
-    key='accelerate' ; new='accelerate               = 0 0 0'
+    key='accelerate'; new='accelerate               = 0 0 0'
     sed -i "/$key/c$new" $mdpfile
 fi
 
 for ((i=1;i<=$ncycles;i++)); do
     tprname=nvt-step-$i
     if [ $i -eq 1 ]; then
-        lastgro=../$nvtequdir/nvt-equ.gro ; lastcpt=../$nvtequdir/nvt-equ.cpt
+        lastgro=$nvtequdir/nvt-equ.gro ; lastcpt=$nvtequdir/nvt-equ.cpt
     else
         lastgro=./nvt-step-$((i-1)).gro ; lastcpt=./nvt-step-$((i-1)).cpt
     fi
@@ -49,7 +48,7 @@ for ((i=1;i<=$ncycles;i++)); do
     #不需要提供-c只有当cpt文件中没有信息会使用-c的gro文件，如果top没有改变也无需提供-p的top文件
     # gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o ./$rundir/$tprname.tpr -po $mdpdir/step$i -n $ndxfile #-maxwarn 1
 
-    gmx grompp -f $mdpfile -t $lastcpt -o ./$rundir/$tprname.tpr -po $mdpdir/step$i -n $ndxfile #-maxwarn 1
+    gmx grompp -f $mdpfile -t $lastcpt -o $tprname.tpr -po $mdpdir/step$i -n $ndxfile #-maxwarn 1
 
     echo "########################################## This is the ${i}th run ##########################################" >> ./2.err
     $gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120
@@ -61,7 +60,7 @@ mv ./nvt-step-$ncycles.cpt ./last.cpt
 mv ./nvt-step-$ncycles.tpr ./traj.tpr
 rm -rf ./*.edr
 rm -rf ./*.log
-if [ $ncycles -gt 1 ] ; then
+if [ $ncycles -gt 1 ]; then
     rm -rf ./nvt-step-*.gro
     rm -rf ./nvt-step-*.cpt
     rm -rf ./nvt-step-*.tpr

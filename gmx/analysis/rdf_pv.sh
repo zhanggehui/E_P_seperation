@@ -1,11 +1,8 @@
-source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
-
-ions=("CS" "LI" "NA" "K" "CA" "MG")
-num=${#ions[@]}
+source $scriptsdir/rdf_func.sh
 rdfdir=rdfs_pv
 if [ ! -d $rdfdir ] ; then
     mkdir $rdfdir
-    for((i=0;i<$num;i++)) ; do
+    for((i=0;i<$n_ions;i++)); do
         ion=${ions[$i]}
         mkdir $rdfdir/$ion
         cd ./$ion

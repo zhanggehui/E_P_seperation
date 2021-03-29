@@ -1,7 +1,7 @@
 #在rundir中运行
 orientation=y
-ncycles=10    
-nsteps=1000
+ncycles=1    
+nsteps=5000000
 nvtequdir=../nvtequ
 pressure=0           #Mpa
 dt=0.001             #ps
@@ -75,5 +75,7 @@ rm -rf \#*
 # 拼接轨迹，由于可以连续输出，不再需要
 # gmx trjcat -f *.trr -o nvt-pro-traj.trr
 
-# mv ./nvt-step-$ncycles.gro ./last.gro
-# mv ./nvt-step-$ncycles.tpr ./traj.tpr
+#维护之前的文件名接口
+mv ./nvt-production.gro ./last.gro
+mv ./nvt-production.tpr ./traj.tpr
+mv ./nvt-production.trr ./nvt-pro-traj.trr

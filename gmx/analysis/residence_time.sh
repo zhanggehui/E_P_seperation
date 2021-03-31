@@ -6,4 +6,4 @@ if [ ! -d select ]; then
     rm -rf \#*
     cd ../
 fi
-mv ./select ../../$rundir/NA_2.5nm_${pressure}Mpa_${voltage}V
+mv ./select ../../$rundir/NA_${pressure}Mpa_${voltage}V

@@ -1,7 +1,7 @@
 source $scriptsdir/rdf_func.sh
 cd ../
-for((i=0;i<$n_ions;i++)); do
-    ion=${ions[$i]}
+for((k=0; k<$n_ions; k++)); do
+    ion=${ions[$k]}
     targetdir=$rundir/$ion
     mkdir -p $targetdir
     cd ./$ion

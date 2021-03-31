@@ -1,3 +1,5 @@
+ionname=''
+
 cd ../
 cd lay_2.5
 for ((i=0; i<20; i++)); do
@@ -5,6 +7,7 @@ for ((i=0; i<20; i++)); do
     for ((j=1; j<17; j++)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%g",0.1*j);}'`
         if [ ${pressure} -eq 0 ] || [ ${voltage} -eq 0 ]; then
+            cd ./${ionname}${pressure}Mpa-${voltage}V
             source $scriptsdir/residence_time.sh
         fi
     done

@@ -8,7 +8,7 @@ for ((i=0; i<20; i++)); do
         voltage=`awk -v j=$j 'BEGIN{printf("%g",0.1*j);}'`
         if [ ${pressure} -eq 0 ] || [ ${voltage} -eq 0 ]; then
             cd ./${ionname}${pressure}Mpa-${voltage}V
-            source $scriptsdir/residence_time.sh
+            source $scriptsdir/residence_time/residence_time.sh
         fi
     done
 done

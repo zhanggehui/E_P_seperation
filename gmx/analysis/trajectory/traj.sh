@@ -1,5 +1,3 @@
-source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
-
 # 不同条件下的轨迹
 ionname=''
 charge=26

@@ -1,5 +1,5 @@
 cd ../
-cd 1.1nm
+cd 1.2nm
 for ((i=0; i<20; i++)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%g",100*i);}'` 
     for ((j=0; j<17; j++)); do 

@@ -1,7 +1,7 @@
 #在rundir中运行
 orientation=y
 ncycles=1    
-nsteps=30000000
+nsteps=50000000
 nvtequdir=../nvtequ
 pressure=0           #Mpa
 dt=0.001             #ps
@@ -27,7 +27,7 @@ fi
 
 break_flag=0
 if [ $pressure -eq 0 ] || [ $acc_water == 'all' ]; then
-    nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%g",nsteps*ncycles);}'`
+    nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%s",nsteps*ncycles);}'`
     break_flag=1
 fi
 #修改每个循环的总步数（模拟时长）
@@ -72,10 +72,10 @@ done
 
 #删除多余的输出文件
 rm -rf \#*
-# 拼接轨迹，由于可以连续输出，不再需要
+#拼接轨迹，由于可以连续输出，不再需要
 # gmx trjcat -f *.trr -o nvt-pro-traj.trr
 
 #维护之前的文件名接口
-mv ./nvt-production.gro ./last.gro
-mv ./nvt-production.tpr ./traj.tpr
-mv ./nvt-production.trr ./nvt-pro-traj.trr
+# mv ./nvt-production.gro ./last.gro
+# mv ./nvt-production.tpr ./traj.tpr
+# mv ./nvt-production.trr ./nvt-pro-traj.trr

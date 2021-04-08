@@ -8,9 +8,9 @@ for ((i=0;i<20;i++)); do
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             cd ./${pressure}Mpa-${voltage}V
-            trajname=${pressure}Mpa-${voltage}V.gro
-            get_traj $rundir $trajname
-            mv $trajname ../$rundir
+            trajgro=${pressure}Mpa-${voltage}V.gro
+            get_traj $rundir $trajgro
+            mv $trajgro ../$rundir
             cd ..
         fi
     done

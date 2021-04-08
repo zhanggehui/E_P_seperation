@@ -1,5 +1,3 @@
-source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
-
 trajdir=mix_traj
 if [ ! -d $trajdir ] ; then
     mkdir ../$trajdir

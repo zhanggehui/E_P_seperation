@@ -1,34 +1,17 @@
-# 不同条件下的轨迹
-ionname=''
-charge=26
-trajdir=charge_${charge}_traj
-# negative=n5
-# trajdir=negative_${negative}_traj
-# spacing=2
-# trajdir=lay_${spacing}_traj
-# rm -rf ../charge_${charge}_traj
+source $scriptsdir/traj_func.sh
 
-# 不同离子的轨迹
-# ionname=MG
-# trajdir=${ionname}_traj
-
-if [ ! -d $trajdir ] ; then
-    mkdir ../$trajdir
-    for ((i=0;i<20;i++)); do
-        pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`   
-        cd ./${pressure}Mpa-0V
-        trajname=${ionname}${pressure}Mpa-0V.gro
-        get_traj $trajname $trajdir
-        cd ..
+# rundir刚好可以与要提取的离子同名
+cd ../
+for ((i=0;i<20;i++)); do
+    pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
+    for ((j=0;j<16;i++)); do 
+        voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
+        if [ $i -eq 0 ] || [ $j -eq 0 ]; then
+            cd ./${pressure}Mpa-${voltage}V
+            trajname=${pressure}Mpa-${voltage}V.gro
+            get_traj $rundir $trajname
+            mv $trajname ../$rundir
+            cd ..
+        fi
     done
-
-    for ((i=1;i<17;i++)); do 
-        voltage=`awk -v i=$i 'BEGIN{printf("%s",0.1*i);}'`
-        cd ./0Mpa-${voltage}V
-        trajname=${ionname}0Mpa-${voltage}V.gro
-        get_traj $trajname $trajdir
-        cd ..
-    done
-else
-    echo 'already exists!'
-fi
+done

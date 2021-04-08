@@ -14,7 +14,7 @@ for ((i=0;i<20;i++)); do
             cd ./${pressure}Mpa-${voltage}V
                 #source $scriptsdir/rdf/rdf.sh
                 #source $scriptsdir/residence_time/residence_time.sh
-                source $scriptsdir/trajectory/traj_func.sh
+                source $scriptsdir/trajectory/traj.sh
             cd ..
         fi
     done

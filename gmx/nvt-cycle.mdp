@@ -44,8 +44,8 @@ rtpi                     = 0.05
 ; OUTPUT CONTROL OPTIONS
 ; Output frequency for coords (x), velocities (v) and forces (f)
 nstxout                  = 1000
-nstvout                  = 1000
-nstfout                  = 1000
+nstvout                  = 0
+nstfout                  = 0
 ; Output frequency for energies to log file and energy file
 nstlog                   = 0
 nstcalcenergy            = 0

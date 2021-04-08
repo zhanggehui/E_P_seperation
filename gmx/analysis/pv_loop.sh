@@ -10,12 +10,14 @@ for ((i=0;i<20;i++)); do
     for ((j=0;j<16;j++)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
-            echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
-            cd ./${pressure}Mpa-${voltage}V
-                #source $scriptsdir/rdf/rdf.sh
-                #source $scriptsdir/residence_time/residence_time.sh
-                source $scriptsdir/trajectory/traj.sh
-            cd ..
+            if [ -d ${pressure}Mpa-${voltage}V ]; then
+                echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
+                cd ./${pressure}Mpa-${voltage}V
+                    #source $scriptsdir/rdf/rdf.sh
+                    #source $scriptsdir/residence_time/residence_time.sh
+                    source $scriptsdir/trajectory/traj.sh
+                cd ..
+            fi
         fi
     done
 done

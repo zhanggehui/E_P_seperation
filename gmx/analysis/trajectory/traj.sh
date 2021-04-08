@@ -4,7 +4,7 @@ source $scriptsdir/traj_func.sh
 cd ../
 for ((i=0;i<20;i++)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
-    for ((j=0;j<16;i++)); do 
+    for ((j=0;j<16;j++)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             cd ./${pressure}Mpa-${voltage}V

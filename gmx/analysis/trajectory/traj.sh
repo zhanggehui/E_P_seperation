@@ -7,7 +7,7 @@ for ((i=0;i<20;i++)); do
     for ((j=0;j<16;j++)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
-            echo "-------------------------- ${pressure}Mpa-${voltage}V    --------------------------"
+            echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
             cd ./${pressure}Mpa-${voltage}V
             trajgro=${pressure}Mpa-${voltage}V.gro
             get_traj $rundir $trajgro

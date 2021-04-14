@@ -13,11 +13,13 @@ for ((i=0;i<20;i++)); do
             if [ -d ${pressure}Mpa-${voltage}V ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./${pressure}Mpa-${voltage}V
-                    #source $scriptsdir/rdf/rdf_pv.sh
+                    source $scriptsdir/rdf/rdf_pv.sh
                     #source $scriptsdir/residence_time/residence_time.sh
-                    source $scriptsdir/trajectory/traj.sh
+                    #source $scriptsdir/trajectory/traj.sh
                 cd ..
             fi
         fi
     done
 done
+
+mv ./$rundir ../tmp_data

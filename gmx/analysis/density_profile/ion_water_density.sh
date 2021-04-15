@@ -1,10 +1,12 @@
+source $scriptsdir/density_func.sh
 
-cd ./1900Mpa-0V
+cd ../
+cd ./0Mpa-1.5V
+
+get_density_along_z OW density.xvg
+
 ion=$rundir
-xvgfile=${ion}.xvg
-#3 ion; 5 water
-echo q | gmx make_ndx -f nvt-production.gro
-echo "$ion" | gmx density -f nvt-production.trr -n index.ndx -s nvt-production.tpr -dens number -d Z -o $xvgfile -b 0 -e 10000 -sl 50
-cp $xvgfile ../$rundir
-rm -rf \#* index.ndx
+#get_density_along_z $ion density.xvg
+
+mv density.xvg ../$rundir
 cd ../

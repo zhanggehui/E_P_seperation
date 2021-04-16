@@ -20,4 +20,4 @@ for ((i=0;i<20;i++)); do
     done
 done
 
-mv ./$rundir ../tmp_data/$rundir 
+mv ./$rundir ../tmp_data/$rundir

@@ -1,9 +1,6 @@
 source $scriptsdir/trajectory/traj_func.sh
 source $scriptsdir/rdf/rdf_func.sh
 
-ions=("CS" "LI" "NA" "K")
-n_ions=${#ions[@]}
-
 cd ../
 for ((i=0;i<20;i++)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
@@ -14,8 +11,9 @@ for ((i=0;i<20;i++)); do
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./${pressure}Mpa-${voltage}V
                     #source $scriptsdir/rdf/rdf_pv.sh
-                    source $scriptsdir/residence_time/residence_time.sh
+                    #source $scriptsdir/residence_time/residence_time.sh
                     #source $scriptsdir/trajectory/traj.sh
+                    source $scriptsdir/density_profile/density.sh
                 cd ..
             fi
         fi

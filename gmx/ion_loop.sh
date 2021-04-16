@@ -10,6 +10,8 @@ for ((i=1;i<2;i++)); do
     elif [ $1 == 'res_t' ];then
         source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
         gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis pv_loop.sh $ion
-    fi
+    elif [ $1 == 'density' ];then
+        source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
+        gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis pv_loop.sh $ion
     cd ../
 done

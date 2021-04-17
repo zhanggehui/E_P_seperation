@@ -12,6 +12,7 @@ BEGIN {
     if(match(ori_v,"vx")) {pv=45;}
     else if(match(ori_v,"vy")) {pv=53;}
     else {pv=61;}
+	print "# ori_p: "p" ; ori_v: "pv 
 }
 
 NF==1 { Nfrm++ }

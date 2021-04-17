@@ -15,7 +15,7 @@ BEGIN {
 }
 
 NF==1 { Nfrm++ }
-NF>6 && $2~/OW/ {
+NF>6 && $0~/OW/ {
 	         z  = mo*substr($0,p,8); v  = mo*substr($0,pv,8) # O的坐标, 速度
 	getline; z += mh*substr($0,p,8); v += mh*substr($0,pv,8) # H1的
 	getline; z += mh*substr($0,p,8); v += mh*substr($0,pv,8) # H2的
@@ -25,6 +25,7 @@ NF>6 && $2~/OW/ {
 	Nwat[i]++; V[i] += v
 	if(Nfrm>Ntot) exit
 }
+
 END {
 	print "# Z: ["Zmin":"Zmax":"dZ"]    Frames: " Nfrm
 	for(i=0; i<=N; i++) if(Nwat[i]>0) printf"%f %f\n", Z[i], V[i]/Nwat[i]

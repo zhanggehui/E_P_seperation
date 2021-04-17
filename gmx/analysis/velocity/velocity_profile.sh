@@ -28,6 +28,6 @@ NF>6 && $0~/OW/ {
 
 END {
 	print "# Z: ["Zmin":"Zmax":"dZ"]    Frames: " Nfrm
-	for(i=0; i<=N; i++) if(Nwat[i]>0) printf"%f %f %f\n", Z[i], V[i]/Nwat[i], Nwat[i]
+	for(i=0; i<=N; i++) if(Nwat[i]>0) printf"%f     %f     %d\n", Z[i], V[i]/Nwat[i], Nwat[i]
 }
 ' $3 > $1-$2.xvg

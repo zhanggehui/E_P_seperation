@@ -12,7 +12,7 @@ for ((i=0;i<20;i++)); do
                 cd ./${pressure}Mpa-${voltage}V
                     #source $scriptsdir/rdf/rdf_pv.sh
                     #source $scriptsdir/residence_time/residence_time.sh
-                    source $scriptsdir/trajectory/traj.sh
+                    source $scriptsdir/trajectory/traj_continuous.sh
                     #source $scriptsdir/density_profile/density.sh
                 cd ..
             fi

@@ -2,7 +2,7 @@ awk -v ori_p=$1 -v ori_v=$2 '
 BEGIN {
 	mo=16; mh=1; M=mo+2*mh      # 定义原子质量
 	Ntot=10000000               # 定义要计算的帧数
-	Zmin=0; Zmax=4; dZ=0.05     # 定义计算区间, 分格间距
+	Zmin=-1; Zmax=5; dZ=0.05     # 定义计算区间, 分格间距
 	Nfrm=0; N=int((Zmax-Zmin)/dZ)
 	for(i=0; i<=N; i++) { Z[i]=Zmin+i*dZ; V[i]=0; Nwat[i]=0 }
 
@@ -28,6 +28,6 @@ NF>6 && $0~/OW/ {
 
 END {
 	print "# Z: ["Zmin":"Zmax":"dZ"]    Frames: " Nfrm
-	for(i=0; i<=N; i++) if(Nwat[i]>0) printf"%f %f\n", Z[i], V[i]/Nwat[i]
+	for(i=0; i<=N; i++) if(Nwat[i]>0) printf"%f %f %f\n", Z[i], V[i]/Nwat[i], Nwat[i]
 }
 ' $3 > $1-$2.xvg

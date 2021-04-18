@@ -1,5 +1,5 @@
 ion=$rundir
-dir=${pressure}Mpa_${voltage}V
+dir=${pressure}Mpa-${voltage}V
 mkdir ./$dir
 get_density_along_z $ion ./$dir/ion.xvg
 get_density_along_z OW ./$dir/OW.xvg

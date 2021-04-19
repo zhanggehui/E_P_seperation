@@ -1,7 +1,7 @@
 ions=("LI" "NA" "K" "CS")
 n_ions=${#ions[@]}
 
-for ((i=1;i<2;i++)); do
+for ((i=0;i<4;i++)); do
     ion=${ions[$i]}
     cd $ion
     if [ $1 == 'em' ]; then

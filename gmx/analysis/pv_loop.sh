@@ -14,6 +14,7 @@ for ((i=0;i<20;i++)); do
                     #source $scriptsdir/rdf/rdf.sh
                     #source $scriptsdir/residence_time/residence_time.sh
                     #source $scriptsdir/trajectory/traj_continuous.sh
+                    source $scriptsdir/velocity/velocity_profile.sh
                     #source $scriptsdir/density_profile/density.sh
                 cd ..
             fi

@@ -3,7 +3,7 @@ n_ions=${#ions[@]}
 
 run_gmx="source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $2"
 
-for ((i=0;i<4;i++)); do
+for ((i=1;i<2;i++)); do
     ion=${ions[$i]}
     cd ./$ion
     if [ $1 == 'em' ]; then

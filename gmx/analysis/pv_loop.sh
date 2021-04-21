@@ -1,6 +1,6 @@
+source $scriptsdir/density_profile/density_func.sh
 source $scriptsdir/trajectory/traj_func.sh
 source $scriptsdir/rdf/rdf_func.sh
-source $scriptsdir/density_profile/density_func.sh
 
 cd ../
 for ((i=0;i<20;i++)); do

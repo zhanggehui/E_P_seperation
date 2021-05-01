@@ -1,9 +1,10 @@
-ions=("LI" "NA" "K" "CS")
+#ions=("LI" "NA" "K" "CS")
+ions=("NA")
 n_ions=${#ions[@]}
 
 run_gmx="source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $2"
 
-for ((i=0;i<4;i++)); do
+for ((i=0; i<${n_ions}; i++)); do
     ion=${ions[$i]}
     if [ -d ./$ion ]; then
         cd ./$ion

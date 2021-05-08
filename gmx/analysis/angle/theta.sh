@@ -13,11 +13,12 @@ for ((time=0; time<=0; time++)); do
         gmx select -f ../nvt-production.trr -s ../nvt-production.tpr -on ${index}.ndx -b ${time} -e ${time}        
     done
     python /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis/angle/read_ion_index.py *.ndx
-    # rm -rf *.ndx
-    # gmx gangle -f ../nvt-production.trr -s ../nvt-production.tpr -n ./vector.ndx \
-    # -oav av-${time}.xvg -oall av-${time}.xvg -oh av-${time}.xvg -b ${time} -e ${time} \
-    # -g1 vector -group1 group vector \
-    # -g2 z
+    gmx gangle -f ../nvt-production.trr -s ../nvt-production.tpr -n ./vector.ndx \
+    -oall av-${time}.xvg -b ${time} -e ${time} \
+    -g1 vector -group1 'group vector' \
+    -g2 z
+    #-oav av-${time}.xvg -oh av-${time}.xvg
+    rm -rf *.ndx
 done
 
 # cd ../

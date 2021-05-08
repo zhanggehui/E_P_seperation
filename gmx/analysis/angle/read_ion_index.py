@@ -40,7 +40,7 @@ def ndx_merge():
         for k, v in ndx_dic.items():
             for index in v:
                 count_line += 2
-                if count_line == 16:
+                if count_line % 16 == 0:
                     f.write('%d %d\n' % (index, int(k)))
                 else:
                     f.write('%d %d ' % (index, int(k)))

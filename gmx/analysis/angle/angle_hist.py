@@ -5,7 +5,7 @@ filenames = []
 
 
 def jump_line(line):
-    return line[0] == ('#' or '@')
+    return line[0] == '#' or line[0] == '@'
 
 
 class all_angle_file:

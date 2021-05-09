@@ -28,7 +28,7 @@ for ((time=0; time<=10; time++)); do
         python $dir/read_ion_index.py av-*.xvg
         rm -rf av-*.xvg
     fi
-donn
+done
 
 if [ $n_t -ne 0 ] || [ $time -lt 1000 ]; then
     python $dir/read_ion_index.py av-*.xvg

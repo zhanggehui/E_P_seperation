@@ -7,4 +7,4 @@ awk -v ion=$ion \
         printf("%d\n", a_index)
     }
 }
-' ../nvt-production.gro > index.txt
+' $1 > index.txt

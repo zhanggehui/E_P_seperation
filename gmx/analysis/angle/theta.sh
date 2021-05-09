@@ -9,7 +9,7 @@ dir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis/angle
 source $dir/make_index_txt.sh ../nvt-production.gro
 indexes=($(awk '{print $0}' index.txt))
 n_idxs=${#indexes[@]}
-for ((time=0; time<=10000; time++)); do
+for ((time=0; time<=10; time++)); do
     for ((i=0; i<${n_idxs}; i++)); do
         index=${indexes[$i]}
         echo -e "resname SOL and name OW and within ${first_shell[0]} of atomnr ${index}\n" | \
@@ -28,7 +28,12 @@ for ((time=0; time<=10000; time++)); do
         python $dir/read_ion_index.py av-*.xvg
         rm -rf av-*.xvg
     fi
-done
+donn
+
+if [ $n_t -ne 0 ] || [ $time -lt 1000 ]; then
+    python $dir/read_ion_index.py av-*.xvg
+    rm -rf av-*.xvg
+fi
 
 # cd ../
 # mv ./gangle ../$rundir/${pressure}Mpa-${voltage}V

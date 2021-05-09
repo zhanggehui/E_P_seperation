@@ -25,14 +25,12 @@ for ((time=0; time<=10; time++)); do
 
     n_t=$((time % 1000))
     if [ $n_t -eq 0 ] && [ $time -gt 0 ]; then
-        python $dir/read_ion_index.py av-*.xvg
-        rm -rf av-*.xvg
+        python $dir/read_ion_index.py av-*.xvg && rm -rf av-*.xvg
     fi
 done
 
 if [ $n_t -ne 0 ] || [ $time -lt 1000 ]; then
-    python $dir/read_ion_index.py av-*.xvg
-    rm -rf av-*.xvg
+    python $dir/read_ion_index.py av-*.xvg && rm -rf av-*.xvg  
 fi
 
 # cd ../

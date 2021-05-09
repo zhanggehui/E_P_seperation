@@ -3,9 +3,9 @@ source $scriptsdir/trajectory/traj_func.sh
 source $scriptsdir/rdf/rdf_func.sh
 
 cd ../
-for ((i=0; i<1; i++)); do
+for ((i=0; i<20; i++)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
-    for ((j=10; j<11; j++)); do 
+    for ((j=0; j<16; j++)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             if [ -d ${pressure}Mpa-${voltage}V ]; then
@@ -14,9 +14,10 @@ for ((i=0; i<1; i++)); do
                     #source $scriptsdir/rdf/rdf.sh
                     #source $scriptsdir/residence_time/residence_time.sh
                     #source $scriptsdir/trajectory/traj_continuous.sh
-                    source $scriptsdir/trajectory/traj_first_last.sh
+                    #source $scriptsdir/trajectory/traj_first_last.sh
                     #source $scriptsdir/velocity/velocity_profile.sh
                     #source $scriptsdir/density_profile/density.sh
+                    source $scriptsdir/angle/theta.sh
                 cd ..
             fi
         fi

@@ -21,7 +21,7 @@ for ((time=0; time<=10; time++)); do
     -oall av-${time}.xvg -b ${time} -e ${time} \
     -g1 vector -group1 'group vector' \
     -g2 z #-oav av-${time}.xvg -oh av-${time}.xvg
-    #rm -rf *.ndx
+    rm -rf *.ndx
 
     n_t=$((time % 1000))
     if [ $n_t -eq 0 ] && [ $time -gt 0 ]; then

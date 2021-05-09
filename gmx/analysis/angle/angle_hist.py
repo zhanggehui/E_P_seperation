@@ -21,7 +21,7 @@ class all_angle_file:
         with open(fname, 'r') as f:
             for line in f:
                 if not jump_line(line):
-                    linelist = line.strip().rstrip('\n').split()
+                    linelist = line.rstrip('\n').split()
                     for i in range(1, len(linelist)):
                         self.angle_list.append(float(linelist[i]))
 

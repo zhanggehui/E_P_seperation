@@ -10,8 +10,10 @@ first_shell = {
 
 
 class Theta:
-    def __init__(self, df):
+    def __init__(self, df, center, ori):
         self.df = df
+        self.center = center
+        self.ori = ori
         self.angle_list = []
         self.__prepare()
 
@@ -21,13 +23,18 @@ class Theta:
         self.tree = spatial.KDTree(self.ow_points)
 
     def analyze_theta(self):
-        rows = self.df['atomName'] == 'NA'
+        rows = self.df['atomName'] == self.center
         ion_points = np.array(self.df.loc[rows][['x', 'y', 'z']])
         count = 0
-        for results in self.tree.query_ball_point(ion_points, first_shell['NA']):
+        for results in self.tree.query_ball_point(ion_points, first_shell[self.center]):
             nearby_points = np.array(self.ow_points[results])
             vectors = nearby_points - ion_points[count]
-            axis = np.array([0, 0, 1])
+            if self.ori == 'x':
+                axis = np.array([1, 0, 0])
+            elif self.ori == 'y':
+                axis = np.array([0, 1, 0])
+            else:
+                axis = np.array([0, 0, 1])
             for vector in vectors:
                 self.angle_list.append(cal_angel_in_deg(vector, axis))
             count = count + 1
@@ -38,5 +45,5 @@ class Theta:
 def cal_angel_in_deg(a, b):
     a_norm = np.linalg.norm(a)
     b_norm = np.linalg.norm(b)
-    a_dot_b = np.dot(a,b)
+    a_dot_b = np.dot(a, b)
     return np.rad2deg(np.arccos(a_dot_b / (a_norm * b_norm)))

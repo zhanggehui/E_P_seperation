@@ -2,11 +2,14 @@ import pandas as pd
 import numpy as np
 import analyze_theta as at
 import matplotlib.pyplot as plt
-
+import sys
 
 class Analysis:
-    def __init__(self, fname):
+    def __init__(self, fname, oname, center, ori):
         self.fname = fname
+        self.oname = oname
+        self.center = center
+        self.ori = ori
         self.df_list = []
         self.angle_list = []
         self.__read_gro_file()
@@ -52,19 +55,20 @@ class Analysis:
 
     def analyze_frame(self, i):
         df = self.df_list[i]
-        self.angle_list.extend(at.Theta(df).analyze_theta())
+        self.angle_list.extend(at.Theta(df, self.center, self.ori).analyze_theta())
 
     def finish_analysis(self):
         self.n, bins = np.histogram(self.angle_list, bins=180, range=[0, 180])
         self.bins = bins[0: len(bins) - 1]
-        y = self.n * np.sin(np.deg2rad(self.bins))
-        plt.plot(self.bins, y, 'o')
-        plt.show()
+        if sys.platform == 'win32':
+            y = self.n * np.sin(np.deg2rad(self.bins))
+            plt.plot(self.bins, y, 'o')
+            plt.show()
         self.write_output()
 
     def write_output(self):
         arr = np.vstack([self.bins, self.n]).T
-        np.savetxt('./data/data.txt', arr, fmt='%g', delimiter=',')
+        np.savetxt(self.oname, arr, fmt='%g', delimiter=',')
 
 
 def add_record(x_arry, y_arry, z_arry, index, line):

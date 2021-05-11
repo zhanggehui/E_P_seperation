@@ -4,6 +4,7 @@ source $scriptsdir/rdf/rdf_func.sh
 
 cd ../
 conda activate base
+python --version
 for ((i=0; i<1; i++)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
     for ((j=0; j<1; j++)); do 

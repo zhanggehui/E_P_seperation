@@ -30,7 +30,8 @@ class Analysis:
                         x_arry = np.empty(n_atoms, dtype=float)
                         y_arry = np.empty(n_atoms, dtype=float)
                         z_arry = np.empty(n_atoms, dtype=float)
-                    print("------ 正在读入第", frame, "帧 ------")
+                    if frame % 1000 == 0:
+                        print("------ 正在读入第", frame, "帧 ------")
                 elif 3 <= count <= n_atoms + 2:
                     if frame == 0:
                         atom_name_list.append(line[10:15].lstrip())
@@ -49,7 +50,8 @@ class Analysis:
 
     def analysis(self):
         for i in range(len(self.df_list)):
-            print("------ 正在分析第", i, "帧 ------")
+            if i % 1000 == 0:
+                print("------ 正在分析第", i, "帧 ------")
             self.analyze_frame(i)
         self.finish_analysis()
 

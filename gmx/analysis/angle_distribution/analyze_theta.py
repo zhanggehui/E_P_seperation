@@ -51,4 +51,4 @@ def cal_angel(a, b):
     return np.arccos(a_dot_b / (a_norm * b_norm))
 
 def cal_angel_in_deg(a, b):
-    return np.rad2deg(cal_angel(a * b))
+    return np.rad2deg(cal_angel(a, b))

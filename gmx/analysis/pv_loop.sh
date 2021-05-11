@@ -4,9 +4,9 @@ source $scriptsdir/rdf/rdf_func.sh
 
 cd ../
 conda activate base
-for ((i=0; i<20; i++)); do
+for ((i=0; i<1; i++)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
-    for ((j=0; j<16; j++)); do 
+    for ((j=0; j<1; j++)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             if [ -d ${pressure}Mpa-${voltage}V ]; then

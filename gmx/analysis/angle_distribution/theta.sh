@@ -8,8 +8,10 @@ echo '8' | gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o ion_
 
 dir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis/angle_distribution
 
-python $dir/angle_distribution.py ion_OW.gro angle_dis.csv ${ion} z
-rm -rf test.gro
+python $dir/angle_distribution.py ion_OW.gro x.csv ${ion} x
+python $dir/angle_distribution.py ion_OW.gro y.csv ${ion} y
+python $dir/angle_distribution.py ion_OW.gro z.csv ${ion} z
+rm -rf ion_OW.gro
 
 
 cd ../

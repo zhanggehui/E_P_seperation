@@ -29,21 +29,26 @@ class Theta:
         for results in self.tree.query_ball_point(ion_points, first_shell[self.center]):
             nearby_points = np.array(self.ow_points[results])
             vectors = nearby_points - ion_points[count]
-            if self.ori == 'x':
+            if self.ori == 'phix':
                 axis = np.array([1, 0, 0])
-            elif self.ori == 'y':
+            elif self.ori == 'phiy':
                 axis = np.array([0, 1, 0])
-            else:
+            elif self.ori == 'theta':
                 axis = np.array([0, 0, 1])
             for vector in vectors:
+                if self.ori != 'theta':
+                    theta=cal_angel(vector, np.array([0, 0, 1]))
+                    vector=vector*np.sin(theta)
                 self.angle_list.append(cal_angel_in_deg(vector, axis))
             count = count + 1
 
         return self.angle_list
 
-
-def cal_angel_in_deg(a, b):
+def cal_angel(a, b):
     a_norm = np.linalg.norm(a)
     b_norm = np.linalg.norm(b)
     a_dot_b = np.dot(a, b)
-    return np.rad2deg(np.arccos(a_dot_b / (a_norm * b_norm)))
+    return np.arccos(a_dot_b / (a_norm * b_norm))
+
+def cal_angel_in_deg(a, b):
+    return np.rad2deg(cal_angel(a * b))

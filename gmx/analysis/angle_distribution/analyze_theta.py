@@ -34,12 +34,10 @@ class Theta:
             elif self.ori == 'phiy':
                 axis = np.array([0, 1, 0])
             elif self.ori == 'theta':
-                axis = np.array([0, 0, 1])
+                axis = np.array([0, 0, 1])            
             for vector in vectors:
                 if self.ori != 'theta':
-                    zaxis=np.array([0, 0, 1])
-                    theta=cal_angle(vector, zaxis)
-                    vector=vector*np.sin(theta)
+                    vector[2] = 0
                 self.angle_list.append(cal_angle_in_deg(vector, axis))
             count = count + 1
 

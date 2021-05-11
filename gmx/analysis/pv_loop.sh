@@ -3,6 +3,7 @@ source $scriptsdir/trajectory/traj_func.sh
 source $scriptsdir/rdf/rdf_func.sh
 
 cd ../
+conda activate base
 for ((i=0; i<20; i++)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
     for ((j=0; j<16; j++)); do 

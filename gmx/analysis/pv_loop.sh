@@ -4,7 +4,6 @@ source $scriptsdir/rdf/rdf_func.sh
 
 cd ../
 
-source activate
 conda activate base
 python --version
 

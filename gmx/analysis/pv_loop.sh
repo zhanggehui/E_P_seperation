@@ -5,6 +5,9 @@ source $scriptsdir/rdf/rdf_func.sh
 cd ../
 
 source activate
+source dectivate
+
+conda activate base
 python --version
 
 for ((i=0; i<1; i++)); do

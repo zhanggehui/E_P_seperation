@@ -7,7 +7,6 @@ cd ../
 source activate
 source deactivate
 conda activate base
-
 python --version
 
 for ((i=0; i<1; i++)); do

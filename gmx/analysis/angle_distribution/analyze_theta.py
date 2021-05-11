@@ -38,18 +38,18 @@ class Theta:
             for vector in vectors:
                 if self.ori != 'theta':
                     zaxis=np.array([0, 0, 1])
-                    theta=cal_angel(vector, zaxis)
+                    theta=cal_angle(vector, zaxis)
                     vector=vector*np.sin(theta)
-                self.angle_list.append(cal_angel_in_deg(vector, axis))
+                self.angle_list.append(cal_angle_in_deg(vector, axis))
             count = count + 1
 
         return self.angle_list
 
-def cal_angel(a, b):
+def cal_angle(a, b):
     a_norm = np.linalg.norm(a)
     b_norm = np.linalg.norm(b)
     a_dot_b = np.dot(a, b)
     return np.arccos(a_dot_b / (a_norm * b_norm))
 
-def cal_angel_in_deg(a, b):
-    return np.rad2deg(cal_angel(a, b))
+def cal_angle_in_deg(a, b):
+    return np.rad2deg(cal_angle(a, b))

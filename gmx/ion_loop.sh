@@ -1,4 +1,4 @@
-ions=("LI")
+ions=("LI" "CS")
 #ions=("LI" "NA" "K" "CS")
 n_ions=${#ions[@]}
 

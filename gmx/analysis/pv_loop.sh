@@ -17,7 +17,7 @@ for ((i=0; i<20; i++)); do
                     #source $scriptsdir/trajectory/traj_first_last.sh
                     #source $scriptsdir/velocity/velocity_profile.sh
                     #source $scriptsdir/density_profile/density.sh
-                    source $scriptsdir/angle/theta.sh
+                    python $scriptsdir/angle_distribution/theta.py
                 cd ..
             fi
         fi

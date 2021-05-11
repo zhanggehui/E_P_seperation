@@ -37,7 +37,8 @@ class Theta:
                 axis = np.array([0, 0, 1])
             for vector in vectors:
                 if self.ori != 'theta':
-                    theta=cal_angel(vector, np.array([0, 0, 1]))
+                    zaxis=np.array([0, 0, 1])
+                    theta=cal_angel(vector, zaxis)
                     vector=vector*np.sin(theta)
                 self.angle_list.append(cal_angel_in_deg(vector, axis))
             count = count + 1

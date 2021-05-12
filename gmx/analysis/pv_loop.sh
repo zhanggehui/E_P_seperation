@@ -8,10 +8,11 @@ source activate
 source deactivate
 conda activate base
 python --version
+ion=${rundir%_*}
 
-for ((i=0; i<1; i++)); do
+for ((i=0; i<20; i=i+5)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
-    for ((j=0; j<1; j++)); do 
+    for ((j=0; j<16; j=j+5)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             if [ -d ${pressure}Mpa-${voltage}V ]; then

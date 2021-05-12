@@ -1,7 +1,6 @@
 mkdir ./gangle
 cd ./gangle
 
-ion=$rundir
 declare -A first_shell=(["LI"]="0.278" ["NA"]="0.32" ["K"]="0.354" ["CS"]="0.396")
 
 dir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis/angle

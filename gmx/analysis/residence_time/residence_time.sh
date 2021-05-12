@@ -1,6 +1,9 @@
-mkdir ./select
-cd ./select
-echo -e "\"1st shell\" resname SOL and name OW and within 0.32 of group NA\n" | \
+mkdir ./rest_select
+cd ./rest_select
+
+declare -A first_shell=(["LI"]="0.278" ["NA"]="0.32" ["K"]="0.354" ["CS"]="0.396")
+echo -e "\"1st shell\" resname SOL and name OW and within ${first_shell[$ion]} of group $ion\n" | \
 gmx select -s ../nvt-production.tpr -f ../nvt-production.trr -n ../waterlayer.ndx -os -oc -oi -on -om -of -olt -b 0 -e 10000
+
 cd ../
-mv ./select ../$rundir/${pressure}Mpa-${voltage}V
+mv ./rest_select ../$rundir/${pressure}Mpa-${voltage}V

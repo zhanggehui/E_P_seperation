@@ -4,10 +4,11 @@ source $scriptsdir/rdf/rdf_func.sh
 
 cd ../
 
-source activate
+#正确启动python环境，由于使用了intel编译器的环境，破坏了原有的python环境
 source deactivate
-conda activate base
+source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
+
 ion=${rundir%_*}
 
 for ((i=0; i<20; i=i+5)); do

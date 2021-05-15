@@ -11,21 +11,26 @@ python --version
 
 ion=${rundir%_*}
 
-for ((i=0; i<20; i=i+5)); do
+for ((i=0; i<20; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
-    for ((j=0; j<16; j=j+5)); do 
+    for ((j=0; j<16; j=j+1)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             if [ -d ${pressure}Mpa-${voltage}V ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./${pressure}Mpa-${voltage}V
+                    #统计离子位移
+                    source $scriptsdir/trajectory/traj_first_last.sh
+                    
+                    #统计径向分布函数
                     #source $scriptsdir/rdf/rdf.sh
+                    
+                    #水合层滞留时间
                     #source $scriptsdir/residence_time/residence_time.sh
                     #source $scriptsdir/trajectory/traj_continuous.sh
-                    #source $scriptsdir/trajectory/traj_first_last.sh
                     #source $scriptsdir/velocity/velocity_profile.sh
                     #source $scriptsdir/density_profile/density.sh
-                    source $scriptsdir/angle_distribution/theta.sh
+                    #source $scriptsdir/angle_distribution/theta.sh
                 cd ..
             fi
         fi

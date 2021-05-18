@@ -24,7 +24,7 @@ for ((i=0; i<20; i=i+1)); do
                     #source $scriptsdir/trajectory/traj_continuous.sh
 
                     #统计径向分布函数
-                    #source $scriptsdir/rdf/rdf.sh
+                    source $scriptsdir/rdf/rdf.sh
                     
                     #水合层滞留时间
                     #source $scriptsdir/residence_time/residence_time.sh
@@ -33,7 +33,7 @@ for ((i=0; i<20; i=i+1)); do
                     #source $scriptsdir/velocity/velocity_profile.sh
 
                     #密度分布
-                    source $scriptsdir/density_profile/density.sh
+                    #source $scriptsdir/density_profile/density.sh
                     
                     #水合层角度分布
                     #source $scriptsdir/angle_distribution/theta.sh

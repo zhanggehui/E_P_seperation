@@ -14,7 +14,7 @@ for ((i=0; i<${n_ions}; i++)); do
             $run_gmx 4 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-equ.sh nvtequ
         elif [ $1 == 'analysis' ]; then
             $run_gmx 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis pv_loop.sh ${ion}_density
-            #${ion}_angle ${ion}_traj ${ion}_density
+            #${ion}_angle ${ion}_traj ${ion}_density ${ion}_rdf
         fi
         cd ../
     else

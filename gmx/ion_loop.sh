@@ -13,8 +13,8 @@ for ((i=0; i<${n_ions}; i++)); do
         elif [ $1 == 'nvtequ' ]; then
             $run_gmx 4 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-equ.sh nvtequ
         elif [ $1 == 'analysis' ]; then
-            $run_gmx 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis pv_loop.sh ${ion}_traj
-            # ${ion}_angle ${ion}_traj
+            $run_gmx 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis pv_loop.sh ${ion}
+            #${ion}_angle ${ion}_traj ${ion}_density
         fi
         cd ../
     else

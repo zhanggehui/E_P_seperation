@@ -39,6 +39,8 @@ for ((i=0; i<20; i=i+1)); do
                     #source $scriptsdir/angle_distribution/theta.sh
                 cd ..
             fi
+        else
+            "No such dictionary (${pressure}Mpa-${voltage}V)!"
         fi
     done
 done

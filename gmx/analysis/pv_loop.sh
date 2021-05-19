@@ -38,9 +38,9 @@ for ((i=0; i<20; i=i+1)); do
                     #水合层角度分布
                     #source $scriptsdir/angle_distribution/theta.sh
                 cd ..
+            else
+                "No such dictionary (${pressure}Mpa-${voltage}V)!"
             fi
-        else
-            "No such dictionary (${pressure}Mpa-${voltage}V)!"
         fi
     done
 done

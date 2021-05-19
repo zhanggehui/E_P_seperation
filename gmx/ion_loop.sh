@@ -18,6 +18,6 @@ for ((i=0; i<${n_ions}; i++)); do
         fi
         cd ../
     else
-        "No such dictionary ($ion)!"
+        echo "No such dictionary ($ion)!"
     fi
 done

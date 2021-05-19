@@ -1,4 +1,5 @@
-awk -v ori_p=$1 -v ori_v=$2 -v Zmax=$4' 
+awk -v ori_p=$1 -v ori_v=$2 -v Zmax=$4 \
+' 
 BEGIN {
 	mo=16; mh=1; M=mo+2*mh          # 定义原子质量
 	Ntot=10000000                   # 定义要计算的帧数

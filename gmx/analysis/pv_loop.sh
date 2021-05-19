@@ -27,10 +27,10 @@ for ((i=0; i<20; i=i+1)); do
                     #source $scriptsdir/rdf/rdf.sh
                     
                     #水合层滞留时间
-                    source $scriptsdir/residence_time/residence_time.sh
+                    #source $scriptsdir/residence_time/residence_time.sh
                     
                     #速度分布
-                    #source $scriptsdir/velocity/velocity_profile.sh
+                    source $scriptsdir/velocity/velocity_profile.sh
 
                     #密度分布
                     #source $scriptsdir/density_profile/density.sh

@@ -3,13 +3,17 @@ import numpy as np
 import analyze_theta as at
 import matplotlib.pyplot as plt
 import sys
+import scipy.io as sio
+
 
 class Analysis:
-    def __init__(self, fname, oname, center, ori):
+    def __init__(self, fname, oname, omatname, center, ori):
         self.fname = fname
         self.oname = oname
+        self.omatname = omatname
         self.center = center
         self.ori = ori
+        self.grid = np.zeros(shape=(100, 100))
         self.df_list = []
         self.angle_list = []
         self.__read_gro_file()
@@ -57,7 +61,9 @@ class Analysis:
 
     def analyze_frame(self, i):
         df = self.df_list[i]
-        self.angle_list.extend(at.Theta(df, self.center, self.ori).analyze_theta())
+        a_list, n_grid = at.Theta(df, self.center, self.ori).analyze_theta()
+        self.angle_list.extend(a_list)
+        self.grid = self.grid + n_grid
 
     def finish_analysis(self):
         self.n, bins = np.histogram(self.angle_list, bins=180, range=[0, 180])
@@ -71,6 +77,7 @@ class Analysis:
     def write_output(self):
         arr = np.vstack([self.bins, self.n]).T
         np.savetxt(self.oname, arr, fmt='%g', delimiter=',')
+        sio.savemat(self.omatname, {'n_grid': self.grid})
 
 
 def add_record(x_arry, y_arry, z_arry, index, line):

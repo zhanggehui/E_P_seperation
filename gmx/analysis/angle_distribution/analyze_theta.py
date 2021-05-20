@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import spatial
+import math
 
 first_shell = {
     "LI": 0.278,
@@ -15,6 +16,7 @@ class Theta:
         self.center = center
         self.ori = ori
         self.angle_list = []
+        self.grid = np.zeros(shape=(100, 100))
         self.__prepare()
 
     def __prepare(self):
@@ -33,21 +35,26 @@ class Theta:
                 axis = np.array([1, 0, 0])
             elif self.ori == 'phiy':
                 axis = np.array([0, 1, 0])
-            elif self.ori == 'theta':
-                axis = np.array([0, 0, 1])            
+            else:  # self.ori == 'theta':
+                axis = np.array([0, 0, 1])
             for vector in vectors:
                 if self.ori != 'theta':
                     vector[2] = 0
                 self.angle_list.append(cal_angle_in_deg(vector, axis))
+                nx = math.floor(vector[0] / 0.01 + 50)
+                ny = math.floor(vector[1] / 0.01 + 50)
+                self.grid[nx, ny] = self.grid[nx, ny] + 1
             count = count + 1
 
-        return self.angle_list
+        return self.angle_list, self.grid
+
 
 def cal_angle(a, b):
     a_norm = np.linalg.norm(a)
     b_norm = np.linalg.norm(b)
     a_dot_b = np.dot(a, b)
     return np.arccos(a_dot_b / (a_norm * b_norm))
+
 
 def cal_angle_in_deg(a, b):
     return np.rad2deg(cal_angle(a, b))

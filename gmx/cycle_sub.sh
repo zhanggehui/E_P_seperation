@@ -18,7 +18,7 @@ else
     pvmix=0
 fi 
 
-for ((i=plow_i;i<=pmax_i;i++)); do
+for ((i=plow_i; i<=pmax_i; i++)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
     word='pressure='
     new="pressure=${pressure}     #Mpa"

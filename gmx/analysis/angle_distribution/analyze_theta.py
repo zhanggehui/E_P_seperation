@@ -16,7 +16,7 @@ class Theta:
         self.center = center
         self.ori = ori
         self.angle_list = []
-        self.x=140
+        self.x=210
         self.grid = np.zeros(shape=(self.x, self.x))
         self.__prepare()
 

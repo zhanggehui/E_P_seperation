@@ -13,7 +13,8 @@ class Analysis:
         self.omatname = omatname
         self.center = center
         self.ori = ori
-        self.grid = np.zeros(shape=(100, 100))
+        self.x = 140
+        self.grid = np.zeros(shape=(self.x, self.x))
         self.df_list = []
         self.angle_list = []
         self.__read_gro_file()

@@ -16,7 +16,8 @@ class Theta:
         self.center = center
         self.ori = ori
         self.angle_list = []
-        self.grid = np.zeros(shape=(100, 100))
+        self.x=140
+        self.grid = np.zeros(shape=(self.x, self.x))
         self.__prepare()
 
     def __prepare(self):
@@ -28,7 +29,9 @@ class Theta:
         rows = self.df['atomName'] == self.center
         ion_points = np.array(self.df.loc[rows][['x', 'y', 'z']])
         count = 0
-        for results in self.tree.query_ball_point(ion_points, first_shell[self.center]):
+        radius=first_shell[self.center]
+        radius=1
+        for results in self.tree.query_ball_point(ion_points, radius):
             nearby_points = np.array(self.ow_points[results])
             vectors = nearby_points - ion_points[count]
             if self.ori == 'phix':
@@ -41,8 +44,8 @@ class Theta:
                 if self.ori != 'theta':
                     vector[2] = 0
                 self.angle_list.append(cal_angle_in_deg(vector, axis))
-                nx = math.floor(vector[0] / 0.01 + 50)
-                ny = math.floor(vector[1] / 0.01 + 50)
+                nx = math.floor(vector[0] / 0.01 + self.x/2)
+                ny = math.floor(vector[1] / 0.01 + self.x/2)
                 self.grid[nx, ny] = self.grid[nx, ny] + 1
             count = count + 1
 

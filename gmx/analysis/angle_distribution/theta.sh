@@ -9,7 +9,7 @@ dir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis/angle_distrib
 #python $dir/angle_distribution.py ion_OW.gro phix.csv phix.mat ${ion} phix
 #python $dir/angle_distribution.py ion_OW.gro phiy.csv phiy.mat ${ion} phiy
 python $dir/angle_distribution.py ion_OW.gro theta.csv grid.mat ${ion} theta
-rm -rf index.ndx ion_OW.gro
+rm -rf \#* index.ndx ion_OW.gro
 
 
 cd ../

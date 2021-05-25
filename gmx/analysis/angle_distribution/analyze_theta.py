@@ -16,9 +16,10 @@ class Theta:
         self.center = center
         self.ori = ori
         self.angle_list = []
-        self.x = 210
-        self.grid = np.zeros(shape=(self.x, self.x))
-        self.v_grid = np.zeros(shape=(self.x, self.x))
+        self.grid_length = 210
+        self.n_grid = np.zeros(shape=(self.grid_length, self.grid_length))
+        self.vx_grid = np.zeros(shape=(self.grid_length, self.grid_length))
+        self.vy_grid = np.zeros(shape=(self.grid_length, self.grid_length))
         self.__prepare()
 
     def __prepare(self):
@@ -32,7 +33,7 @@ class Theta:
         ion_points = np.array(self.df.loc[rows][['x', 'y', 'z']])
         count = 0
         radius = first_shell[self.center]
-        radius=1
+        radius = 0.5
         for results in self.tree.query_ball_point(ion_points, radius):
             nearby_points = np.array(self.ow_points[results])
             nearby_points_vels = np.array(self.ow_vels[results])
@@ -44,20 +45,21 @@ class Theta:
             else:  # self.ori == 'theta':
                 axis = np.array([0, 0, 1])
 
-            count_vel=0
+            count_vel = 0
             for vector in vectors:
-                vel=nearby_points_vels[count_vel]
+                vel = nearby_points_vels[count_vel]
                 if self.ori != 'theta':
                     vector[2] = 0
                 self.angle_list.append(cal_angle_in_deg(vector, axis))
-                n1 = math.floor(vector[0] / 0.01 + self.x / 2)
-                n2 = math.floor(vector[1] / 0.01 + self.x / 2)
-                self.grid[n1, n2] = self.grid[n1, n2] + 1
-                self.v_grid[n1, n2] = self.v_grid[n1, n2] + vel[1]
-                count_vel=count_vel+1
+                n1 = math.floor(vector[0] / 0.1 + self.grid_length / 2)
+                n2 = math.floor(vector[1] / 0.1 + self.grid_length / 2)
+                self.n_grid[n1, n2] = self.n_grid[n1, n2] + 1
+                self.vx_grid[n1, n2] = self.vx_grid[n1, n2] + vel[0]
+                self.vy_grid[n1, n2] = self.vy_grid[n1, n2] + vel[1]
+                count_vel = count_vel + 1
             count = count + 1
 
-        return self.angle_list, self.grid, self.v_grid
+        return self.angle_list, self.n_grid, self.vx_grid, self.vy_grid
 
 
 def cal_angle(a, b):

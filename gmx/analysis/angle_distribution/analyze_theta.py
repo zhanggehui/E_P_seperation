@@ -1,6 +1,7 @@
 import numpy as np
 from scipy import spatial
 import math
+import commons as cmval
 
 first_shell = {
     "LI": 0.278,
@@ -16,10 +17,10 @@ class Theta:
         self.center = center
         self.ori = ori
         self.angle_list = []
-        self.grid_length = 210
-        self.n_grid = np.zeros(shape=(self.grid_length, self.grid_length))
-        self.vx_grid = np.zeros(shape=(self.grid_length, self.grid_length))
-        self.vy_grid = np.zeros(shape=(self.grid_length, self.grid_length))
+        gLength = int(cmval.gridLength)
+        self.n_grid = np.zeros(shape=(gLength, gLength))
+        self.v1_grid = np.zeros(shape=(gLength, gLength))
+        self.v2_grid = np.zeros(shape=(gLength, gLength))
         self.__prepare()
 
     def __prepare(self):
@@ -32,8 +33,8 @@ class Theta:
         rows = self.df['atomName'] == self.center
         ion_points = np.array(self.df.loc[rows][['x', 'y', 'z']])
         count = 0
-        radius = first_shell[self.center]
-        radius = 0.5
+        # radius = first_shell[self.center]
+        radius = cmval.radius
         for results in self.tree.query_ball_point(ion_points, radius):
             nearby_points = np.array(self.ow_points[results])
             nearby_points_vels = np.array(self.ow_vels[results])
@@ -51,15 +52,16 @@ class Theta:
                 if self.ori != 'theta':
                     vector[2] = 0
                 self.angle_list.append(cal_angle_in_deg(vector, axis))
-                n1 = math.floor(vector[0] / 0.1 + self.grid_length / 2)
-                n2 = math.floor(vector[1] / 0.1 + self.grid_length / 2)
+
+                n1 = math.floor(vector[1] / cmval.girdBinWidth + cmval.gridLength / 2)
+                n2 = math.floor(vector[2] / cmval.girdBinWidth + cmval.gridLength / 2)
                 self.n_grid[n1, n2] = self.n_grid[n1, n2] + 1
-                self.vx_grid[n1, n2] = self.vx_grid[n1, n2] + vel[0]
-                self.vy_grid[n1, n2] = self.vy_grid[n1, n2] + vel[1]
+                self.v1_grid[n1, n2] = self.v1_grid[n1, n2] + vel[1]
+                self.v2_grid[n1, n2] = self.v2_grid[n1, n2] + vel[2]
                 count_vel = count_vel + 1
             count = count + 1
 
-        return self.angle_list, self.n_grid, self.vx_grid, self.vy_grid
+        return self.angle_list, self.n_grid, self.v1_grid, self.v2_grid
 
 
 def cal_angle(a, b):

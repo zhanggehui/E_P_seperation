@@ -4,6 +4,7 @@ import analyze_theta as at
 import matplotlib.pyplot as plt
 import sys
 import scipy.io as sio
+import commons as cmval
 
 
 class Analysis:
@@ -13,10 +14,10 @@ class Analysis:
         self.omatname = omatname
         self.center = center
         self.ori = ori
-        self.grid_length = 210
-        self.n_grid = np.zeros(shape=(self.grid_length, self.grid_length))
-        self.vx_grid = np.zeros(shape=(self.grid_length, self.grid_length))
-        self.vy_grid = np.zeros(shape=(self.grid_length, self.grid_length))
+        gLength = int(cmval.gridLength)
+        self.n_grid = np.zeros(shape=(gLength, gLength))
+        self.v1_grid = np.zeros(shape=(gLength, gLength))
+        self.v2_grid = np.zeros(shape=(gLength, gLength))
         self.df_list = []
         self.angle_list = []
         self.__read_gro_file()
@@ -71,11 +72,11 @@ class Analysis:
 
     def analyze_frame(self, i):
         df = self.df_list[i]
-        a_list, n_grid, vx_grid, vy_grid = at.Theta(df, self.center, self.ori).analyze_theta()
+        a_list, n_grid, v1_grid, v2_grid = at.Theta(df, self.center, self.ori).analyze_theta()
         self.angle_list.extend(a_list)
         self.n_grid = self.n_grid + n_grid
-        self.vx_grid = self.vx_grid + vx_grid
-        self.vy_grid = self.vy_grid + vy_grid
+        self.v1_grid = self.v1_grid + v1_grid
+        self.v2_grid = self.v2_grid + v2_grid
 
     def finish_analysis(self):
         self.n, bins = np.histogram(self.angle_list, bins=180, range=[0, 180])
@@ -84,20 +85,21 @@ class Analysis:
             y = self.n * np.sin(np.deg2rad(self.bins))
             plt.plot(self.bins, y, 'o')
             plt.show()
-        self.vx_grid = self.vx_grid / self.n_grid
-        self.vy_grid = self.vy_grid / self.n_grid
+        self.v1_grid = self.v1_grid / self.n_grid
+        self.v2_grid = self.v2_grid / self.n_grid
         self.write_output()
 
     def write_output(self):
         arr = np.vstack([self.bins, self.n]).T
         np.savetxt(self.oname, arr, fmt='%g', delimiter=',')
         sio.savemat(self.omatname, {'n_grid': self.n_grid,
-                                    'vx_grid': self.vx_grid,
-                                    'vy_grid': self.vy_grid})
+                                    'v1_grid': self.v1_grid,
+                                    'v2_grid': self.v2_grid})
 
 
 def add_record(x_arry, y_arry, z_arry,
-               v_x_arry, v_y_arry, v_z_arry, index, line):
+               v_x_arry, v_y_arry, v_z_arry,
+               index, line):
     x_arry[index] = float(line[20 + 0 * 8: 28 + 0 * 8])
     y_arry[index] = float(line[20 + 1 * 8: 28 + 1 * 8])
     z_arry[index] = float(line[20 + 2 * 8: 28 + 2 * 8])

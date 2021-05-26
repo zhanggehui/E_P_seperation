@@ -1,8 +1,11 @@
 import unittest
 
+a=1
+
+
 class MyTestCase(unittest.TestCase):
     def test_something(self):
-        pass
+        print(a,'--------------------------------------------------')
 
 
 if __name__ == '__main__':

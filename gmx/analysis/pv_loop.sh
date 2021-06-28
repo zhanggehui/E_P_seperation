@@ -10,15 +10,15 @@ source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%_*}
-
+dir=fix-${pressure}Mpa-${voltage}V
 for ((i=0; i<20; i=i+19)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s",100*i);}'`
     for ((j=0; j<16; j=j+15)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s",0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
-            if [ -d ${pressure}Mpa-${voltage}V ]; then
+            if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
-                cd ./${pressure}Mpa-${voltage}V
+                cd ./$dir
                     #统计离子位移
                     #source $scriptsdir/trajectory/traj_first_last.sh
                     #source $scriptsdir/trajectory/traj_continuous.sh

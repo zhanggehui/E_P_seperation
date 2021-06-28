@@ -10,7 +10,7 @@ acc_water=all
 echo "pressure: $pressure" > cyclelog
 echo 'stepnum   count   len   lenv1   lenv2   area   acceleration' >> cyclelog
 
-cp ../index.ndx.ndx ./waterlayer.ndx
+cp ../index.ndx ./waterlayer.ndx
 mdpdir=./mdps ; mkdir -p $mdpdir
 ndxdir=./ndxs ; mkdir -p $ndxdir
 

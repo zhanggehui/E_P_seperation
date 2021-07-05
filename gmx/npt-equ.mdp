@@ -126,17 +126,16 @@ print-nose-hoover-chain-variables = no
 tc-grps                  = System
 ; Time constant (ps) and reference temperature (K)
 tau_t                    = 0.1    
-ref_t                    = 300 
-; pressure coupling     
-pcoupl                   = no
-pcoupltype               = Isotropic
+ref_t                    = 300
+ 
+; pressure coupling
+pcoupl                  = Parrinello-Rahman     ; Pressure coupling on in NPT
 nstpcouple               = -1
-; Time constant (ps), compressibility (1/bar) and reference P (bar)
-tau-p                    = 1
-compressibility          = 
-ref-p                    = 
-; Scaling of reference coordinates, No, All or COM
-refcoord-scaling         = No
+pcoupltype              = isotropic             ; uniform scaling of box vectors
+tau_p                   = 1.0                   ; time constant, in ps
+ref_p                   = 1.0                   ; reference pressure, in bar
+compressibility         = 4.5e-5                ; isothermal compressibility of water, bar^-1
+refcoord_scaling        = com
 
 ; OPTIONS FOR QMMM calculations
 QMMM                     = no
@@ -280,7 +279,7 @@ dh_hist_spacing          = 0.1
 ; Non-equilibrium MD stuff
 acc-grps                 = 
 accelerate               = 
-freezegrps               = gra pion
+freezegrps               = gra OW
 freezedim                = Y Y Y Y Y Y
 cos-acceleration         = 0
 deform                   = 

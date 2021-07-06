@@ -28,10 +28,6 @@
 
 
 
-
-
-
-
 ## gmx
 1. gmx流程中有文件读写，故使用时不要超过一个节点，除非更改为MPIIO
 
@@ -64,8 +60,6 @@ cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvtpull
 ```
-
-
 
 - 伞形采样
 
@@ -103,8 +97,6 @@ source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/ion_loop.sh analysi
 ```bash
 echo "NA" | gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o noskip-1nm-20e-NA-1600Mpa-0V.gro -pbc nojump -b 0 -e 10000 -n waterlayer.ndx
 ```
-
-
 
 - 清理文件
 

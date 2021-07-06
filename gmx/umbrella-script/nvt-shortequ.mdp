@@ -9,7 +9,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 1000000
+nsteps                   = 500000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -216,19 +216,20 @@ wall-ewald-zfac          = 3
 
 ; COM PULLING          
 pull                    = yes
-pull_ncoords            = 1         
+pull_ncoords            = 1
 pull_ngroups            = 1         
 pull_group1_name        = pion
-pull_coord1_type        = umbrella  
+pull_coord1_type        = umbrella
 pull-coord1-geometry    = direction
 pull_coord1_groups      = 0 1
 pull-coord1-dim         = N Y N
 pull-coord1-origin      = 2.460 7.520 1.500
 pull_coord1_vec         = 0 1 0
-pull_coord1_rate        = 0.005     ; 0.005 nm per ps = 5 nm per ns
+pull-coord1-start       = yes
+pull_coord1_rate        = 0
 pull_coord1_k           = 1000      ; kJ mol^-1 nm^-2
 
-; ENFORCED ROTATION    
+; ENFORCED ROTATION
 ; Enforced rotation: No or Yes
 rotation                 = no
 

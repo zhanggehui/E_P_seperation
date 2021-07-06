@@ -115,6 +115,15 @@ def main(argv=None):
             delta_dist = "%10.3f" % (dist - prev_dist)
 
         out.append("%10i%10.3f%s\n" % (frame, dist, delta_dist))
+        
+    f1 = open(tpr-files.dat, 'w')
+    f2 = open(pullf-files.dat, 'w')
+    for i in range(len(sampled_indexes)):
+        frame = int(float(sampled_indexes[i]))
+        f1.write('../umbrella-frame-'+str(frame)+'/umbrella'+str(frame)+'.tpr\n')
+        f1.write('../umbrella-frame-'+str(frame)+'/umbrella'+str(frame)+'_pullf.xvg\n')
+    f1.close()
+    f2.close()
 
     return out
 

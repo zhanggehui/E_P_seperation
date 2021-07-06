@@ -70,9 +70,14 @@ gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvt
 - 伞形采样
 
 ```bash
-#分析
+#采样
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella.sh
+
+#wham
+cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
+gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script wham.sh wham
 ```
 
 

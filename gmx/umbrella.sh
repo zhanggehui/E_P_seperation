@@ -11,8 +11,8 @@ nvt-pull_pullx.xvg 0.1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umb
 conda deactivate
 
 for udir in `ls | grep umbrella`; do 
-cd $udir
-source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx auto 1 . sampling.sh run
-cd ../
+    cd $udir
+    source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
+    gmx auto 1 . sampling.sh run
+    cd ../
 done

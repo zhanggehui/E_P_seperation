@@ -2,7 +2,7 @@ source ~/gmx_zgh.sh
 
 mkdir conf
 cd conf
-gmx trjconv -s ../nvt-pull.tpr -f ../nvt-pull.trr -o conf.gro -sep -n ../../waterlayer.ndx
+echo 0 | gmx trjconv -s ../nvt-pull.tpr -f ../nvt-pull.trr -o conf.gro -sep -n ../../waterlayer.ndx
 cd ../
 
 conda activate base

@@ -52,7 +52,7 @@ def sampleDistances(distance_table, sample_interval):
 
 def createOutputFile(template_file, frame_number, search_string="XXX"):
 
-    out_file = "./umbrella-frame-%i/frame-%i_%s" % (frame_number, frame_number, template_file)
+    out_file = "./umbrella-frame-%i/sampling.sh" % (frame_number)
 
     # Read the contents of the template file
     f = open(template_file, 'r')

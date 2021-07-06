@@ -122,7 +122,7 @@ def main(argv=None):
     for i in range(len(sampled_indexes)):
         frame = int(float(sampled_indexes[i]))
         f1.write('../umbrella-frame-'+str(frame)+'/umbrella'+str(frame)+'.tpr\n')
-        f1.write('../umbrella-frame-'+str(frame)+'/umbrella'+str(frame)+'_pullf.xvg\n')
+        f2.write('../umbrella-frame-'+str(frame)+'/umbrella'+str(frame)+'_pullf.xvg\n')
     f1.close()
     f2.close()
 

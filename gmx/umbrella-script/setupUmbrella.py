@@ -100,8 +100,9 @@ def main(argv=None):
         for t in template_files:
             for i in range(len(sampled_indexes)):
                 frame = int(float(sampled_indexes[i]))
-                os.system('mkdir umbrella-frame-'+str(frame))
-                createOutputFile(t, frame, search_string="XXX")
+                if not os.path.exists('umbrella-frame-'+str(frame)):
+                    os.system('mkdir umbrella-frame-'+str(frame))
+                    createOutputFile(t, frame, search_string="XXX")
 
     # Print out summary of the frames we identified      
     out = ["%10s%10s%10s\n" % ("frame", "dist", "del_dist")]
@@ -116,8 +117,8 @@ def main(argv=None):
 
         out.append("%10i%10.3f%s\n" % (frame, dist, delta_dist))
         
-    f1 = open(tpr-files.dat, 'w')
-    f2 = open(pullf-files.dat, 'w')
+    f1 = open('tpr-files.dat', 'w')
+    f2 = open('pullf-files.dat', 'w')
     for i in range(len(sampled_indexes)):
         frame = int(float(sampled_indexes[i]))
         f1.write('../umbrella-frame-'+str(frame)+'/umbrella'+str(frame)+'.tpr\n')

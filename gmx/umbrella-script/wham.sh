@@ -4,4 +4,4 @@ else
     OMP_NUM_THREADS=20
 fi
 
-gmx wham -it ../tpr-files2.dat -if ../pullf-files2.dat -o -hist -unit kCal
+gmx wham -it ../tpr-files.dat -if ../pullf-files.dat -o -hist -unit kCal

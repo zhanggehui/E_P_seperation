@@ -31,7 +31,7 @@ def readDistanceFile(distance_file):
 
 def sampleDistances(distance_table, sample_interval):
     target_distance = {}
-    for i in range(20 + 1):
+    for i in range(20):
         str1 = 't' + str(i)
         target_distance[str1] = float(i * sample_interval)
     distance_table.update(target_distance)

@@ -216,6 +216,7 @@ wall-ewald-zfac          = 3
 
 ; COM PULLING          
 pull                    = yes
+pull-print-components   = yes
 pull_ncoords            = 1         
 pull_ngroups            = 1         
 pull_group1_name        = pion

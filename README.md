@@ -55,23 +55,6 @@ gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx em.sh em
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-equ.sh nvtequ
-
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvtpull
-```
-
-- 伞形采样
-
-```bash
-#采样
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella.sh
-
-#wham
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script wham.sh wham
 ```
 
 - 批处理提交任务
@@ -102,7 +85,27 @@ echo "NA" | gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o noskip-1n
 rm -rf CS/CS_*/ LI/LI_*/ K/K_*/ NA/NA_*/ tmp_data/*
 rm -rf */*/angle*
 ```
+- **伞形采样**
 
+```bash
+#牵引制作初始构型
+cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
+gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvtpull
+
+#采样
+cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella.sh
+
+#检查弹簧位置动画
+cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script/springs.sh
+
+#wham
+cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
+gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script wham.sh wham
+```
 
 
 

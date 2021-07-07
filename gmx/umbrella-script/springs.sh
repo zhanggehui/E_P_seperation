@@ -4,6 +4,6 @@ mkdir springs
 for udir in `ls | grep umbrella`; do 
   cd $udir
   fnum=${udir##*-}
-  echo 15 | gmx trjconv -s ./umbrella$fnum.tpr -f ./umbrella$fnum.trr -o ../springs/${fnum}conf.gro -n ../../waterlayer.ndx
+  echo 15 | gmx trjconv -s ./umbrella$fnum.tpr -f ./umbrella$fnum.trr -o ../springs/${fnum}conf${fnum}.gro -n ../../waterlayer.ndx
   cd ../.
 done

@@ -1,2 +1,2 @@
-#检查采样轨迹
-echo 15 | gmx trjconv -s ./umbrella379.tpr -f ./umbrella379.trr -o conf379.gro -n ../../waterlayer.ndx
+#牵引连续轨迹
+echo 0 | gmx trjconv -s ./nvt-pull.tpr -f ./nvt-pull.trr -o conf.gro -n ../waterlayer.ndx

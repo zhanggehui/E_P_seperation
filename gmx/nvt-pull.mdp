@@ -222,7 +222,7 @@ pull_group1_name        = pion
 pull_coord1_type        = umbrella  
 pull-coord1-geometry    = direction
 pull_coord1_groups      = 0 1
-pull-coord1-dim         = N Y N
+pull-coord1-dim         = Y Y Y
 pull-coord1-origin      = 2.460 7.520 1.500
 pull_coord1_vec         = 0 1 0
 pull_coord1_rate        = 0.005     ; 0.005 nm per ps = 5 nm per ns

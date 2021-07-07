@@ -1,2 +1,2 @@
 #检查采样轨迹
-gmx trjconv -s ./umbrella379.tpr -f ./umbrella379.trr -o conf.gro -n ../../waterlayer.ndx
+gmx trjconv -s ./umbrella379.tpr -f ./umbrella379.trr -o conf379.gro -n ../../waterlayer.ndx

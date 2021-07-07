@@ -74,8 +74,6 @@ source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script wham.sh wham
 ```
 
-
-
 - 批处理提交任务
 ```bash
 #多个电压或者电场

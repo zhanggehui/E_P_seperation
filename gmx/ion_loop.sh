@@ -1,5 +1,5 @@
-#ions=("LI" "NA" "K" "CS")
-ions=("LI")
+#ions=("LI")
+ions=("LI" "NA" "K" "CS" "CA" "MG")
 n_ions=${#ions[@]}
 
 run_gmx="source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $2"

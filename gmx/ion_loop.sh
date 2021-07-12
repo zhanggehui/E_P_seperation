@@ -12,6 +12,8 @@ for ((i=0; i<${n_ions}; i++)); do
             $run_gmx 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx em.sh em
         elif [ $1 == 'nvtequ' ]; then
             $run_gmx 4 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-equ.sh nvtequ
+        elif [ $1 == 'nvtpull' ]; then
+            $run_gmx 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvtpull
         elif [ $1 == 'analysis' ]; then
             $run_gmx 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis pv_loop.sh ${ion}_angle
             #${ion}_angle ${ion}_traj ${ion}_density ${ion}_rdf ${ion}_rest ${ion}_vel

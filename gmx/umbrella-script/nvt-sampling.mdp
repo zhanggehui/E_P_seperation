@@ -217,7 +217,7 @@ wall-ewald-zfac          = 3
 ; COM PULLING          
 pull                    = yes
 pull-print-components   = yes
-pull_ncoords            = 3
+pull_ncoords            = 1 ;3
 pull_ngroups            = 1
 
 ;coord1         

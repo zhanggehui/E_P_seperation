@@ -13,6 +13,6 @@ conda deactivate
 for udir in `ls | grep umbrella`; do 
     cd $udir
     source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-    gmx auto 1 . sampling.sh run
+    gmx auto 4 . sampling.sh run
     cd ../
 done

@@ -232,24 +232,24 @@ pull_coord1_rate        = 0.005     ; 0.005 nm per ps = 5 nm per ns
 pull_coord1_k           = 1000      ; kJ mol^-1 nm^-2
 
 ;coord2
-pull_coord2_type        = umbrella  
-pull-coord2-geometry    = direction
-pull_coord2_groups      = 0 1
-pull-coord2-dim         = Y N N
-pull-coord2-origin      = 2.425 7.400 1.500
-pull_coord2_vec         = 1 0 0
-pull_coord2_rate        = 0    
-pull_coord2_k           = 1000      ; kJ mol^-1 nm^-2
+;pull_coord2_type        = umbrella  
+;pull-coord2-geometry    = direction
+;pull_coord2_groups      = 0 1
+;pull-coord2-dim         = Y N N
+;pull-coord2-origin      = 2.425 7.400 1.500
+;pull_coord2_vec         = 1 0 0
+;pull_coord2_rate        = 0    
+;pull_coord2_k           = 1000      ; kJ mol^-1 nm^-2
 
 ;coord3
-pull_coord3_type        = umbrella  
-pull-coord3-geometry    = direction
-pull_coord3_groups      = 0 1
-pull-coord3-dim         = N N Y
-pull-coord3-origin      = 2.425 7.400 1.500
-pull_coord3_vec         = 0 0 1
-pull_coord3_rate        = 0    
-pull_coord3_k           = 1000      ; kJ mol^-1 nm^-2
+;pull_coord3_type        = umbrella  
+;pull-coord3-geometry    = direction
+;pull_coord3_groups      = 0 1
+;pull-coord3-dim         = N N Y
+;pull-coord3-origin      = 2.425 7.400 1.500
+;pull_coord3_vec         = 0 0 1
+;pull_coord3_rate        = 0    
+;pull_coord3_k           = 1000      ; kJ mol^-1 nm^-2
 
 ; ENFORCED ROTATION
 ; Enforced rotation: No or Yes
@@ -311,8 +311,8 @@ dh_hist_spacing          = 0.1
 ; Non-equilibrium MD stuff
 acc-grps                 = 
 accelerate               = 
-freezegrps               = gra
-freezedim                = Y Y Y
+freezegrps               = gra pion
+freezedim                = Y Y Y Y N Y
 cos-acceleration         = 0
 deform                   = 
 

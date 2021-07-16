@@ -91,7 +91,7 @@ rm -rf */*/angle*
 #牵引制作初始构型
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvtpull
+gmx auto 4 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvtpull
 
 #采样
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \

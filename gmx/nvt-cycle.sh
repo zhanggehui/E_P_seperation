@@ -35,7 +35,7 @@ reset_nsteps="nsteps                   = $nsteps"
 sed -i "/nsteps/c${reset_nsteps}" $mdpfile
 
 tprname=nvt-production
-for ((i=1;i<=$ncycles;i++)); do
+for ((i=1; i<=$ncycles; i++)); do
     if [ $i -eq 1 ]; then
         lastgro=$nvtequdir/nvt-equ.gro ; lastcpt=$nvtequdir/nvt-equ.cpt
     else

@@ -109,6 +109,15 @@ gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script
 
 
 
+## 系统状态输出
+
+```bash
+echo "potential" | gmx energy -f em.edr -o em-potential.xvg
+echo "temperature" | gmx energy -f nvt-equ.edr -o nvt-equ-tem.xvg  # 能量输出被关闭，仅最后一步的能量被记录在文件中
+```
+
+
+
 
 ## lmp
 ```bash

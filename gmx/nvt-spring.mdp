@@ -217,7 +217,7 @@ wall-ewald-zfac          = 3
 ; COM PULLING          
 pull                    = yes
 pull-print-components   = yes
-pull-nstfout            = 1000
+pull-nstfout            = 5000
 pull_ncoords            = 1       
 pull_ngroups            = 1         
 pull_group1_name        = pion
@@ -230,7 +230,7 @@ pull-coord1-dim         = N Y N
 pull-coord1-origin      = 2.460 4.260 1.500
 pull_coord1_vec         = 0 1 0
 pull_coord1_rate        = 0
-pull_coord1_k           = 200      ; kJ mol^-1 nm^-2
+pull_coord1_k           = 50      ; kJ mol^-1 nm^-2
 
 ; ENFORCED ROTATION    
 ; Enforced rotation: No or Yes

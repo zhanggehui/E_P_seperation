@@ -59,16 +59,16 @@ gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-equ.sh nvte
 
 - 批处理提交任务
 ```bash
-#多个电压或者电场
+# 多个电压或者电场
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/cycle_sub.sh 0 0 0 1.5 auto
 
-#压强加反向电场
+# 压强加反向电场
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/cycle_sub.sh 1500 1500 0 1.6 auto
 
-#不同离子的通用接口，仅能用一个节点，因为有大量的文件修改
-#em nvtequ analysis
+# 不同离子的通用接口，仅能用一个节点，因为有大量的文件修改
+# em nvtequ analysis nvtpull nvtspring
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/ion_loop.sh analysis auto
 ```
@@ -88,20 +88,20 @@ rm -rf */*/angle*
 - **伞形采样**
 
 ```bash
-#牵引制作初始构型
+# 牵引制作初始构型
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvtpull
 
-#采样
+# 采样
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella.sh
 
-#检查弹簧位置动画
+# 检查弹簧位置动画
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script/springs.sh
 
-#wham
+# wham
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script wham.sh wham
@@ -121,12 +121,12 @@ echo "temperature" | gmx energy -f nvt-equ.edr -o nvt-equ-tem.xvg  # 能量输�
 
 ## lmp
 ```bash
-#构建初始体系
+# 构建初始体系
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 lmp auto 10 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp build.in build_1.175_400
 
-#非平衡模拟
+# 非平衡模拟
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 lmp auto 10 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp NEMD.in NEMD_1.175_400

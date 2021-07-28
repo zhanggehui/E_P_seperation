@@ -3,8 +3,8 @@ orientation=y
 ncycles=1    
 nsteps=10000000
 nvtequdir=../nvtequ
-pressure=0           #Mpa
-dt=0.001             #ps
+pressure=0           # Mpa
+dt=0.001             # ps
 acc_water=all
 ############################################################
 echo "pressure: $pressure" > cyclelog
@@ -46,7 +46,7 @@ for ((i=1; i<=$ncycles; i++)); do
     reset_tinit="tinit                    = $tinit"
     sed -i "/tinit/c${reset_tinit}" $mdpfile
 
-    # 重新给水加速度,更新mdp文件,更新ndx文件
+    # 重新给水加速度,更新mdp文件，更新ndx文件
     if [ $pressure -gt 0 ]; then
         source $scriptsdir/pressure_on_water.sh
     fi

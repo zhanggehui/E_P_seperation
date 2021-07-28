@@ -9,7 +9,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 10000000
+nsteps                   = 1000000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -217,7 +217,7 @@ wall-ewald-zfac          = 3
 ; COM PULLING          
 pull                    = yes
 pull-print-components   = yes
-pull-nstfout            = 50000
+pull-nstfout            = 10000
 pull_ncoords            = 1       
 pull_ngroups            = 1         
 pull_group1_name        = pion

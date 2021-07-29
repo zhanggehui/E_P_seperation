@@ -2,7 +2,7 @@ mkdir ./angle
 cd ./angle
 
 # echo -e "a OW or a ${ion}\nq" | gmx make_ndx -f ../nvt-production.gro -quiet
-# echo "OW_OR_A_${ion}" | gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o ion_OW.gro -pbc nojump -b 1000 -e 10000 -n index.ndx -quiet
+# echo "OW_OR_A_${ion}" | gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o ion_OW.gro -pbc nojump -b 1000 -e 0 -n index.ndx -quiet
 
 echo -e "a OW | a 4131\nq" | gmx make_ndx -f ../nvt-production.gro -quiet
 echo "OW_a_4131" | gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o ion_OW.gro -pbc nojump -b 1000 -e 0 -n index.ndx -quiet

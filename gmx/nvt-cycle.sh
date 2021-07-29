@@ -14,7 +14,7 @@ cp ../waterlayer.ndx ./waterlayer.ndx
 mdpdir=./mdps ; mkdir -p $mdpdir
 ndxdir=./ndxs ; mkdir -p $ndxdir
 
-mdpfile=./nvt-spring.mdp  # ./nvt-cycle.mdp
+mdpfile=./nvt-cycle.mdp # ./nvt-spring.mdp
 ndxfile=./waterlayer.ndx 
 topfile=../GO_ion_pp.top
 

@@ -4,7 +4,7 @@ source $scriptsdir/rdf/rdf_func.sh
 
 cd ../
 
-#正确启动python环境，由于使用了intel编译器的环境，破坏了原有的python环境
+# 正确启动python环境，由于使用了intel编译器的环境，破坏了原有的python环境
 source deactivate
 source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
@@ -19,23 +19,23 @@ for ((i=0; i<20; i=i+1)); do
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./$dir
-                    #统计离子位移
-                    #source $scriptsdir/trajectory/traj_first_last.sh
-                    #source $scriptsdir/trajectory/traj_continuous.sh
+                    # 统计离子位移
+                    # source $scriptsdir/trajectory/traj_first_last.sh
+                    # source $scriptsdir/trajectory/traj_continuous.sh
 
-                    #统计径向分布函数
-                    #source $scriptsdir/rdf/rdf.sh
+                    # 统计径向分布函数
+                    # source $scriptsdir/rdf/rdf.sh
                     
-                    #水合层滞留时间
-                    #source $scriptsdir/residence_time/residence_time.sh
+                    # 水合层滞留时间
+                    # source $scriptsdir/residence_time/residence_time.sh
                     
-                    #速度分布
-                    #source $scriptsdir/velocity/velocity_profile.sh
+                    # 速度分布
+                    # source $scriptsdir/velocity/velocity_profile.sh
 
-                    #密度分布
-                    #source $scriptsdir/density_profile/density.sh
+                    # 密度分布
+                    # source $scriptsdir/density_profile/density.sh
                     
-                    #水合层角度分布
+                    # 水合层角度分布
                     source $scriptsdir/angle_distribution/theta.sh
                 cd ..
             else

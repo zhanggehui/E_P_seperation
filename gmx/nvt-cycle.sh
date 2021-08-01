@@ -1,12 +1,13 @@
 # 在rundir中运行
 orientation=y
 ncycles=1    
-nsteps=30000000
+nsteps=50000000
 nvtequdir=../nvtequ
 pressure=0           # Mpa
 dt=0.001             # ps
 acc_water=all
-############################################################
+# --------------------------------------------------------------------- #
+
 echo "pressure: $pressure" > cyclelog
 echo 'stepnum   count   len   lenv1   lenv2   area   acceleration' >> cyclelog
 

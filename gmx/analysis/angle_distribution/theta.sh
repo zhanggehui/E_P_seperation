@@ -21,6 +21,6 @@ done
 python $dir/merge_mat.py out_*.mat
 python $dir/merge_csv.py theta_*.csv
 
-rm -rf \#* index.ndx ion_OW_*.gro theta_*.csv out_*.mat
+rm -rf \#* index.ndx ion_OW_*.gro # theta_*.csv out_*.mat
 cd ../
 mv ./angle ../$rundir/${pressure}Mpa-${voltage}V

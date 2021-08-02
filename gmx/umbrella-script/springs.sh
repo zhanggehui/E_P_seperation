@@ -1,5 +1,5 @@
 #检查采样轨迹
-source ~/gmx_zgh.sh
+source ~/software/gmx_zgh.sh
 mkdir springs
 for udir in `ls | grep umbrella`; do 
   cd $udir

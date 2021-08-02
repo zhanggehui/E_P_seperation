@@ -3,7 +3,6 @@ cd ./angle
 
 echo -e "a OW | a 3948\nq" | gmx make_ndx -f ../nvt-production.gro -quiet
 for ((i=0; i<10; i=i+1)); do
-    
     tb=$((i*5000))
     te=$(((i+1)*5000))
 
@@ -17,8 +16,11 @@ for ((i=0; i<10; i=i+1)); do
     # python $dir/angle_distribution.py ion_OW.gro phix.csv phix.mat ${ion} phix
     # python $dir/angle_distribution.py ion_OW.gro phiy.csv phiy.mat ${ion} phiy
     python $dir/angle_distribution.py ion_OW_$i.gro theta_$i.csv out_$i.mat ${ion} theta
-    
 done
-rm -rf \#* index.ndx ion_OW_*.gro
+
+python $dir/merge_mat.py out_*.mat
+python $dir/merge_csv.py theta_*.csv
+
+rm -rf \#* index.ndx ion_OW_*.gro theta_*.csv out_*.mat
 cd ../
 mv ./angle ../$rundir/${pressure}Mpa-${voltage}V

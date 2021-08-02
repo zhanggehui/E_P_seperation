@@ -1,4 +1,4 @@
-source ~/gmx_zgh.sh
+source ~/software/gmx_zgh.sh
 
 mkdir conf
 cd conf

@@ -11,7 +11,7 @@ python --version
 
 ion=${rundir%_*}
 for ((i=0; i<20; i=i+1)); do
-    pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
+    pressure=`awk -v i=$i 'BEGIN{printf("%g", 100*i);}'`
     for ((j=0; j<16; j=j+1)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
@@ -36,7 +36,7 @@ for ((i=0; i<20; i=i+1)); do
                     # source $scriptsdir/density_profile/density.sh
                     
                     # 水合层角度分布
-                    source $scriptsdir/angle_distribution/theta.sh
+                    # source $scriptsdir/angle_distribution/theta.sh
                 cd ..
             else
                 echo "No such dictionary ($dir)!"

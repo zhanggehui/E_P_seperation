@@ -19,7 +19,7 @@ for ((i=0; i<${n_ions}; i++)); do
         elif [ $1 == 'nvtspring' ]; then
             $run_gmx 2 $gitdir/gmx nvt-cycle.sh spring-1500Mpa-0V
         elif [ $1 == 'analysis' ]; then
-            $run_gmx 1 $gitdir/gmx/analysis pv_loop.sh test #${ion}_angle_merge
+            $run_gmx 1 $gitdir/gmx/analysis pv_loop.sh  ${ion}_angle
             # ${ion}_angle ${ion}_traj ${ion}_density ${ion}_rdf ${ion}_rest ${ion}_vel
         fi
         cd ../

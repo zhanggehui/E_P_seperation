@@ -36,7 +36,7 @@ for ((i=0; i<20; i=i+1)); do
                     # source $scriptsdir/density_profile/density.sh
                     
                     # 水合层角度分布
-                    # source $scriptsdir/angle_distribution/theta.sh
+                    source $scriptsdir/angle_distribution/theta.sh
                 cd ..
             else
                 echo "No such dictionary ($dir)!"

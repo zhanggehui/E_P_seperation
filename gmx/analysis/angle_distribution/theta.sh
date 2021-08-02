@@ -19,6 +19,6 @@ for ((i=0; i<10; i=i+1)); do
     python $dir/angle_distribution.py ion_OW_$i.gro theta_$i.csv out_$i.mat ${ion} theta
     
 done
-rm -rf \#* index.ndx ion_OW.gro
+rm -rf \#* index.ndx ion_OW_*.gro
 cd ../
 mv ./angle ../$rundir/${pressure}Mpa-${voltage}V

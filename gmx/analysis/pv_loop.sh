@@ -10,7 +10,7 @@ source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%_*}
-for ((i=0; i<20; i=i+1)); do
+for ((i=10; i<20; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%g", 100*i);}'`
     for ((j=0; j<16; j=j+1)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`

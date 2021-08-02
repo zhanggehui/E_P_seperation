@@ -18,6 +18,7 @@ if __name__ == '__main__':
             n_grid = n_grid + arr1
             v1_grid = v1_grid + arr2
             v2_grid = v2_grid + arr3
+        count = count + 1
 
     sio.savemat('out.mat', {'n_grid': n_grid,
                             'v1_grid': v1_grid,

@@ -5,7 +5,7 @@ source $scriptsdir/rdf/rdf_func.sh
 cd ../
 
 # 正确启动python环境，由于使用了intel编译器的环境，破坏了原有的python环境
-source deactivate
+# source deactivate
 source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 

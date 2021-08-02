@@ -14,6 +14,6 @@ if __name__ == '__main__':
             num = n
         else:
             num = num + n
-
+        count = count + 1
     arr = np.vstack([bins, num]).T
     np.savetxt('theta.csv', arr, fmt='%g', delimiter=',')

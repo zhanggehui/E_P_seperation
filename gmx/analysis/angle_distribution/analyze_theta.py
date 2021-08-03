@@ -51,13 +51,14 @@ class Theta:
                 vel = nearby_points_vels[count_vel]
                 if self.ori != 'theta':
                     vector[2] = 0
-                self.angle_list.append(cal_angle_in_deg(vector, axis))
-
-                n1 = math.floor(vector[0] / cmval.girdBinWidth + cmval.gridLength / 2)
-                n2 = math.floor(vector[1] / cmval.girdBinWidth + cmval.gridLength / 2)
-                self.n_grid[n1, n2] = self.n_grid[n1, n2] + 1
-                self.v1_grid[n1, n2] = self.v1_grid[n1, n2] + vel[0]
-                self.v2_grid[n1, n2] = self.v2_grid[n1, n2] + vel[1]
+                ang = cal_angle_in_deg(vector, axis)
+                self.angle_list.append(ang)
+                if ang < 30:
+                    n1 = math.floor(vector[0] / cmval.girdBinWidth + cmval.gridLength / 2)
+                    n2 = math.floor(vector[1] / cmval.girdBinWidth + cmval.gridLength / 2)
+                    self.n_grid[n1, n2] = self.n_grid[n1, n2] + 1
+                    self.v1_grid[n1, n2] = self.v1_grid[n1, n2] + vel[0]
+                    self.v2_grid[n1, n2] = self.v2_grid[n1, n2] + vel[1]
                 count_vel = count_vel + 1
             count = count + 1
 

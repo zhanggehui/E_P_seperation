@@ -9,7 +9,6 @@ for ((i=0; i<10; i=i+1)); do
     tb=$((i*5000))
     te=$(((i+1)*5000))
 
-    
     # echo "OW_OR_A_${ion}" | gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o ion_OW.gro -pbc nojump -b 1000 -e 10000 -n index.ndx -quiet
     echo "OW_a_3948" | gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o ion_OW_$i.gro -pbc nojump -b ${tb} -e ${te} -n index.ndx -quiet
 

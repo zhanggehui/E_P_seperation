@@ -6,13 +6,14 @@ cd ../
 
 # 正确启动python环境，由于使用了intel编译器的环境，破坏了原有的python环境
 # source deactivate
-source /home/liufeng_pkuhpc/anaconda3/bin/activate base
+# source /home/liufeng_pkuhpc/anaconda3/bin/activate base
+conda activate base 
 python --version
 
 ion=${rundir%_*}
 for ((i=5; i<6; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%g", 100*i);}'`
-    for ((j=0; j<16; j=j+1)); do 
+    for ((j=0; j<1; j=j+1)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             dir=50ns-fix-${pressure}Mpa-${voltage}V

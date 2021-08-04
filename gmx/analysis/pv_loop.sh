@@ -9,7 +9,7 @@ source deactivate
 source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 
-ion=${rundir%_*}
+ion=${rundir%%_*}
 for ((i=0; i<20; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%g", 100*i);}'`
     for ((j=0; j<1; j=j+1)); do 

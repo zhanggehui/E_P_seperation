@@ -279,7 +279,7 @@ dh_hist_spacing          = 0.1
 acc-grps                 = 
 accelerate               = 
 freezegrps               = gra pion
-freezedim                = Y Y Y Y Y Y
+freezedim                = Y Y Y Y N Y
 cos-acceleration         = 0
 deform                   = 
 

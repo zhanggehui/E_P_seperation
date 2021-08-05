@@ -5,7 +5,7 @@ cd ./$rundir
 echo -e "a OW | a 3948\nq" | gmx make_ndx -f ../nvt-production.gro -quiet
 
 dir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis/angle_distribution
-for ((a=0; a<10; a=a+1)); do
+for ((a=1; a<10; a=a+1)); do
     tb=$((a*5000))
     te=$(((a+1)*5000))
 
@@ -20,6 +20,6 @@ done
 python $dir/merge_mat.py out_*.mat
 python $dir/merge_csv.py theta_*.csv
 
-rm -rf \#* index.ndx ion_OW_*.gro # theta_*.csv out_*.mat
+rm -rf \#* index.ndx ion_OW_*.gro theta_*.csv out_*.mat
 cd ../
 mv ./$rundir ../$rundir/${pressure}Mpa-${voltage}V

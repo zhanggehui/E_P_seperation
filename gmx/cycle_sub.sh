@@ -34,7 +34,7 @@ for ((i=plow_i; i<=pmax_i; i++)); do
         sed -i "/$word/c$new" $scriptsdir/nvt-cycle.mdp
         # rm -rf ${pressure}Mpa-${e_amplitude}V
         source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-        gmx $5 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-cycle.sh 60ns-${pressure}Mpa-${e_amplitude}V
+        gmx $5 4 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-cycle.sh ${pressure}Mpa-${e_amplitude}V
         # ${pressure}Mpa-${e_amplitude}V spring-${pressure}Mpa-${e_amplitude}V
     done
 done

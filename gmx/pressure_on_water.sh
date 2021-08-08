@@ -46,7 +46,7 @@ END{
   print (i, count, len, araalen1, araalen2, area, acceleration) >> "./cyclelog";
 }
 ' $lastgro >> $ndxfile
-echo '' >> $ndxfile #最后一行没有换行符好像会不识别
+echo '' >> $ndxfile   # 最后一行没有换行符好像会不识别
 
 acceleration=`sed -n '1p' ./tmp`
 if [ $orientation == 'x' ]; then

@@ -1,4 +1,3 @@
-# 在rundir中运行
 orientation=y
 ncycles=1    
 nsteps=10000000
@@ -6,8 +5,8 @@ nvtequdir=../nvtequ
 pressure=0           # Mpa
 dt=0.001             # ps
 acc_water=all
-# --------------------------------------------------------------------- #
 
+# --------------------------------------------------------------------- #
 echo "pressure: $pressure" > cyclelog
 echo 'stepnum   count   len   lenv1   lenv2   area   acceleration' >> cyclelog
 
@@ -15,8 +14,8 @@ cp ../waterlayer.ndx ./waterlayer.ndx
 mdpdir=./mdps ; mkdir -p $mdpdir
 ndxdir=./ndxs ; mkdir -p $ndxdir
 
-mdpfile=./nvt-cycle.mdp # ./nvt-spring.mdp
-ndxfile=./waterlayer.ndx 
+mdpfile=./nvt-cycle.mdp   # ./nvt-spring.mdp
+ndxfile=./waterlayer.ndx
 topfile=../GO_ion_pp.top
 
 if [ $pressure -gt 0 ]; then
@@ -26,12 +25,12 @@ if [ $pressure -gt 0 ]; then
     sed -i "/$key/c$new" $mdpfile
 fi
 
+# 修改每个循环的总步数（模拟时长）
 break_flag=0
 if [ $pressure -eq 0 ] || [ $acc_water == 'all' ]; then
-    nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%s",nsteps*ncycles);}'`
+    nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%s", nsteps*ncycles);}'`
     break_flag=1
 fi
-# 修改每个循环的总步数（模拟时长）
 reset_nsteps="nsteps                   = $nsteps"
 sed -i "/nsteps/c${reset_nsteps}" $mdpfile
 
@@ -43,7 +42,7 @@ for ((i=1; i<=$ncycles; i++)); do
         lastgro=./nvt-production.gro ; lastcpt=./nvt-production.cpt
     fi
 
-    tinit=`awk -v i=$i -v dt=$dt -v nsteps=$nsteps 'BEGIN{printf("%g",(i-1)*dt*nsteps);}'`
+    tinit=`awk -v i=$i -v dt=$dt -v nsteps=$nsteps 'BEGIN{printf("%g", (i-1)*dt*nsteps);}'`
     reset_tinit="tinit                    = $tinit"
     sed -i "/tinit/c${reset_tinit}" $mdpfile
 
@@ -54,7 +53,7 @@ for ((i=1; i<=$ncycles; i++)); do
     echo "######################################### This is the ${i}th grompp  #########################################" >> ./2.err
 
     # -c必须提供，但只有当cpt文件中没有信息会使用-c的gro文件，即使top没有改变也要提供-p的top文件
-    gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o $tprname.tpr -po $mdpdir/step$i -n $ndxfile -maxwarn 1 
+    gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o $tprname.tpr -po $mdpdir/step$i -n $ndxfile # -maxwarn 1 
 
     echo "########################################## This is the ${i}th run ##########################################" >> ./2.err
     if [ $i -eq 1 ]; then

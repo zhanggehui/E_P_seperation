@@ -7,8 +7,9 @@ function get_continuous_frame() {
     # echo -e "a OW\ndel 8\ndel 8\ndel 8\nq" | gmx make_ndx -f nvt-production.gro
     # echo "$1" | gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $2 -pbc nojump -b $3 -e $4 -n waterlayer.ndx
 
-    echo 'name OW and z { 3 to 7 }' | gmx select -f nvt-production.trr -s nvt-production.tpr -b 0 -e 0 -on
-    gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $2 -b $3 -e $4 -n index.ndx # -pbc nojump
+    # echo 'name OW and z { 3 to 7 }' z在3-7nm之间的OW分子
+    echo 'name OW NA' | gmx select -f nvt-production.trr -s nvt-production.tpr -b 0 -e 0 -on
+    gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $2 -b $3 -e $4 -dt 10 -n index.ndx # -pbc nojump
 
     rm -rf \#* 
     if [ -e index.ndx ]; then

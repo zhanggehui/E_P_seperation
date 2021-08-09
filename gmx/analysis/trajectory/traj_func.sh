@@ -9,7 +9,7 @@ function get_continuous_frame() {
 
     # echo 'name OW and z { 3 to 7 }' z在3-7nm之间的OW分子
     echo 'name OW NA' | gmx select -f nvt-production.trr -s nvt-production.tpr -b 0 -e 0 -on
-    gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $2 -b $3 -e $4 -dt 10 -n index.ndx # -pbc nojump
+    gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $2 -b $3 -e $4 -dt 10 -n index.ndx -pbc nojump
 
     rm -rf \#* 
     if [ -e index.ndx ]; then

@@ -19,7 +19,7 @@ else
 fi 
 
 for ((i=plow_i; i<=pmax_i; i++)); do
-    pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
+    pressure=`awk -v i=$i 'BEGIN{printf("%g", 10*i);}'`
     word='pressure='
     new="pressure=${pressure}      # Mpa"
     sed -i "/$word/c$new" $scriptsdir/nvt-cycle.sh

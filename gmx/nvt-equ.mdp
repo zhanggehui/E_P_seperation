@@ -122,11 +122,18 @@ tcoupl                   = V-rescale   ; Nose-Hoover
 nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
+
 ; Groups to couple separately
-tc-grps                  = System
+;tc-grps                  = System
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = 0.1    
-ref_t                    = 300 
+;tau_t                    = 0.1    
+;ref_t                    = 300 
+
+; Groups to couple separately
+tc-grps                  = gra fungrps SOL
+; Time constant (ps) and reference temperature (K)
+tau_t                    = 0.1 0.1 0.1
+ref_t                    = 0 300 300
 ; pressure coupling     
 pcoupl                   = no
 pcoupltype               = Isotropic

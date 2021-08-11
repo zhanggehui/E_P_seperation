@@ -121,7 +121,7 @@ nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = gra fungrps SOL
+tc-grps                  = gra funcgrp SOL
 ; Time constant (ps) and reference temperature (K)
 tau_t                    = 0.1 0.1 0.1
 ref_t                    = 0 300 300

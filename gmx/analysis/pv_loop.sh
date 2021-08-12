@@ -10,9 +10,9 @@ source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%%_*}
-for ((i=10; i<11; i=i+1)); do
+for ((i=0; i<21; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%g", 100*i);}'`
-    for ((j=0; j<1; j=j+1)); do 
+    for ((j=0; j<11; j=j+1)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             dir=${pressure}Mpa-${voltage}V

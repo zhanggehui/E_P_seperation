@@ -20,8 +20,8 @@ for ((i=10; i<11; i=i+1)); do
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./$dir
                     # 统计离子位移
-                    # source $scriptsdir/trajectory/traj_first_last.sh
-                    source $scriptsdir/trajectory/traj_continuous.sh
+                    source $scriptsdir/trajectory/traj_first_last.sh
+                    # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
                     # source $scriptsdir/rdf/rdf.sh

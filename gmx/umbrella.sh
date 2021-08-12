@@ -1,7 +1,7 @@
 source ~/software/gmx_zgh.sh
 
-mkdir conf
-cd conf
+mkdir ./conf
+cd ./conf
 echo 0 | gmx trjconv -s ../nvt-pull.tpr -f ../nvt-pull.trr -o conf.gro -sep -n ../../waterlayer.ndx
 cd ../
 

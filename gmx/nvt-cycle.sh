@@ -1,6 +1,6 @@
 orientation=y
 ncycles=1    
-nsteps=10000000
+nsteps=100000000
 nvtequdir=../nvtequ
 pressure=0           # Mpa
 dt=0.0001            # ps

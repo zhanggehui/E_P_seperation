@@ -132,3 +132,10 @@ source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 lmp auto 10 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp NEMD.in NEMD_1.175_400
 ```
 
+```bash
+# 周期性体系脚本
+cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
+lmp auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic run.in test
+```
+

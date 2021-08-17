@@ -1,8 +1,9 @@
 units           real
 boundary        p p p
+
 pair_style      lj/cut/coul/long 10.0
 pair_modify     shift yes mix geometric
-kspace_style    pppm 1.0e-4
+kspace_style    pppm 1.0e-05
 
 atom_style      full
 bond_style      harmonic
@@ -18,8 +19,8 @@ min_style       sd
 minimize        0.0 1.0e-8 2000 20000
 
 fix             nvt all nvt temp 300 300 100.0
-run             2000
-write_dump      all custom ready.dump id type x y z vx vy vz ix iy iz
+run             2000000
+write_dump all custom nvtequ.dump id type x y z vx vy vz ix iy iz
 unfix           nvt
 
 group           OW type 7

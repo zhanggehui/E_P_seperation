@@ -29,6 +29,6 @@ variable        area equal lx*lz
 variable        p_ratio equal 1.013*6.022*1e-5/4.186
 variable        add_f equal v_target_p*v_p_ratio*v_area/v_n_OW
 
-fix             push_OW OW setforce 0 0 $(add_f)
+fix             push_OW OW setforce 0 0 $(v_add_f)
 fix             nvt all nvt temp 300 300 100.0
 run             2000

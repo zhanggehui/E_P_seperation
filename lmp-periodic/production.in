@@ -2,7 +2,7 @@ include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic/def_setti
 
 variable        laststep file ../nvtequ/nvtequ.dump
 next laststep
-read_dump       ../nvtequ/nvtequ.dump ${laststep} x y z vx vy vz replace yes box yes
+read_dump       ../nvtequ/nvtequ.dump ${laststep} x y z vx vy vz ix iy iz replace yes box yes
 write_dump      all custom nvtequ.dump id type xu yu zu
 
 group           gra type  1:3

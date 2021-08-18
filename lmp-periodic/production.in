@@ -1,6 +1,6 @@
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic/def_setting.in
 
-variable        laststep file ../nvtequ/nvtequ.dump
+variable        laststep file ../test/ready.dump
 next laststep
 read_dump       ../test/ready.dump ${laststep} x y z vx vy vz ix iy iz replace yes box yes
 write_dump      all custom nvtequ.dump id type xu yu zu

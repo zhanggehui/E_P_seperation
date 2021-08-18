@@ -1,9 +1,8 @@
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic/def_setting.in
 
-variable        laststep file ../test/ready.dump
+variable        laststep file ../nvtequ/nvtequ.dump
 next laststep
-read_dump       ../test/ready.dump ${laststep} x y z vx vy vz ix iy iz replace yes box yes
-write_dump      all custom nvtequ.dump id type xu yu zu
+read_dump       ../nvtequ/nvtequ.dump ${laststep} x y z vx vy vz ix iy iz replace yes box yes
 
 group           gra type  1:3
 fix             freeze gra setforce 0 0 0

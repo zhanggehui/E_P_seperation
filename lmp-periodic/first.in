@@ -12,4 +12,5 @@ fix             nvt all nvt temp 300 300 100.0
 thermo_style    one
 thermo          1000
 run             2000000
-write_dump      all custom nvtequ.dump id type x y z vx vy vz ix iy iz
+# write_dump      all custom nvtequ.dump id type x y z vx vy vz ix iy iz
+write_dump      all custom nvtequ.dump id type xu yu zu vx vy

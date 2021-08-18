@@ -1,5 +1,5 @@
 include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic/def_setting.in
-write_dump      all custom ready.dump id type xu yu zu
+write_dump      all custom ready.dump id type x y z ix iy iz
 
 group           gra type  1:3
 

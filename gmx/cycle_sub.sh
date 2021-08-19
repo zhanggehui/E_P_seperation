@@ -1,5 +1,5 @@
 function get_i() {
-    awk -v i=$1 -v bin=$2 'BEGIN{printf("%g", i/bin);}'
+    awk -v i=$1 -v bin=$2 'BEGIN{printf("%s", i/bin);}'
 }
 
 plow=$1; pmax=$2; vlow=$3; vmax=$4
@@ -17,14 +17,14 @@ word='orientation='; new="orientation=${orientation}"
 sed -i "/$word/c$new" $scriptsdir/nvt-cycle.sh
 
 for ((i=plow_i; i<=pmax_i; i++)); do
-    pressure=`awk -v i=$i 'BEGIN{printf("%g", 100*i);}'`
+    pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
     word='pressure='; new="pressure=${pressure}"
     sed -i "/$word/c$new" $scriptsdir/nvt-cycle.sh
     for ((j=vlow_i; j<=vmax_i; j++)); do 
         if [ $pvmix -ne 0 ]; then
-            e_amplitude=`awk -v i=$j 'BEGIN{printf("%g", -0.1*i);}'`
+            e_amplitude=`awk -v i=$j 'BEGIN{printf("%s", -0.1*i);}'`
         else
-            e_amplitude=`awk -v i=$j 'BEGIN{printf("%g", 0.1*i);}'`
+            e_amplitude=`awk -v i=$j 'BEGIN{printf("%s", 0.1*i);}'`
         fi
         word="electric-field-$orientation"
         new="electric-field-$orientation         = ${e_amplitude} 0 0 0" 

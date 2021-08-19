@@ -31,7 +31,7 @@ sed -i "/$key/c$new" $mdpfile
 
 # 修改每个循环的总步数（模拟时长）
 if [ $pressure -eq 0 ] || [ $acc_water == 'all' ]; then
-    nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%g", nsteps*ncycles);}'`
+    nsteps=`awk -v ncycles=$ncycles -v nsteps=$nsteps 'BEGIN{printf("%s", nsteps*ncycles);}'`
     ncycles=1
 fi
 reset_nsteps="nsteps                   = $nsteps"
@@ -45,7 +45,7 @@ for ((i=1; i<=$ncycles; i++)); do
         lastgro=./nvt-production.gro ; lastcpt=./nvt-production.cpt
     fi
 
-    tinit=`awk -v i=$i -v dt=$dt -v nsteps=$nsteps 'BEGIN{printf("%g", (i-1)*dt*nsteps);}'`
+    tinit=`awk -v i=$i -v dt=$dt -v nsteps=$nsteps 'BEGIN{printf("%s", (i-1)*dt*nsteps);}'`
     reset_tinit="tinit                    = $tinit"
     sed -i "/tinit/c${reset_tinit}" $mdpfile
 

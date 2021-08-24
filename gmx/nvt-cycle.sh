@@ -60,7 +60,7 @@ for ((i=1; i<=$ncycles; i++)); do
 
     echo "########################################## This is the ${i}th run ##########################################" >> ./2.err
     if [ $i -eq 1 ]; then
-        $gmxrun -v -deffnm $tprname
+        $gmxrun mdrun -v -deffnm $tprname
     else
         # 分开输出到不同文件，以part.XXXX结尾，补0方法awk 'BEGIN{printf("%04d\n", 100)}'
         # $gmxrun -v -deffnm $tprname -cpi $lastcpt -cpt 120 -noappend

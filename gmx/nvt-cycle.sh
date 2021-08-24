@@ -56,7 +56,7 @@ for ((i=1; i<=$ncycles; i++)); do
     echo "######################################### This is the ${i}th grompp  #########################################" >> ./2.err
 
     # -c必须提供，但只有当cpt文件中没有信息会使用-c的gro文件，即使top没有改变也要提供-p的top文件
-    gmx grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o $tprname.tpr -po $mdpdir/step$i -n $ndxfile # -maxwarn 1 
+    gmx_d grompp -f $mdpfile -c $lastgro -t $lastcpt -p $topfile -o $tprname.tpr -po $mdpdir/step$i -n $ndxfile # -maxwarn 1 
 
     echo "########################################## This is the ${i}th run ##########################################" >> ./2.err
     if [ $i -eq 1 ]; then

@@ -88,7 +88,7 @@ epsilon-surface          = 0
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
 ; Temperature coupling  
-tcoupl                   = V-rescale
+tcoupl                   = nose-hoover   ; V-rescale
 nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no

@@ -67,7 +67,7 @@ vdw-modifier             = Potential-shift
 rvdw-switch              = 0
 rvdw                     = 1.2
 ; Apply long range dispersion corrections for Energy and Pressure
-DispCorr                 = EnerPres
+DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
 table-extension          = 1
 ; Separate tables between energy group pairs
@@ -88,8 +88,8 @@ epsilon-surface          = 0
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
 ; Temperature coupling  
-tcoupl                   = nose-hoover   ; V-rescale
-nsttcouple               = 1
+tcoupl                   = V-rescale
+nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately

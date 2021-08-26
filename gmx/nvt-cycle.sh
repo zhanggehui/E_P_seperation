@@ -2,7 +2,7 @@ nvtequdir=../nvtequ
 orientation=y
 ncycles=1
 dt=0.001             # 单位ps 
-nsteps=1000000
+nsteps=3000000
 pressure=0           # 单位Mpa
 acc_water=all        # 根据具体情况记得修改，all/notall
 

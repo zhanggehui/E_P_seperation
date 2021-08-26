@@ -32,13 +32,17 @@ BEGIN{
   thick=2*len;
 }
 /OW/{
-  coord=substr($0,p1,8); coord=coord+0;
-  if( coord<thick || coord>(len-thick) )
+  coord=substr($0, p1, 8);  coord=coord+0;     # 运动方向（y）限制
+  coord2=substr($0, p2, 8); coord2=coord2+0;   # z方向限制
+  if( coord>(len-thick) || coord<thick )
   { 
-    count++; 
-    serial=substr($0,16,5);
-    if(count%15!=0) {printf("%5s ",serial);}
-    else            {printf("%5s\n",serial);}
+    if( coord2>4 && coord2<8 )
+    {
+      count++; 
+      serial=substr($0,16,5);
+      if(count%15!=0) {printf("%5s ",  serial);}
+      else            {printf("%5s\n", serial);}
+    }
   }
 }
 END{

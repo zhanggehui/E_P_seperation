@@ -49,14 +49,14 @@ periodic-molecules       = no
 ; a value of -1 means: use rlist
 verlet-buffer-tolerance  = -1   ; 0.005
 ; nblist cut-off        
-rlist                    = 1.5
+rlist                    = 2
 
 ; OPTIONS FOR ELECTROSTATICS AND VDW
 ; Method for doing electrostatics
 coulombtype              = PME
 coulomb-modifier         = Potential-shift
 rcoulomb-switch          = 0
-rcoulomb                 = 1.5
+rcoulomb                 = 2
 ; Relative dielectric constant for the medium and the reaction field
 epsilon-r                = 1
 epsilon-rf               = 0
@@ -65,7 +65,7 @@ vdw-type                 = Cut-off
 vdw-modifier             = Potential-shift
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 1.5
+rvdw                     = 2
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
@@ -95,7 +95,7 @@ print-nose-hoover-chain-variables = no
 ; Groups to couple separately
 tc-grps                  = gra funcgrp SOL Ion
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = 0.1 0.1 -1 -1
+tau_t                    = 0.1 0.1 0.1 -1
 ref_t                    = 0 300 300 300
 
 ; Non-equilibrium MD stuff

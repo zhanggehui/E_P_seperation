@@ -3,7 +3,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001      ; 在nvt-cycle.sh中修改
-nsteps                   = 1000000   ; 在nvt-cycle.sh中修改
+nsteps                   = 10000000   ; 在nvt-cycle.sh中修改
 
 ; For exact run continuation or redoing part of a run
 init-step                = 0
@@ -49,14 +49,14 @@ periodic-molecules       = no
 ; a value of -1 means: use rlist
 verlet-buffer-tolerance  = -1   ; 0.005
 ; nblist cut-off        
-rlist                    = 1.2
+rlist                    = 1.5
 
 ; OPTIONS FOR ELECTROSTATICS AND VDW
 ; Method for doing electrostatics
 coulombtype              = PME
 coulomb-modifier         = Potential-shift
 rcoulomb-switch          = 0
-rcoulomb                 = 1.2
+rcoulomb                 = 1.5
 ; Relative dielectric constant for the medium and the reaction field
 epsilon-r                = 1
 epsilon-rf               = 0
@@ -65,11 +65,11 @@ vdw-type                 = Cut-off
 vdw-modifier             = Potential-shift
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 1.2
+rvdw                     = 1.5
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
-table-extension          = 1
+table-extension          = 0
 ; Separate tables between energy group pairs
 energygrp-table          = 
 ; Spacing for the PME/PPPM FFT grid

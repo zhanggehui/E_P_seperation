@@ -35,7 +35,7 @@ new3="${new3} 300"
 done
 sed -i "/tc-grps/c$new1" $mdpfile
 sed -i "/tau_t/c$new2" $mdpfile
-sed -i "/ref_t/c$new2" $mdpfile
+sed -i "/ref_t/c$new3" $mdpfile
 
 
 # 修改时间步长

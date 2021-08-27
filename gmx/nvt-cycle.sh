@@ -5,6 +5,7 @@ dt=0.001             # 单位ps
 nsteps=10000000
 pressure=0           # 单位Mpa
 acc_water=all        # 根据具体情况记得修改，all/notall
+nlays=10
 
 # --------------------------------------------------------------------- #
 echo "pressure: $pressure" > cyclelog
@@ -23,6 +24,19 @@ if [ $pressure -gt 0 ]; then
     new='acc-grps                 = waterlayer'; sed -i "/acc-grps/c$new" $mdpfile
     new='accelerate               = 0 0 0'     ; sed -i "/accelerate/c$new" $mdpfile
 fi
+
+new1='tc-grps                  = gra funcgrp Ion'
+new2='tau_t                    = -1 0.1 -1'
+new3='ref_t                    = 0 300 300'
+for ((i=1; i<=$nlays; i++)); do
+new1="${new1} layer${i}_f0_t0.000"
+new2="${new2} 0.1"
+new3="${new3} 300"
+done
+sed -i "/tc-grps/c$new1" $mdpfile
+sed -i "/tau_t/c$new2" $mdpfile
+sed -i "/ref_t/c$new2" $mdpfile
+
 
 # 修改时间步长
 key='dt                       ='

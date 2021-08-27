@@ -9,11 +9,11 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 2000000
+nsteps                   = 5000000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
-simulation-part          = 1
+simulation-part          = 0
 ; mode for center of mass motion removal
 comm-mode                = None
 ; number of steps for center of mass motion removal
@@ -73,28 +73,28 @@ pbc                      = xyz
 periodic-molecules       = no
 ; Allowed energy error due to the Verlet buffer in kJ/mol/ps per atom,
 ; a value of -1 means: use rlist
-verlet-buffer-tolerance  = 0.005
+verlet-buffer-tolerance  = -1   ; 0.005
 ; nblist cut-off        
-rlist                    = 1
+rlist                    = 1.2
 ; long-range cut-off for switched potentials
 
 ; OPTIONS FOR ELECTROSTATICS AND VDW
 ; Method for doing electrostatics
 coulombtype              = PME
-coulomb-modifier         = Potential-shift-Verlet
+coulomb-modifier         = Potential-shift
 rcoulomb-switch          = 0
-rcoulomb                 = 1.0
+rcoulomb                 = 1.2
 ; Relative dielectric constant for the medium and the reaction field
 epsilon-r                = 1
 epsilon-rf               = 0
 ; Method for doing Van der Waals
 vdw-type                 = Cut-off
-vdw-modifier             = Potential-shift-Verlet
+vdw-modifier             = Potential-shift
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 1.0
+rvdw                     = 1.2
 ; Apply long range dispersion corrections for Energy and Pressure
-DispCorr                 = EnerPres
+DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
 table-extension          = 1
 ; Separate tables between energy group pairs
@@ -118,22 +118,15 @@ implicit-solvent         = No
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
 ; Temperature coupling  
-tcoupl                   = V-rescale   ; Nose-Hoover
+tcoupl                   = V-rescale
 nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
-
 ; Groups to couple separately
-;tc-grps                  = System
+tc-grps                  = gra funcgrp SOL Ion
 ; Time constant (ps) and reference temperature (K)
-;tau_t                    = 0.1    
-;ref_t                    = 300 
-
-; Groups to couple separately
-tc-grps                  = gra funcgrp SOL
-; Time constant (ps) and reference temperature (K)
-tau_t                    = 0.1 0.1 0.1
-ref_t                    = 0 300 300
+tau_t                    = -1 0.1 0.1 -1
+ref_t                    = 0 300 300 300
 ; pressure coupling     
 pcoupl                   = no
 pcoupltype               = Isotropic
@@ -189,7 +182,7 @@ gen_temp                 = 300
 gen_seed                 = -1
 
 ; OPTIONS FOR BONDS    
-constraints              = none ; h-bonds ; all-bonds
+constraints              = none   ; h-bonds all-bonds
 ; Type of constraint algorithm
 constraint_algorithm     = lincs
 ; Do not constrain the start configuration

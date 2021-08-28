@@ -5,7 +5,7 @@ dt=0.001             # 单位ps
 nsteps=10000000
 pressure=0           # 单位Mpa
 acc_water=all        # 根据具体情况记得修改，all/notall
-nlays=10
+nlays=4
 
 # --------------------------------------------------------------------- #
 echo "pressure: $pressure" > cyclelog

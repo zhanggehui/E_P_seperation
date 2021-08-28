@@ -9,7 +9,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 2000000
+nsteps                   = 5000000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -73,9 +73,9 @@ pbc                      = xyz
 periodic-molecules       = no
 ; Allowed energy error due to the Verlet buffer in kJ/mol/ps per atom,
 ; a value of -1 means: use rlist
-verlet-buffer-tolerance  = 0.005
+verlet-buffer-tolerance  = -1   ; 0.005
 ; nblist cut-off        
-rlist                    = 1
+rlist                    = 1.2
 ; long-range cut-off for switched potentials
 
 ; OPTIONS FOR ELECTROSTATICS AND VDW
@@ -83,7 +83,7 @@ rlist                    = 1
 coulombtype              = PME
 coulomb-modifier         = Potential-shift-Verlet
 rcoulomb-switch          = 0
-rcoulomb                 = 1.0
+rcoulomb                 = 1.2
 ; Relative dielectric constant for the medium and the reaction field
 epsilon-r                = 1
 epsilon-rf               = 0
@@ -92,9 +92,9 @@ vdw-type                 = Cut-off
 vdw-modifier             = Potential-shift-Verlet
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 1.0
+rvdw                     = 1.2
 ; Apply long range dispersion corrections for Energy and Pressure
-DispCorr                 = EnerPres
+DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
 table-extension          = 1
 ; Separate tables between energy group pairs
@@ -141,29 +141,6 @@ refcoord_scaling        = com
 QMMM                     = no
 ; Groups treated Quantum Mechanically
 QMMM-grps                = 
-; QM method             
-QMmethod                 = 
-; QMMM scheme           
-QMMMscheme               = normal
-; QM basisset           
-QMbasis                  = 
-; QM charge             
-QMcharge                 = 
-; QM multiplicity       
-QMmult                   = 
-; Surface Hopping       
-SH                       = 
-; CAS space options     
-CASorbitals              = 
-CASelectrons             = 
-SAon                     = 
-SAoff                    = 
-SAsteps                  = 
-; Scale factor for MM charges
-MMChargeScaleFactor      = 1
-; Optimization of QM subsystem
-bOPT                     = 
-bTS                      = 
 
 ; SIMULATED ANNEALING  
 ; Type of annealing for each temperature group (no/single/periodic)
@@ -181,7 +158,7 @@ gen_temp                 = 300
 gen_seed                 = -1
 
 ; OPTIONS FOR BONDS    
-constraints              = none ; h-bonds ; all-bonds
+constraints              = none   ; h-bonds all-bonds
 ; Type of constraint algorithm
 constraint_algorithm     = lincs
 ; Do not constrain the start configuration

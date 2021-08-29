@@ -38,7 +38,7 @@ BEGIN{
   coord2=substr($0, 37, 8);  coord2=coord2+0;   # z方向限制
   if( coord>(len-thick) && coord<thick+5 )
   { 
-    if( coord2>-1 && coord2<11 )
+    if( coord2>-1 && coord2<100 )
     {
       count++; 
       serial=substr($0,16,5);

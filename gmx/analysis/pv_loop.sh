@@ -5,8 +5,9 @@ source $scriptsdir/rdf/rdf_func.sh
 cd ../
 
 # 正确启动python环境，由于使用了intel编译器的环境，破坏了原有的python环境
-source deactivate
-source /home/liufeng_pkuhpc/anaconda3/bin/activate base
+# source deactivate
+# source /home/liufeng_pkuhpc/anaconda3/bin/activate base
+conda activate base
 python --version
 
 ion=${rundir%%_*}
@@ -21,7 +22,7 @@ for ((i=10; i<11; i=i+1)); do
                 cd ./$dir
                     # 统计离子位移
                     # source $scriptsdir/trajectory/traj_first_last.sh
-                    source $scriptsdir/trajectory/traj_continuous.sh
+                    # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
                     # source $scriptsdir/rdf/rdf.sh

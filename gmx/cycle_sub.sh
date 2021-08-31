@@ -1,18 +1,15 @@
 function get_i() {
-    awk -v i=$1 -v bin=$2 'BEGIN{printf("%d", i/bin);}'
+    awk -v i=$1 -v bin=$2 'BEGIN{printf("%s", i/bin);}'
 }
 
 plow=$1; pmax=$2; vlow=$3; vmax=$4
 plow_i=`get_i $plow 100`; pmax_i=`get_i $pmax 100`
 vlow_i=`get_i $vlow 0.1`; vmax_i=`get_i $vmax 0.1`
-if [ $pmax -gt 0 ] && [ $vmax -gt 0 ]; then
+if [ $pmax_i -gt 0 ] && [ $vmax_i -gt 0 ]; then
     pvmix=1
 else
     pvmix=0
-fi 
-echo '##################################'
-echo $pvmix
-echo '##################################'
+fi
 
 scriptsdir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx
 orientation='y'

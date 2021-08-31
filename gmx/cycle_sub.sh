@@ -22,7 +22,7 @@ for ((i=plow_i; i<=pmax_i; i++)); do
     sed -i "/$word/c$new" $scriptsdir/nvt-cycle.sh
     for ((j=vlow_i; j<=vmax_i; j++)); do 
         if [ $pvmix -ne 0 ]; then
-            e_amplitude=`awk -v i=$j 'BEGIN{printf("%s", -0.05*i);}'`
+            e_amplitude=`awk -v i=$j 'BEGIN{printf("%g", -0.05*i);}'`
         else
             e_amplitude=`awk -v i=$j 'BEGIN{printf("%s", 0.1*i);}'`
         fi

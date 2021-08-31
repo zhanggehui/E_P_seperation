@@ -1,5 +1,5 @@
 function get_i() {
-    awk -v i=$1 -v bin=$2 'BEGIN{printf("%s", i/bin);}'
+    awk -v i=$1 -v bin=$2 'BEGIN{printf("%d", i/bin);}'
 }
 
 plow=$1; pmax=$2; vlow=$3; vmax=$4

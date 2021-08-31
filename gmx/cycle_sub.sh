@@ -10,6 +10,9 @@ if [ $pmax -gt 0 ] && [ $vmax -gt 0 ]; then
 else
     pvmix=0
 fi 
+echo '##################################'
+echo $pvmix
+echo '##################################'
 
 scriptsdir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx
 orientation='y'

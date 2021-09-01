@@ -69,7 +69,7 @@ source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/cycle_sub.sh 1500 1
 
 # 单独分析脚本
 cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx \ 
+source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis pv_loop.sh CS_traj
 
 # 不同离子的通用接口，仅能用一个节点，因为有大量的文件修改

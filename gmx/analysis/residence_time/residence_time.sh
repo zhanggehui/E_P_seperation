@@ -7,7 +7,7 @@ cd ./rest_select
 echo -e "\"in_shell\" resname SOL and name OW and within 1.0 of atomnr 4553\n" | \
 $gmx select -s ../nvt-production.tpr -f ../nvt-production.trr -n ../waterlayer.ndx -os -oc -oi -on -om -of -olt -b 0 -e 0
 
-$gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o a.gro -b 0 -e 1000 -n index.ndx -dt $4 -pbc nojump
+$gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o a.gro -b 0 -e 1000 -n index.ndx -pbc nojump
 
 # $gmx trajectory -s ../nvt-production.tpr -f ../nvt-production.trr -n ../waterlayer.ndx \
 # -b 0 -e 10000 -select "\"in_shell\" resname SOL and name OW and within 1.0 of atomnr 4553" 

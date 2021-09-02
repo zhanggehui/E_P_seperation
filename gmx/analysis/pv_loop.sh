@@ -10,9 +10,9 @@ source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%%_*}
-for ((i=15; i<=15; i=i+1)); do
+for ((i=0; i<=15; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
-    for ((j=0; j<=15; j=j+1)); do 
+    for ((j=15; j<=15; j=j+1)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
         # if [ $i -eq 15 ]; then

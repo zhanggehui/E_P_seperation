@@ -22,14 +22,14 @@ for ((i=plow_i; i<=pmax_i; i++)); do
     sed -i "/$word/c$new" $scriptsdir/nvt-cycle.sh
     for ((j=vlow_i; j<=vmax_i; j++)); do 
         if [ $pvmix -ne 0 ]; then
-            e_amplitude=`awk -v i=$j 'BEGIN{printf("%g", -0.05*i);}'`
+            e_amplitude=`awk -v i=$j 'BEGIN{printf("%s", -0.05*i);}'`
         else
             e_amplitude=`awk -v i=$j 'BEGIN{printf("%s", 0.1*i);}'`
         fi
         word="electric-field-$orientation"
         new="electric-field-$orientation         = ${e_amplitude} 0 0 0" 
         sed -i "/$word/c$new" $scriptsdir/nvt-cycle.mdp
-        source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $5 25 \
+        source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $5 20 \
         /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-cycle.sh \
         ${pressure}Mpa-${e_amplitude}V
         # spring-${pressure}Mpa-${e_amplitude}V

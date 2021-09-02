@@ -5,7 +5,7 @@ cd ./rest_select
 # echo -e "\"1st shell\" resname SOL and name OW and within ${first_shell[$ion]} of group $ion\n" | \
 # $gmx select -s ../nvt-production.tpr -f ../nvt-production.trr -n ../waterlayer.ndx -os -oc -oi -on -om -of -olt -b 0 -e 10000
 
-echo -e "atomnr 4553 resname SOL and within 0.5 of atomnr 4553\n" | \
+echo -e "atomnr 4553 or resname SOL and within 0.5 of atomnr 4553\n" | \
 $gmx select -s ../nvt-production.tpr -f ../nvt-production.trr -n ../waterlayer.ndx -os -oc -oi -on -om -of -olt -b 0 -e 0
 
 $gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o a.gro -b 0 -e 1000 -n index.ndx -pbc nojump

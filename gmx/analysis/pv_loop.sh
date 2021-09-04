@@ -10,7 +10,7 @@ source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%%_*}
-for ((i=15; i<=15; i=i+1)); do
+for ((i=0; i<=15; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
     for ((j=0; j<=15; j=j+1)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
@@ -21,14 +21,14 @@ for ((i=15; i<=15; i=i+1)); do
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./$dir
                     # 统计离子位移
-                    # source $scriptsdir/trajectory/traj_first_last.sh
+                    source $scriptsdir/trajectory/traj_first_last.sh
                     # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
                     # source $scriptsdir/rdf/rdf.sh
                     
                     # 水合层滞留时间
-                    source $scriptsdir/residence_time/residence_time.sh
+                    # source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
                     # source $scriptsdir/velocity/velocity_profile.sh

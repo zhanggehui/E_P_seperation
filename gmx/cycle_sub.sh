@@ -29,7 +29,7 @@ for ((i=plow_i; i<=pmax_i; i++)); do
         word="electric-field-$orientation"
         new="electric-field-$orientation         = ${e_amplitude} 0 0 0" 
         sed -i "/$word/c$new" $scriptsdir/nvt-cycle.mdp
-        source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $5 20 \
+        source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $5 15 \
         /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-cycle.sh \
         ${pressure}Mpa-${e_amplitude}V
         # spring-${pressure}Mpa-${e_amplitude}V

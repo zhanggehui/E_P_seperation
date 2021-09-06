@@ -25,11 +25,11 @@ if [ $pressure -gt 0 ]; then
     new='accelerate               = 0 0 0'     ; sed -i "/accelerate/c$new" $mdpfile
 fi
 
-# new1='tc-grps                  = gra funcgrp '
+# new1='tc-grps                  = gra funcgrp Ion'
 # new2='tau_t                    = -1 0.1 -1'
 # new3='ref_t                    = 0 300 300'
-new1='tc-grps                  = gra Ion'
-new2='tau_t                    = -1 -1'
+new1='tc-grps                  = gra funcgrp'
+new2='tau_t                    = -1 0.1'
 new3='ref_t                    = 0 300'
 for ((i=1; i<=$nlays; i++)); do
 new1="${new1} layer${i}_f0_t0.000"

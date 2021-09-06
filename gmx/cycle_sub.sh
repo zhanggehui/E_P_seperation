@@ -11,7 +11,7 @@ else
     pvmix=0
 fi
 
-scriptsdir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx
+scriptsdir=/home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx
 orientation='y'
 word='orientation='; new="orientation=${orientation}"
 sed -i "/$word/c$new" $scriptsdir/nvt-cycle.sh
@@ -30,7 +30,7 @@ for ((i=plow_i; i<=pmax_i; i++)); do
         new="electric-field-$orientation         = ${e_amplitude} 0 0 0" 
         sed -i "/$word/c$new" $scriptsdir/nvt-cycle.mdp
         source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $5 4 \
-        /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-cycle.sh \
+        /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-cycle.sh \
         ${pressure}Mpa-${e_amplitude}V
         # spring-${pressure}Mpa-${e_amplitude}V
     done

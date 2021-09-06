@@ -5,7 +5,7 @@ ions=("LI" "NA" "K" "CS")
 n_ions=${#ions[@]}
 
 run_gmx="source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $2"
-gitdir=/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts
+gitdir=/home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/
 
 for ((i=0; i<${n_ions}; i++)); do
     ion=${ions[$i]}

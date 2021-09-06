@@ -48,34 +48,34 @@
 - 先进行em和nvt弛豫
 
 ```bash
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx em.sh em
+gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx em.sh em
 
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx cn_nl 4 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-equ.sh nvtequ
+gmx cn_nl 4 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-equ.sh nvtequ
 ```
 
 - 批处理提交任务
 ```bash
 # 多个电压或者电场
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/cycle_sub.sh 0 0 0 1.5 cn_nl
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/cycle_sub.sh 0 0 0 1.5 cn_nl
 
 # 压强加反向电场
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/cycle_sub.sh 1500 1500 0 1.6 auto
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/cycle_sub.sh 1500 1500 0 1.6 auto
 
 # 单独分析脚本
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis pv_loop.sh CS_traj
+gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/analysis pv_loop.sh CS_traj
 
 # 不同离子的通用接口，仅能用一个节点，因为有大量的文件修改
 # em nvtequ analysis nvtpull nvtspring
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/ion_loop.sh analysis auto
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/ion_loop.sh analysis auto
 ```
 
 - 分析离子位移随时间变化，单独使用
@@ -94,22 +94,22 @@ rm -rf */*/angle*
 
 ```bash
 # 牵引制作初始构型
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx nvt-pull.sh nvtpull
+gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-pull.sh nvtpull
 
 # 采样
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella.sh
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella.sh
 
 # 检查弹簧位置动画
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script/springs.sh
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script/springs.sh
 
 # wham
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/umbrella-script wham.sh wham
+gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script wham.sh wham
 ```
 
 
@@ -127,26 +127,26 @@ echo "temperature" | gmx energy -f nvt-equ.edr -o nvt-equ-tem.xvg  # 能量输�
 ## lmp
 ```bash
 # 构建初始体系
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-lmp auto 10 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp build.in build_1.175_400
+lmp auto 10 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp build.in build_1.175_400
 
 # 非平衡模拟
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-lmp auto 10 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp NEMD.in NEMD_1.175_400
+lmp auto 10 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp NEMD.in NEMD_1.175_400
 ```
 
 
 
 ```bash
 # 周期性体系脚本
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic first.in nvtequ
+lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-periodic first.in nvtequ
 
-cd /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic production.in nvtpro
+lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-periodic production.in nvtpro
 ```
 

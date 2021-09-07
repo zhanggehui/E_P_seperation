@@ -1,4 +1,4 @@
-include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic/def_setting.in
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-coexist/def_setting.in
 
 variable        laststep file ../nvtequ/nvtequ.dump
 next laststep

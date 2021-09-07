@@ -1,4 +1,4 @@
-include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-periodic/def_setting.in
+include /home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/lmp-coexist/def_setting.in
 
 group           gra type  1
 fix             freeze gra setforce 0 0 0

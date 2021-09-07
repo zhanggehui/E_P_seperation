@@ -31,10 +31,10 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
-                    source $scriptsdir/velocity/velocity_profile.sh
+                    # source $scriptsdir/velocity/velocity_profile.sh
 
                     # 密度分布
-                    # source $scriptsdir/density_profile/density.sh
+                    source $scriptsdir/density_profile/density.sh
                     
                     # 水合层角度分布
                     # source $scriptsdir/angle_distribution/theta.sh

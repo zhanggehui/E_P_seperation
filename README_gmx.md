@@ -1,4 +1,4 @@
-## GO建模
+### GO建模
 - 使用在线建模网站 生成newGO.gro, 拉大石墨烯的距离然后再缩小回去, 可以帮助识别键的类型
 
 - 非周期性模型:
@@ -28,7 +28,7 @@
 
 
 
-## gmx
+### gmx
 1. gmx流程中有文件读写，故使用时不要超过一个节点，除非更改为MPIIO
 
 2. 模拟运行时，有的文件会共同使用，但是里面内容分的参数一样，所以每一个模拟都需要拷贝一个副本，采用的方法是：先修改，再复制副本
@@ -114,7 +114,7 @@ gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-s
 
 
 
-## 系统状态输出
+### 系统状态输出
 
 ```bash
 echo "potential" | gmx energy -f em.edr -o em-potential.xvg

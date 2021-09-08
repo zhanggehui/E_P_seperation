@@ -1,4 +1,4 @@
-## lmp
+### 层状加压强
 ```bash
 # 构建初始体系
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
@@ -12,9 +12,8 @@ lmp auto 10 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp NEMD.in N
 ```
 
 
-
+### 周期性体系脚本
 ```bash
-# 周期性体系脚本
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-periodic first.in nvtequ
@@ -24,8 +23,9 @@ source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-periodic production.in nvtpro
 ```
 
+
+### 研究共存离子
 ```bash
-# 研究共存离子
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-coexist first.in nvtequ

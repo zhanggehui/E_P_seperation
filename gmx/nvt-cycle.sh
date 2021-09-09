@@ -5,7 +5,7 @@ dt=0.001             # 单位ps
 nsteps=10000000
 pressure=0           # 单位Mpa
 acc_water=all        # 根据具体情况记得修改，all/notall
-nlays=4
+nlays=3
 
 # --------------------------------------------------------------------- #
 echo "pressure: $pressure" > cyclelog
@@ -28,9 +28,9 @@ fi
 # new1='tc-grps                  = gra funcgrp Ion'
 # new2='tau_t                    = -1 0.1 -1'
 # new3='ref_t                    = 0 300 300'
-new1='tc-grps                  = gra funcgrp'
-new2='tau_t                    = -1 0.1'
-new3='ref_t                    = 0 300'
+new1='tc-grps                  = gra funcgrp Ion'
+new2='tau_t                    = -1 0.1 -1'
+new3='ref_t                    = 0 300 300'
 for ((i=1; i<=$nlays; i++)); do
 new1="${new1} layer${i}_f0_t0.000"
 new2="${new2} 0.1"

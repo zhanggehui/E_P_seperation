@@ -12,7 +12,7 @@ import sys
 def readDistanceFile(distance_file):
     # Read file
     f = open(distance_file, 'r')
-    lines = f.readlines()[29:]
+    lines = f.readlines()[25:]
     f.close()
 
     # Read the data from the bottom

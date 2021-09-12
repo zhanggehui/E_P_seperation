@@ -5,13 +5,18 @@ next laststep
 read_dump       ../nvtequ/nvtequ.dump ${laststep} x y z vx vy vz ix iy iz replace yes box yes
 
 group           gra type 1
+group           water type 2:3
+group           Ion type 5
+
 fix             freeze gra setforce 0 0 0
 fix             ef all efield 0.0 0.1 0.0
-fix             nvt all nvt temp 300 300 100.0
 
-dump            production all custom 10000 production.dump id type xu yu zu vx vy vz
+fix             Ion Ion nve
+# fix             gra gra nvt temp 0 0 100.0
+fix             water water nvt temp 300 300 100.0
+
+dump            production all xtc 1000 production.xtc
 thermo          10000
 run             10000000
 
-group           Ion type 5:6
 write_dump      all custom nvtequ.dump id type x y z vx vy vz ix iy iz

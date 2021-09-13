@@ -1,4 +1,4 @@
-sdir=/home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx
+sdir=/home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-coexist
 
 if [ ! -e 'topol.tpr' ]; then 
     $gmx grompp -f $sdir/em.mdp -c ../GO_ion.gro -p ../GO_ion_pp.top

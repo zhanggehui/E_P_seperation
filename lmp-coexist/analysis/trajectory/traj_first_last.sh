@@ -5,7 +5,7 @@ if [ ! -e 'topol.tpr' ]; then
     rm -rf mdout.mdp
 fi
 
-echo "name LI FE" | $gmx select -f production.xtc -s topol.tpr -b 0 -e 0 -on
+echo "name LI FE" | $gmx select -f ../GO_ion.gro -s topol.tpr -b 0 -e 0 -on
 $gmx trjconv -f production.xtc -s topol.tpr -o traj.gro -pbc nojump -b 0 -skip 10000 -n index.ndx
 
 rm -rf \#*

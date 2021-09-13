@@ -33,4 +33,9 @@ lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-coexist f
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 lmp cn_nl 8 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-coexist production.in nvtpro
+
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/lmp-coexist/analysis/trajectory/traj_first_last.sh
+
+
 ```

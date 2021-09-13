@@ -18,5 +18,3 @@ fix             water water nvt temp 300 300 100.0
 dump            production all xtc 1000 production.xtc
 thermo          10000
 run             10000000
-
-write_dump      all custom nvtequ.dump id type x y z vx vy vz ix iy iz

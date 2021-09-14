@@ -1,4 +1,5 @@
 source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
+gmx='gmx'
 
 mkdir ./conf
 cd ./conf

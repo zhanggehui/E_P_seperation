@@ -1,14 +1,18 @@
-source ~/software/gmx_zgh.sh
+source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
 
 mkdir ./conf
 cd ./conf
 echo 0 | $gmx trjconv -s ../nvt-pull.tpr -f ../nvt-pull.trr -o conf.gro -sep -n ../../waterlayer.ndx
 cd ../
 
-conda activate base
+
+source deactivate
+# conda activate base
+source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script/setupUmbrella.py \
 nvt-pull_pullx.xvg 0.1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script/nvt-sampling.sh > summary.data
-conda deactivate
+python --version
+# conda deactivate
 
 for udir in `ls | grep umbrella`; do 
     cd $udir

@@ -1,10 +1,9 @@
 import analysis as ay
 import argparse
-import sys
-sys.path.append("/home/liufeng_pkuhpc/lustre3/zgh/GO_MD/md_scripts/gmx/analysis/angle_distribution")
+
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='解析命令')
     parser.add_argument("ifile", type=str)
     parser.add_argument("ofile", type=str)
     parser.add_argument("omatfile", type=str)

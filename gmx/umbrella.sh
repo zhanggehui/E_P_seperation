@@ -1,5 +1,5 @@
-source /appsnew/mdapps/gromacs2019.2_intelmkl2019u4/bin/GMXRC2.bash
-gmx='gmx'
+source /home/liufeng_pkuhpc/software/gmx_zgh.sh
+# gmx='gmx'
 
 mkdir ./conf
 cd ./conf
@@ -21,6 +21,6 @@ conda deactivate
 for udir in `ls | grep umbrella`; do 
     cd $udir
     source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-    gmx cn_nl 8 . sampling.sh run
+    gmx cn_nl 2 . sampling.sh run
     cd ../
 done

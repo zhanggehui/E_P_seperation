@@ -6,7 +6,7 @@ cd ../
 
 # 正确启动python环境，如果使用了intel编译器的环境会破坏了原有的python环境，使用source deactivate
 # conda activate base在计算节点不能使用
-source deactivate
+# source deactivate
 source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 

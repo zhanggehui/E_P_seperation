@@ -23,7 +23,7 @@ class AnalyzeAngle(ma.MdAnalyze):
     def analyze_frame(self, df):
         count = 0
         radius = first_shell[self.reftype]
-        mf = ma.MdFrame(df, self.reftype, self.reftype, radius)
+        mf = ma.MdFrame(df, self.seltype, self.reftype, radius)
         for results in mf.results_set:
             nearby_points = np.array(mf.sel_points[results])
             vectors = nearby_points - mf.ref_points[count]

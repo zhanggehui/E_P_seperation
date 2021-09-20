@@ -8,7 +8,7 @@ echo "OW_OR_A_${ion}" | $gmx trjconv -f ../nvt-production.trr -s ../nvt-producti
 # echo -e "a OW | a 3948\nq" | gmx make_ndx -f ../nvt-production.gro -quiet
 # echo "OW_a_3948" | gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o ion_OW.gro -pbc nojump -b ${tb} -e ${te} -n index.ndx -quiet
 
-pyrun="python $dir/angle_distribution.py -ingro ion_OW.gro -seltype OW -reftype NA -angletype"
+pyrun="python $dir/angle_distribution.py -ingro ion_OW.gro -seltype OW -reftype ${ion} -angletype"
 $pyrun phix
 $pyrun phiy
 $pyrun theta

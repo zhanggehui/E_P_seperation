@@ -6,7 +6,6 @@ cd ../
 
 # 正确启动python环境，如果使用了intel编译器的环境会破坏了原有的python环境，使用source deactivate
 # conda activate base在计算节点不能使用
-
 source deactivate
 source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
@@ -16,8 +15,9 @@ for ((i=0; i<=15; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
     for ((j=0; j<=15; j=j+1)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
-        if [ $i -eq 0 ] || [ $j -eq 0 ]; then
+        # if [ $i -eq 0 ] || [ $j -eq 0 ]; then
         # if [ $i -eq 15 ] || [ $j -eq 15 ]; then
+        if [ $i -eq 0 ] && [ $j -eq 0 ]; then
             dir=${pressure}Mpa-${voltage}V
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
@@ -33,13 +33,16 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
-                    source $scriptsdir/velocity/velocity_profile.sh
+                    # source $scriptsdir/velocity/velocity_profile.sh
 
                     # 密度分布
                     # source $scriptsdir/density_profile/density.sh
                     
                     # 水合层角度分布
                     # source $scriptsdir/angle_distribution/theta.sh
+
+                    # py
+                    source $scriptsdir/py_analyze/angle_distribution.sh
                 cd ..
             else
                 echo "No such dictionary ($dir)!"

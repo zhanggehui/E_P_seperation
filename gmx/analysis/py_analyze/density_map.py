@@ -9,8 +9,8 @@ girdBinWidth = 0.01
 gridLength = int(2 * radius / girdBinWidth)
 
 class DensityMap(ma.MdAnalyze):
-    def __init__(self, igro, seltype, reftype):
-        ma.MdAnalyze.__init__(self, igro)
+    def __init__(self, ingro, seltype, reftype):
+        ma.MdAnalyze.__init__(self, ingro)
         self.seltype = seltype
         self.reftype = reftype
         self.n_grid = np.zeros(shape=(gridLength, gridLength))
@@ -18,7 +18,7 @@ class DensityMap(ma.MdAnalyze):
     def analyze_frame(self, df):
         count = 0
         # radius = first_shell[self.reftype]
-        mf = ma.MdFrame(df, self.reftype, self.reftype, radius)
+        mf = ma.MdFrame(df, self.seltype, self.reftype, radius)
         for results in mf.results_set:
             nearby_points = np.array(mf.sel_points[results])
             vectors = nearby_points - mf.ref_points[count]

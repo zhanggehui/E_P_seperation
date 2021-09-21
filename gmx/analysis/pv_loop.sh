@@ -42,6 +42,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/angle_distribution/theta.sh
 
                     # py
+                    # source $scriptsdir/py_analyze/angle_distribution.sh
                     source $scriptsdir/py_analyze/angle_distribution.sh
                 cd ..
             else

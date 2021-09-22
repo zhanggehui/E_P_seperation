@@ -43,7 +43,7 @@ for ((i=0; i<=15; i=i+1)); do
 
                     # py
                     # source $scriptsdir/py_analyze/angle_distribution.sh
-                    source $scriptsdir/py_analyze/angle_distribution.sh
+                    source $scriptsdir/py_analyze/density_map.sh
                 cd ..
             else
                 echo "No such dictionary ($dir)!"

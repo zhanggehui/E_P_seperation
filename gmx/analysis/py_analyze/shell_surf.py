@@ -14,7 +14,7 @@ first_shell = {
 
 ns = 100
 dtheta = np.pi/ns
-dphi = 2*np.pi/ns
+dphi = np.pi/ns   # 关于y轴对称，phi只需要[0, pi]
 
 class AnalyzeAngle(ma.MdAnalyze):
     def __init__(self, ingro, seltype, reftype):
@@ -37,7 +37,7 @@ class AnalyzeAngle(ma.MdAnalyze):
                 r = np.linalg.norm(vector)
                 vector[2] = 0
                 phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
-                if phiy:
+                if not np.isnan(phiy):
                     self.add_r(theta, phiy, r)
             count = count + 1
     

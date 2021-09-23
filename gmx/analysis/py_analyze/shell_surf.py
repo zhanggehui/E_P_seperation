@@ -28,7 +28,8 @@ class AnalyzeAngle(ma.MdAnalyze):
 
     def analyze_frame(self, df):
         count = 0
-        cutoff = self.radius
+        cutoff = 2*self.radius
+        lowedge = self.radius
         mf = ma.MdFrame(df, self.seltype, self.reftype, cutoff)
         for results in mf.results_set:
             nearby_points = np.array(mf.sel_points[results])
@@ -36,7 +37,7 @@ class AnalyzeAngle(ma.MdAnalyze):
             
             for vector in vectors:
                 r = np.linalg.norm(vector)
-                if  0 < r < self.radius:
+                if   r > lowedge:
                     theta = mu.cal_angle(vector, np.array([0, 0, 1]))
                     vector[2] = 0
                     phiy = mu.cal_angle(vector, np.array([0, 1, 0]))

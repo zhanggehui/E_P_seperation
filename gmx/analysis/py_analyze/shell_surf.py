@@ -33,10 +33,10 @@ class AnalyzeAngle(ma.MdAnalyze):
             vectors = nearby_points - mf.ref_points[count]
 
             for vector in vectors:
-                theta = mu.cal_angle_in_deg(vector, np.array([0, 0, 1]))
+                theta = mu.cal_angle(vector, np.array([0, 0, 1]))
                 r = np.linalg.norm(vector)
                 vector[2] = 0
-                phiy = mu.cal_angle_in_deg(vector, np.array([0, 1, 0]))
+                phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
                 self.add_r(theta, phiy, r)
             count = count + 1
     

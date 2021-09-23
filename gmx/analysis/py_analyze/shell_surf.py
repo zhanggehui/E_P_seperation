@@ -1,5 +1,4 @@
 import argparse
-from warnings import catch_warnings
 import md_analyze as ma
 import md_utils as mu
 import numpy as np

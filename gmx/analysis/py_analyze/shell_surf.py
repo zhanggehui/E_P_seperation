@@ -33,11 +33,10 @@ class AnalyzeAngle(ma.MdAnalyze):
             vectors = nearby_points - mf.ref_points[count]
             for vector in vectors:
                 r = np.linalg.norm(vector)
-                if  radius < r < 2*radius:
-                    theta = mu.cal_angle(vector, np.array([0, 0, 1]))
-                    vector[2] = 0
-                    phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
-                    self.add_r(theta, phiy, r)
+                theta = mu.cal_angle(vector, np.array([0, 0, 1]))
+                vector[2] = 0
+                phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
+                self.add_r(theta, phiy, r)
             count = count + 1
     
     def add_r(self, theta, phiy, r):
@@ -57,7 +56,7 @@ class AnalyzeAngle(ma.MdAnalyze):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-ingro", type=str, default='a.gro')
-    parser.add_argument("-seltype", type=str, default='NA')
-    parser.add_argument("-reftype", type=str, default='OW')
+    parser.add_argument("-seltype", type=str, default='OW')
+    parser.add_argument("-reftype", type=str, default='NA')
     args = parser.parse_args()
     AnalyzeAngle(args.ingro, args.seltype, args.reftype).analyze()

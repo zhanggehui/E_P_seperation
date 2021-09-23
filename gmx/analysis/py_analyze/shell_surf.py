@@ -28,12 +28,14 @@ class AnalyzeAngle(ma.MdAnalyze):
     def analyze_frame(self, df):
         count = 0
         radius = first_shell[self.reftype]
-        mf = ma.MdFrame(df, self.seltype, self.reftype, radius)
+        mf = ma.MdFrame(df, self.seltype, self.reftype, 2*radius)
         for results in mf.results_set:
             nearby_points = np.array(mf.sel_points[results])
             vectors = nearby_points - mf.ref_points[count]
+            
             for vector in vectors:
                 r = np.linalg.norm(vector)
+                if  radius < r < 2*radius
                 theta = mu.cal_angle(vector, np.array([0, 0, 1]))
                 vector[2] = 0
                 phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
@@ -51,7 +53,7 @@ class AnalyzeAngle(ma.MdAnalyze):
             self.n_grid[0][:] = self.n_grid[0][:] + 1
 
     def write_output(self):
-        self.r_grid = self.r_grid / (2 * self.n_grid)  # phi[0, pi]，r统计了两次
+        self.r_grid = self.r_grid / self.n_grid
         sio.savemat('r.mat', {'r_grid': self.r_grid})
 
 

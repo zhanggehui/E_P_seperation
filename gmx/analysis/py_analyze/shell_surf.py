@@ -1,4 +1,5 @@
 import argparse
+from warnings import catch_warnings
 import md_analyze as ma
 import md_utils as mu
 import numpy as np
@@ -53,7 +54,10 @@ class AnalyzeAngle(ma.MdAnalyze):
             self.n_grid[0][:] = self.n_grid[0][:] + 1
 
     def write_output(self):
-        self.r_grid = self.r_grid / self.n_grid
+        try:
+            self.r_grid = self.r_grid / self.n_grid
+        except:
+            print("除零，变为非数值nan")
         sio.savemat('r.mat', {'r_grid': self.r_grid})
 
 

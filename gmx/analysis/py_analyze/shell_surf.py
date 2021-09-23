@@ -24,18 +24,19 @@ class AnalyzeAngle(ma.MdAnalyze):
         self.reftype = reftype
         self.r_grid = np.zeros(shape=(ns, ns))
         self.n_grid = np.zeros(shape=(ns, ns))
+        self.radius = first_shell[self.reftype]
 
     def analyze_frame(self, df):
         count = 0
-        radius = first_shell[self.reftype]
-        mf = ma.MdFrame(df, self.seltype, self.reftype, 2*radius)
+        cutoff = self.radius
+        mf = ma.MdFrame(df, self.seltype, self.reftype, cutoff)
         for results in mf.results_set:
             nearby_points = np.array(mf.sel_points[results])
             vectors = nearby_points - mf.ref_points[count]
             
             for vector in vectors:
                 r = np.linalg.norm(vector)
-                if  radius < r < 2*radius:
+                if  0 < r < self.radius:
                     theta = mu.cal_angle(vector, np.array([0, 0, 1]))
                     vector[2] = 0
                     phiy = mu.cal_angle(vector, np.array([0, 1, 0]))

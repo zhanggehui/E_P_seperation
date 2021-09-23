@@ -9,7 +9,6 @@ first_shell = {
     "K": 0.354,
     "CS": 0.396
 }
-radius = 0.5
 
 
 class AnalyzeAngle(ma.MdAnalyze):
@@ -51,8 +50,8 @@ class AnalyzeAngle(ma.MdAnalyze):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-ingro", type=str, default='a.gro')
-    parser.add_argument("-seltype", type=str, default='NA')
-    parser.add_argument("-reftype", type=str, default='OW')
+    parser.add_argument("-seltype", type=str, default='OW')
+    parser.add_argument("-reftype", type=str, default='NA')
     parser.add_argument("-angletype", type=str, default='theta')
     args = parser.parse_args()
     AnalyzeAngle(args.ingro, args.seltype, args.reftype, args.angletype).analyze()

@@ -37,7 +37,8 @@ class AnalyzeAngle(ma.MdAnalyze):
                 r = np.linalg.norm(vector)
                 vector[2] = 0
                 phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
-                self.add_r(theta, phiy, r)
+                if phiy:
+                    self.add_r(theta, phiy, r)
             count = count + 1
     
     def add_r(self, theta, phiy, r):

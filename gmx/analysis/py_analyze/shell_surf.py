@@ -39,6 +39,9 @@ class AnalyzeAngle(ma.MdAnalyze):
                 phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
                 if not np.isnan(phiy):
                     self.add_r(theta, phiy, r)
+                else:
+                    self.r_grid[0][:] = self.r_grid[0][:] + r
+                    self.n_grid[0][:] = self.n_grid[0][:] + 1
             count = count + 1
     
     def add_r(self, theta, phiy, r):
@@ -48,7 +51,7 @@ class AnalyzeAngle(ma.MdAnalyze):
         self.n_grid[n1][n2] = self.r_grid[n1][n2] + 1
 
     def write_output(self):
-        self.r_grid = self.r_grid / self.n_grid
+        self.r_grid = self.r_grid / (2*self.n_grid)
         sio.savemat('r.mat', {'r_grid': self.r_grid})
 
 if __name__ == '__main__':

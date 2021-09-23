@@ -7,6 +7,6 @@ echo "OW_OR_A_${ion}" | $gmx trjconv -f ../nvt-production.trr -s ../nvt-producti
 
 python $dir/shell_surf.py -ingro ion_OW.gro -seltype OW -reftype ${ion}
 
-rm -rf \#* index.ndx ion_OW.gro
+rm -rf \#* index.ndx # ion_OW.gro
 cd ../
 mv ./$rundir ../$rundir/${pressure}Mpa-${voltage}V

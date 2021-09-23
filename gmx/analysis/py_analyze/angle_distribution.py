@@ -13,8 +13,8 @@ radius = 0.5
 
 
 class AnalyzeAngle(ma.MdAnalyze):
-    def __init__(self, igro, seltype, reftype, angletype):
-        ma.MdAnalyze.__init__(self, igro)
+    def __init__(self, ingro, seltype, reftype, angletype):
+        ma.MdAnalyze.__init__(self, ingro)
         self.seltype = seltype
         self.reftype = reftype
         self.angletype = angletype

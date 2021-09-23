@@ -28,8 +28,8 @@ class AnalyzeAngle(ma.MdAnalyze):
 
     def analyze_frame(self, df):
         count = 0
-        cutoff = 2*self.radius
-        lowedge = self.radius
+        cutoff = self.radius
+        lowedge = 0
         mf = ma.MdFrame(df, self.seltype, self.reftype, cutoff)
         for results in mf.results_set:
             nearby_points = np.array(mf.sel_points[results])

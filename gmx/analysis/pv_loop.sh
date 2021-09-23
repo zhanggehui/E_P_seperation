@@ -32,7 +32,7 @@ for ((i=0; i<=15; i=i+15)); do
                     # source $scriptsdir/rdf/rdf.sh
                     
                     # 水合层滞留时间
-                    source $scriptsdir/residence_time/residence_time.sh
+                    # source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
                     # source $scriptsdir/velocity/velocity_profile.sh

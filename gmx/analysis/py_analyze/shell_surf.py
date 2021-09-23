@@ -51,7 +51,7 @@ class AnalyzeAngle(ma.MdAnalyze):
             self.n_grid[0][:] = self.n_grid[0][:] + 1
 
     def write_output(self):
-        self.r_grid = self.r_grid / (2*self.n_grid)
+        self.r_grid = self.r_grid / (2*self.n_grid)   # phi[0, pi]，r统计了两次
         sio.savemat('r.mat', {'r_grid': self.r_grid})
 
 if __name__ == '__main__':

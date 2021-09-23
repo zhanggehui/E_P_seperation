@@ -37,18 +37,18 @@ class AnalyzeAngle(ma.MdAnalyze):
                 r = np.linalg.norm(vector)
                 vector[2] = 0
                 phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
-                if not np.isnan(phiy):
-                    self.add_r(theta, phiy, r)
-                else:
-                    self.r_grid[0][:] = self.r_grid[0][:] + r
-                    self.n_grid[0][:] = self.n_grid[0][:] + 1
+                self.add_r(theta, phiy, r)
             count = count + 1
     
     def add_r(self, theta, phiy, r):
-        n1 = math.floor(theta / dtheta)
-        n2 = math.floor(phiy / dphi)
-        self.r_grid[n1][n2] = self.r_grid[n1][n2] + r
-        self.n_grid[n1][n2] = self.r_grid[n1][n2] + 1
+        if not np.isnan(phiy):
+            n1 = math.floor(theta / dtheta)
+            n2 = math.floor(phiy / dphi)
+            self.r_grid[n1][n2] = self.r_grid[n1][n2] + r
+            self.n_grid[n1][n2] = self.r_grid[n1][n2] + 1
+        else:
+            self.r_grid[0][:] = self.r_grid[0][:] + r
+            self.n_grid[0][:] = self.n_grid[0][:] + 1
 
     def write_output(self):
         self.r_grid = self.r_grid / (2*self.n_grid)

@@ -31,13 +31,13 @@ class AnalyzeAngle(ma.MdAnalyze):
         for results in mf.results_set:
             nearby_points = np.array(mf.sel_points[results])
             vectors = nearby_points - mf.ref_points[count]
-
             for vector in vectors:
-                theta = mu.cal_angle(vector, np.array([0, 0, 1]))
                 r = np.linalg.norm(vector)
-                vector[2] = 0
-                phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
-                self.add_r(theta, phiy, r)
+                if  radius < r < 2*radius:
+                    theta = mu.cal_angle(vector, np.array([0, 0, 1]))
+                    vector[2] = 0
+                    phiy = mu.cal_angle(vector, np.array([0, 1, 0]))
+                    self.add_r(theta, phiy, r)
             count = count + 1
     
     def add_r(self, theta, phiy, r):

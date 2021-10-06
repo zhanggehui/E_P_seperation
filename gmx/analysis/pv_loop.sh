@@ -30,7 +30,7 @@ for ((i=0; i<=15; i=i+15)); do
                     # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
-                    # source $scriptsdir/rdf/rdf.sh
+                    source $scriptsdir/rdf/rdf.sh
                     
                     # 水合层滞留时间
                     # source $scriptsdir/residence_time/residence_time.sh
@@ -47,7 +47,7 @@ for ((i=0; i<=15; i=i+15)); do
                     # py
                     # source $scriptsdir/py_analyze/angle_distribution.sh
                     # source $scriptsdir/py_analyze/density_map.sh
-                    source $scriptsdir/py_analyze/shell_surf.sh
+                    # source $scriptsdir/py_analyze/shell_surf.sh
                 cd ..
             else
                 echo "No such dictionary ($dir)!"

@@ -10,7 +10,7 @@ first_shell = {
     "K": 0.354,
     "CS": 0.396
 }
-
+Dphi=30
 
 class RadDistribution(ma.MdAnalyze):
     def __init__(self, ingro, seltype, reftype):
@@ -37,9 +37,9 @@ class RadDistribution(ma.MdAnalyze):
 
     def add_r(self, phiy, r):
         if not np.isnan(phiy):
-            if phiy < 20:
+            if phiy < Dphi:
                 self.r_list1.append(r)
-            elif phiy > 160:
+            elif phiy > 180-Dphi:
                 self.r_list2.append(r)
 
     def write_output(self):

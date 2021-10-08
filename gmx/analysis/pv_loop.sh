@@ -11,9 +11,9 @@ source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%%_*}
-for ((i=0; i<=15; i=i+1)); do
+for ((i=0; i<=15; i=i+15)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
-    for ((j=0; j<=15; j=j+1)); do 
+    for ((j=0; j<=15; j=j+15)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
         
         # if [ $i -eq 15 ]; then
@@ -33,7 +33,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/rdf/rdf.sh
                     
                     # 水合层滞留时间
-                    source $scriptsdir/residence_time/residence_time.sh
+                    # source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
                     # source $scriptsdir/velocity/velocity_profile.sh
@@ -48,6 +48,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/py_analyze/angle_distribution.sh
                     # source $scriptsdir/py_analyze/density_map.sh
                     # source $scriptsdir/py_analyze/shell_surf.sh
+                    source $scriptsdir/py_analyze/r_distribution.sh
                 cd ..
             else
                 echo "No such dictionary ($dir)!"

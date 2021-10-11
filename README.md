@@ -8,13 +8,13 @@
 
 
 
-- 注意:
+​	注意:
 
-  对于有文件修改的模拟，节点数只能用1
+​	对于有文件修改的模拟，节点数只能用1
 
 
 
-- 先进行em和nvt弛豫
+**先进行em和nvt弛豫**
 
 ```bash
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
@@ -26,7 +26,10 @@ source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 gmx cn_nl 4 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-equ.sh nvtequ
 ```
 
-- 批处理提交任务
+
+
+**批处理提交任务**
+
 ```bash
 # 多个电压或者电场
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
@@ -47,7 +50,9 @@ cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD
 source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/ion_loop.sh analysis cn_nl
 ```
 
-- 清理文件
+
+
+**清理文件**
 
 ```bash
 rm -rf CS/CS_*/ LI/LI_*/ K/K_*/ NA/NA_*/ tmp_data/*
@@ -55,12 +60,14 @@ rm -rf */*/angle*
 ```
 
 
-- **伞形采样**
+
+**伞形采样**
+
 ```bash
 # 牵引制作初始构型
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx cn_nl 2 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-pull.sh nvtpull
+gmx cn_nl 4 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-pull.sh nvtpull
 
 # 采样
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \

@@ -1,7 +1,6 @@
 # ions=("NA")
-# ions=("LI" "NA" "K" "CS")
-# ions=("LI" "NA" "K" "CS" "CA" "MG")
 ions=("LI" "NA" "K" "CS")
+# ions=("LI" "NA" "K" "CS" "CA" "MG")
 n_ions=${#ions[@]}
 
 run_gmx="source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $2"
@@ -25,6 +24,6 @@ for ((i=0; i<${n_ions}; i++)); do
         fi
         cd ../
     else
-        echo "No such dictionary ($ion)!"
+        echo "No such directory ($ion)!"
     fi
 done

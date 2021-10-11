@@ -6,7 +6,7 @@
 
 3. 停止维护老版本的命令格式，全部使用新版本
 
-   
+
 
 - 注意:
 
@@ -34,23 +34,17 @@ source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/cycle_sub.sh 0
 
 # 压强加反向电场
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/cycle_sub.sh 1500 1500 0 1.6 auto
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/cycle_sub.sh 1500 1500 0 1.6 cn_nl
 
 # 单独分析脚本
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/analysis pv_loop.sh CS_traj
+gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/analysis pv_loop.sh NA_ay
 
 # 不同离子的通用接口，仅能用一个节点，因为有大量的文件修改
 # em nvtequ analysis nvtpull nvtspring
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
-source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/ion_loop.sh analysis auto
-```
-
-- 分析离子位移随时间变化，单独使用
-
-```bash
-echo "NA" | gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o noskip-1nm-20e-NA-1600Mpa-0V.gro -pbc nojump -b 0 -e 10000 -n waterlayer.ndx
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/ion_loop.sh analysis cn_nl
 ```
 
 - 清理文件
@@ -59,25 +53,25 @@ echo "NA" | gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o noskip-1n
 rm -rf CS/CS_*/ LI/LI_*/ K/K_*/ NA/NA_*/ tmp_data/*
 rm -rf */*/angle*
 ```
-- **伞形采样**
 
+
+- **伞形采样**
 ```bash
 # 牵引制作初始构型
-cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx auto 2 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-pull.sh nvtpull
+gmx cn_nl 2 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-pull.sh nvtpull
 
 # 采样
-cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \
 source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella.sh
 
 # 检查弹簧位置动画
-cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \
 source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script/springs.sh
 
 # wham
-cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/ ; gitget ; cd $OLDPWD ; \
+cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
-gmx auto 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script wham.sh wham
+gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script wham.sh wham
 ```
-

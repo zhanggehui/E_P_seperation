@@ -46,7 +46,7 @@ for ((i=0; i<=15; i=i+15)); do
                     source $scriptsdir/py_analyze/r_distribution.sh
                 cd ..
             else
-                echo "No such dictionary ($dir)!"
+                echo "No such directory ($dir)!"
             fi
         fi
     done

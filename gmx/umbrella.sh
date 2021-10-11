@@ -21,6 +21,6 @@ python --version
 
 for udir in `ls | grep umbrella`; do 
     cd $udir
-    source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx cn_nl 8 . sampling.sh run
+    source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx cn_nl 4 . sampling.sh run
     cd ../
 done

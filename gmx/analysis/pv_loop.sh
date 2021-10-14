@@ -7,21 +7,22 @@ cd ../
 # 正确启动python环境，如果使用了intel编译器的环境会破坏了原有的python环境，使用source deactivate
 # conda activate base在计算节点不能使用
 # source deactivate
-source /home/liufeng_pkuhpc/anaconda3/bin/activate base
+# source /home/liufeng_pkuhpc/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%%_*}
-for ((i=0; i<=15; i=i+15)); do
+for ((i=15; i<=15; i=i+15)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
-    for ((j=0; j<=15; j=j+15)); do 
-        voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
+    for ((j=8; j<=17; j=j+1)); do 
+        #voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
+        voltage=`awk -v j=$j 'BEGIN{printf("%s", -0.05*j);}'`
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             dir=${pressure}Mpa-${voltage}V
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./$dir
                     # 统计离子位移
-                    # source $scriptsdir/trajectory/traj_first_last.sh
+                    source $scriptsdir/trajectory/traj_first_last.sh
                     # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
@@ -43,7 +44,7 @@ for ((i=0; i<=15; i=i+15)); do
                     # source $scriptsdir/py_analyze/angle_distribution.sh
                     # source $scriptsdir/py_analyze/density_map.sh
                     # source $scriptsdir/py_analyze/shell_surf.sh
-                    source $scriptsdir/py_analyze/r_distribution.sh
+                    # source $scriptsdir/py_analyze/r_distribution.sh
                 cd ..
             else
                 echo "No such directory ($dir)!"

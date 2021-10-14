@@ -11,14 +11,15 @@ cd ../
 python --version
 
 ion=${rundir%%_*}
-for ((i=15; i<=15; i=i+15)); do
-    pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
-    for ((j=8; j<=17; j=j+1)); do 
-        #voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
+for ((i=1; i<=5; i=i+1)); do
+    # pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
+    pressure=`awk -v i=$i 'BEGIN{printf("%s", 10*i);}'`
+    for ((j=0; j<=15; j=j+1)); do 
+        # voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
         voltage=`awk -v j=$j 'BEGIN{printf("%s", -0.05*j);}'`
         
-        if [ $i -eq 15 ] || [ $j -eq 0 ]; then
-        # if [ $i -eq 0 ] || [ $j -eq 0 ]; then
+        # if [ $i -eq 15 ] || [ $j -eq 0 ]; then
+        if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             dir=${pressure}Mpa-${voltage}V
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"

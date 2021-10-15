@@ -46,7 +46,7 @@ gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/analysis 
 # 不同离子的通用接口，仅能用一个节点，因为有大量的文件修改
 # em nvtequ analysis nvtpull nvtspring
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \
-source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/ion_loop.sh analysis cn_nl
+source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/ion_loop.sh analysis cn_nl 1
 ```
 
 

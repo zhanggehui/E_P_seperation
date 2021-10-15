@@ -207,7 +207,7 @@ pull-coord1-dim         = N Y N
 pull-coord1-origin      = 2.460 1.0 1.500
 pull_coord1_vec         = 0 1 0
 pull_coord1_rate        = 0
-pull_coord1_k           = 90   ; kJ mol^-1 nm^-2
+pull_coord1_k           = 150   ; kJ mol^-1 nm^-2
 
 ; ENFORCED ROTATION    
 ; Enforced rotation: No or Yes

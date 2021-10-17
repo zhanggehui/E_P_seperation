@@ -74,14 +74,14 @@ periodic-molecules       = no
 ; a value of -1 means: use rlist
 verlet-buffer-tolerance  = -1
 ; nblist cut-off        
-rlist                    = 1.2
+rlist                    = 1
 
 ; OPTIONS FOR ELECTROSTATICS AND VDW
 ; Method for doing electrostatics
 coulombtype              = PME
 coulomb-modifier         = Potential-shift
 rcoulomb-switch          = 0
-rcoulomb                 = 1.2
+rcoulomb                 = 1
 ; Relative dielectric constant for the medium and the reaction field
 epsilon-r                = 1
 epsilon-rf               = 0
@@ -90,7 +90,7 @@ vdw-type                 = Cut-off
 vdw-modifier             = Potential-shift
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 1.2
+rvdw                     = 1
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
@@ -207,7 +207,7 @@ pull-coord1-dim         = N Y N
 pull-coord1-origin      = 2.460 1.0 1.500
 pull_coord1_vec         = 0 1 0
 pull_coord1_rate        = 0
-pull_coord1_k           = 20   ; kJ mol^-1 nm^-2 ，记得修改cyclesub.sh中的值
+pull_coord1_k           = 30   ; kJ mol^-1 nm^-2 ，记得修改cyclesub.sh中的值
 
 ; ENFORCED ROTATION    
 ; Enforced rotation: No or Yes

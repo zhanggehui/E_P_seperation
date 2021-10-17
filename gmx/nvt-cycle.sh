@@ -29,7 +29,7 @@ fi
 # new2='tau_t                    = -1 0.1 -1'
 # new3='ref_t                    = 0 300 300'
 new1='tc-grps                  = gra Ion'
-new2='tau_t                    = -1 -1'
+new2='tau_t                    = 0.1 0.1'
 new3='ref_t                    = 0 300'
 for ((i=1; i<=$nlays; i++)); do
 new1="${new1} layer${i}_f0_t0.000"

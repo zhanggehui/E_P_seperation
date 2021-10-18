@@ -17,7 +17,7 @@ word='orientation='; new="orientation=${orientation}"
 sed -i "/$word/c$new" $scriptsdir/nvt-cycle.sh
 
 for ((i=plow_i; i<=pmax_i; i++)); do
-    pressure=`awk -v i=$i 'BEGIN{printf("%s", 10*i);}'`
+    pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
     word='pressure='; new="pressure=${pressure}"
     sed -i "/$word/c$new" $scriptsdir/nvt-cycle.sh
     for ((j=vlow_i; j<=vmax_i; j++)); do 

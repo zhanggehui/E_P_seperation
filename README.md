@@ -1,18 +1,3 @@
-#### gmx
-
-1. gmx流程中有文件读写，故使用时不要超过一个节点，除非更改为MPIIO
-
-2. 模拟运行时，有的文件会共同使用，但是里面内容分的参数一样，所以每一个模拟都需要拷贝一个副本，采用的方法是：先修改，再复制副本
-
-3. 停止维护老版本的命令格式，全部使用新版本
-
-
-​	注意:
-
-​	对于有文件修改的模拟，节点数只能用1
-
-
-
 **先进行em和nvt弛豫**
 
 ```bash
@@ -81,3 +66,6 @@ cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; 
 source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh \
 gmx cn_nl 1 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script wham.sh wham
 ```
+
+
+

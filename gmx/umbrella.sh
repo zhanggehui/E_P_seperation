@@ -9,7 +9,7 @@ cd ../
 
 
 source deactivate
-source /home/liufeng_pkuhpc/anaconda3/bin/activate base
+source /home/liufeng_pkuhpc/lustre2/anaconda3/bin/activate base
 
 # conda activate base
 

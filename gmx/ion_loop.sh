@@ -12,6 +12,7 @@ for ((i=0; i<${n_ions}; i++)); do
     ion=${ions[$i]}
     if [ -d ./$ion ]; then
         cd ./$ion
+        ion=${ion%%_*}
         if [ $1 == 'em' ]; then
             $run_gmx $gitdir/gmx em.sh em
         elif [ $1 == 'nvtequ' ]; then

@@ -10,5 +10,5 @@ rcoulomb        = 1.2       ; Short-range electrostatic cut-off
 rvdw            = 1.2       ; Short-range Van der Waals cut-off
 pbc             = xyz       ; Periodic Boundary Conditions in all 3 dimensions
 
-freezegrps      = gra   ; pion
-freezedim       = Y Y Y   ; Y Y Y
+freezegrps      = gra  pion
+freezedim       = Y Y Y  Y Y Y

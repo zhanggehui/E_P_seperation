@@ -9,7 +9,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 1000000
+nsteps                   = 5000000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -203,9 +203,9 @@ pull_coord1_type        = umbrella
 pull-coord1-geometry    = direction
 pull_coord1_groups      = 0 1
 pull-coord1-dim         = N Y N
-pull-coord1-origin      = 2.460 7.520 2.500
+pull-coord1-origin      = 2.460   6.020   2.500
 pull_coord1_vec         = 0 1 0
-pull_coord1_rate        = 0.003     ; 0.003 nm per ps == 3 nm per ns
+pull_coord1_rate        = 0.001     ; 0.001 nm per ps == 1 nm per ns
 pull_coord1_k           = 1000      ; kJ mol^-1 nm^-2
 
 ;coord2

@@ -19,9 +19,9 @@ def readDistanceFile(distance_file):
     out_dict = {}
     for i in range(len(lines)):
         # Split on white-space; grab frame/distance
-        if i % 20 == 0:
+        if i % 200 == 0:
             columns = lines[i].split()
-            key = str(i / 20)
+            key = str(i / 200)
             value = float(columns[1])
             if not math.isnan(value):
                 out_dict[key] = value

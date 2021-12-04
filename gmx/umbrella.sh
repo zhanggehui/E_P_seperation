@@ -4,7 +4,7 @@ gmx='gmx'
 
 mkdir ./conf
 cd ./conf
-echo 0 | $gmx trjconv -s ../nvt-pull.tpr -f ../nvt-pull.trr -o conf.gro -sep -n ../../waterlayer.ndx
+echo 0 | $gmx trjconv -s ../nvt-pull.tpr -f ../nvt-pull.trr -o conf.gro -sep -n ../../waterlayer.ndx -dt 10
 cd ../
 
 

@@ -4,7 +4,7 @@ gmx='gmx'
 
 mkdir ./conf
 cd ./conf
-echo 0 | $gmx trjconv -s ../nvt-pull.tpr -f ../nvt-pull.trr -o conf.gro -sep -n ../../waterlayer.ndx -dt 5
+echo 0 | $gmx trjconv -s ../nvt-pull.tpr -f ../nvt-pull.trr -o conf.gro -sep -n ../../waterlayer.ndx # -dt 5
 cd ../
 
 
@@ -20,7 +20,11 @@ python --version
 # conda deactivate
 
 for udir in `ls | grep umbrella`; do 
+    XXX=${udir##*-}        # ./umbrella-frame-$XXX
+    cp ./conf/conf$XXX.gro $udir 
     cd $udir
     source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx cn_nl 4 . sampling.sh run
     cd ../
 done
+
+rm -rf ./conf

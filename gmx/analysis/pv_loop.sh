@@ -6,8 +6,8 @@ cd ../
 
 # 正确启动python环境，如果使用了intel编译器的环境会破坏了原有的python环境，使用source deactivate
 # conda activate base在计算节点不能使用
-# source deactivate
-# source /home/liufeng_pkuhpc/lustre2/anaconda3/bin/activate base
+source deactivate
+source /home/liufeng_pkuhpc/lustre2/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%%_*}
@@ -18,8 +18,8 @@ for ((i=15; i<=15; i=i+1)); do
         # voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
         voltage=`awk -v j=$j 'BEGIN{printf("%s", -0.05*j);}'`
         
-        # if [ $i -eq 15 ] || [ $j -eq 0 ]; then
-        if [ $i -eq 0 ] || [ $j -eq 0 ]; then
+        if [ $i -eq 15 ] || [ $j -eq 0 ]; then
+        # if [ $i -eq 0 ] || [ $j -eq 0 ]; then
             dir=${pressure}Mpa-${voltage}V
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"

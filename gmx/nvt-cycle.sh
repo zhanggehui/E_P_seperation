@@ -2,10 +2,10 @@ nvtequdir=../nvtequ
 orientation=y
 ncycles=1
 dt=0.001             # 单位ps 
-nsteps=60000000
+nsteps=10000000
 pressure=0           # 单位Mpa
 acc_water=all        # 根据具体情况记得修改，all/notall
-nlays=4
+nlays=3
 
 # --------------------------------------------------------------------- #
 echo "pressure: $pressure" > cyclelog
@@ -15,7 +15,7 @@ cp ../waterlayer.ndx ./waterlayer.ndx
 mdpdir=./mdps; mkdir -p $mdpdir
 ndxdir=./ndxs; mkdir -p $ndxdir
 
-mdpfile=./nvt-cycle.mdp   # ./nvt-spring.mdp; ./nvt-cycle.mdp
+mdpfile=./nvt-spring.mdp   # ./nvt-spring.mdp; ./nvt-cycle.mdp
 ndxfile=./waterlayer.ndx
 topfile=../GO_ion_pp.top
 

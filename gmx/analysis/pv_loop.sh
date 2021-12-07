@@ -11,21 +11,21 @@ source /home/liufeng_pkuhpc/lustre2/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%%_*}
-for ((i=15; i<=15; i=i+1)); do
+for ((i=0; i<=15; i=i+1)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
     # pressure=`awk -v i=$i 'BEGIN{printf("%s", 10*i);}'`
-    for ((j=8; j<=18; j=j+1)); do 
-        # voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
-        voltage=`awk -v j=$j 'BEGIN{printf("%s", -0.05*j);}'`
+    for ((j=0; j<=15; j=j+1)); do 
+        voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
+        # voltage=`awk -v j=$j 'BEGIN{printf("%s", -0.05*j);}'`
         
-        if [ $i -eq 15 ] || [ $j -eq 0 ]; then
-        # if [ $i -eq 0 ] || [ $j -eq 0 ]; then
-            dir=${pressure}Mpa-${voltage}V
+        # if [ $i -eq 15 ] || [ $j -eq 15 ]; then
+        if [ $i -eq 0 ] || [ $j -eq 0 ]; then
+            dir=${pressure}Mpa-${voltage}V_60ns
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./$dir
                     # 统计离子位移
-                    source $scriptsdir/trajectory/traj_first_last.sh
+                    # source $scriptsdir/trajectory/traj_first_last.sh
                     # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
@@ -42,6 +42,9 @@ for ((i=15; i<=15; i=i+1)); do
                     
                     # 水合层角度分布
                     # source $scriptsdir/angle_distribution/theta.sh
+
+                    # 密度等值面
+                    source $scriptsdir/density_isosurface/density_iso.sh
 
                     # py
                     # source $scriptsdir/py_analyze/angle_distribution.sh

@@ -26,7 +26,7 @@ for ((i=0; i<=15; i=i+1)); do
                 cd ./$dir
                     # 统计离子位移
                     # source $scriptsdir/trajectory/traj_first_last.sh
-                    # source $scriptsdir/trajectory/traj_continuous.sh
+                    source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
                     # source $scriptsdir/rdf/rdf.sh
@@ -44,7 +44,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/angle_distribution/theta.sh
 
                     # 密度等值面
-                    source $scriptsdir/density_isosurface/density_iso.sh
+                    # source $scriptsdir/density_isosurface/density_iso.sh
 
                     # py
                     # source $scriptsdir/py_analyze/angle_distribution.sh

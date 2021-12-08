@@ -1,8 +1,8 @@
 # ions=("LI" "NA" "K" "CS" "CA" "MG")
-ions=("LI" "NA" "K" "CS")
+# ions=("LI" "NA" "K" "CS")
 # ions=("NA")
 # ions=("LI" "CS")
-
+ions=("30e_fix" "30e_flexible")
 n_ions=${#ions[@]}
 
 run_gmx="source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx $2 $3"

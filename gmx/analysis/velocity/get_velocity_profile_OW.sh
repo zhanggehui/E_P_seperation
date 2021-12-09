@@ -21,7 +21,7 @@ NF>6 && $0~/OW/ {
 	v=substr($0,pv,8); v=v+0
 	i=int((z-Zmin)/dZ)
 	Nwat[i]++; V[i] += v
-	if (i%100==0) {print "# Frames: " Nfrm "    Z: "z}
+	if (i%100==0) {print "# Frames: " Nfrm "    Z: "z "  NR:  "NR }
 	if(Nfrm>Ntot) exit
 }
 

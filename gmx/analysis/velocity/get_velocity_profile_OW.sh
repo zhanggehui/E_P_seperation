@@ -17,7 +17,12 @@ BEGIN {
 
 NF==1 { Nfrm++ }
 NF>6 && $0~/OW/ {
-	z=substr($0,p,8); z=z+0
+	z=substr($0,p,8); 
+	ii=index(z,".")
+	if (ii==6){
+		z=substr($0,p+1,8); 
+	}
+	z=z+0
 	v=substr($0,pv,8); v=v+0
 	i=int((z-Zmin)/dZ)
 	Nwat[i]++; V[i] += v

@@ -21,8 +21,10 @@ python --version
 
 for udir in `ls | grep umbrella`; do 
     XXX=${udir##*-}        # ./umbrella-frame-$XXX
-    cp ./conf/conf$XXX.gro $udir 
     cd $udir
+    if [ !-e  ]; then 
+        cp ../conf/conf$XXX.gro ./
+    fi
     source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx cn_nl 4 . sampling.sh run
     cd ../
 done

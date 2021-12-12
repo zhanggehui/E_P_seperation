@@ -61,6 +61,7 @@ gmx cn_nl 4 /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx nvt-pull.
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \
 source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella.sh
 
+# 重新提交采样任务
 cd /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/; gitget; cd $OLDPWD; \
 source /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/re_umbrella.sh
 

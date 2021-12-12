@@ -10,7 +10,6 @@ cd ../
 
 source deactivate
 source /home/liufeng_pkuhpc/lustre2/anaconda3/bin/activate base
-
 # conda activate base
 
 python /home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-script/setupUmbrella.py \

@@ -8,3 +8,4 @@ echo "3" | $gmx msd -f ../nvt-production.trr -s ../nvt-production.tpr -lateral z
 rm -rf index.ndx
 cd ../
 mv ./msd/msd.xvg ../$rundir/$ion.xvg
+rm -rf ./msd

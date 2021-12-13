@@ -1,5 +1,4 @@
 mkdir ./cube
-
 cd ./cube
 
 echo -e "a OW\na 9115\ndel 8\ndel 8\n\nq" | $gmx make_ndx -f ../nvt-production.gro

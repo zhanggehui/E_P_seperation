@@ -35,7 +35,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
-                    # source $scriptsdir/velocity/velocity_profile.sh
+                    source $scriptsdir/velocity/velocity_profile_OW.sh
 
                     # 密度分布
                     # source $scriptsdir/density_profile/density.sh
@@ -44,7 +44,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/angle_distribution/theta.sh
 
                     # 密度等值面
-                    source $scriptsdir/density_isosurface/density_iso.sh
+                    # source $scriptsdir/density_isosurface/density_iso.sh
                     
                     # msd
                     # source $scriptsdir/msd/msd.sh

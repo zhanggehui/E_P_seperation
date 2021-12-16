@@ -1,7 +1,7 @@
 mkdir ./rest_select
 cd ./rest_select
 
-declare -A first_shell=(["LI"]="0.278" ["NA"]="0.32" ["K"]="0.354" ["CS"]="0.396")
+declare -A first_shell=(["LI"]="0.274" ["NA"]="0.322" ["K"]="0.354" ["CS"]="0.394")
 echo -e "\"1st shell\" resname SOL and name OW and within ${first_shell[$ion]} of group $ion\n" | \
 $gmx select -s ../nvt-production.tpr -f ../nvt-production.trr -n ../waterlayer.ndx -os -oc -oi -on -om -of -olt -b 1000 -e 10000 -norm   # -nocumlt
 

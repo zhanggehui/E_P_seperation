@@ -25,11 +25,11 @@ for ((i=0; i<=15; i=i+1)); do
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./$dir
                     # 统计离子位移
-                    source $scriptsdir/trajectory/traj_first_last.sh
+                    # source $scriptsdir/trajectory/traj_first_last.sh
                     # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
-                    # source $scriptsdir/rdf/rdf.sh
+                    source $scriptsdir/rdf/rdf.sh
                     
                     # 水合层滞留时间
                     # source $scriptsdir/residence_time/residence_time.sh

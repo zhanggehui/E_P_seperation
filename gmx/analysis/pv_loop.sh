@@ -29,10 +29,10 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
-                    source $scriptsdir/rdf/rdf.sh
+                    # source $scriptsdir/rdf/rdf.sh
                     
                     # 水合层滞留时间
-                    # source $scriptsdir/residence_time/residence_time.sh
+                    source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
                     # source $scriptsdir/velocity/velocity_profile_OW.sh

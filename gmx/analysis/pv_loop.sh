@@ -20,7 +20,7 @@ for ((i=0; i<=15; i=i+1)); do
         
         # if [ $i -eq 15 ] || [ $j -eq 15 ]; then
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
-            dir=${pressure}Mpa-${voltage}V
+            dir=${pressure}Mpa-${voltage}V_60ns
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./$dir
@@ -29,7 +29,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
-                    source $scriptsdir/rdf/rdf.sh
+                    # source $scriptsdir/rdf/rdf.sh
                     
                     # 水合层滞留时间
                     # source $scriptsdir/residence_time/residence_time.sh
@@ -51,7 +51,7 @@ for ((i=0; i<=15; i=i+1)); do
 
                     # py
                     # source $scriptsdir/py_analyze/angle_distribution.sh
-                    # source $scriptsdir/py_analyze/density_map.sh
+                    source $scriptsdir/py_analyze/density_map.sh
                     # source $scriptsdir/py_analyze/shell_surf.sh
                     # source $scriptsdir/py_analyze/r_distribution.sh
                 cd ..

@@ -50,8 +50,8 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/msd/msd.sh
 
                     # py
-                    # source $scriptsdir/py_analyze/angle_distribution.sh
-                    source $scriptsdir/py_analyze/density_map.sh
+                    source $scriptsdir/py_analyze/angle_distribution.sh
+                    # source $scriptsdir/py_analyze/density_map.sh
                     # source $scriptsdir/py_analyze/shell_surf.sh
                     # source $scriptsdir/py_analyze/r_distribution.sh
                 cd ..

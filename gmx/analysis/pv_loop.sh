@@ -11,10 +11,10 @@ source /home/liufeng_pkuhpc/lustre2/anaconda3/bin/activate base
 python --version
 
 ion=${rundir%%_*}
-for ((i=0; i<=15; i=i+1)); do
+for ((i=0; i<=15; i=i+15)); do
     pressure=`awk -v i=$i 'BEGIN{printf("%s", 100*i);}'`
     # pressure=`awk -v i=$i 'BEGIN{printf("%s", 10*i);}'`
-    for ((j=0; j<=15; j=j+1)); do 
+    for ((j=0; j<=15; j=j+15)); do 
         voltage=`awk -v j=$j 'BEGIN{printf("%s", 0.1*j);}'`
         # voltage=`awk -v j=$j 'BEGIN{printf("%s", -0.05*j);}'`
         

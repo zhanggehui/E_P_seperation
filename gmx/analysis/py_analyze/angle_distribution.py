@@ -4,10 +4,10 @@ import md_utils as mu
 import numpy as np
 
 first_shell = {
-    "LI": 0.278,
-    "NA": 0.32,
+    "LI": 0.274,
+    "NA": 0.322,
     "K": 0.354,
-    "CS": 0.396
+    "CS": 0.394
 }
 
 
@@ -16,13 +16,14 @@ class AnalyzeAngle(ma.MdAnalyze):
         ma.MdAnalyze.__init__(self, ingro)
         self.seltype = seltype
         self.reftype = reftype
+        self.radius = first_shell[self.reftype]
         self.angletype = angletype
         self.angle_list = []
 
     def analyze_frame(self, df):
         count = 0
-        radius = first_shell[self.reftype]
-        mf = ma.MdFrame(df, self.seltype, self.reftype, radius)
+        
+        mf = ma.MdFrame(df, self.seltype, self.reftype, self.radius)
         for results in mf.results_set:
             nearby_points = np.array(mf.sel_points[results])
             vectors = nearby_points - mf.ref_points[count]

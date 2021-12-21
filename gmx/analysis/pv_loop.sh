@@ -38,7 +38,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/velocity/velocity_profile_OW.sh
 
                     # 密度分布
-                    # source $scriptsdir/density_profile/density.sh
+                    source $scriptsdir/density_profile/density.sh
                     
                     # 水合层角度分布
                     # source $scriptsdir/angle_distribution/theta.sh
@@ -50,7 +50,7 @@ for ((i=0; i<=15; i=i+1)); do
                     # source $scriptsdir/msd/msd.sh
 
                     # py
-                    source $scriptsdir/py_analyze/angle_distribution.sh
+                    # source $scriptsdir/py_analyze/angle_distribution.sh
                     # source $scriptsdir/py_analyze/density_map.sh
                     # source $scriptsdir/py_analyze/shell_surf.sh
                     # source $scriptsdir/py_analyze/r_distribution.sh

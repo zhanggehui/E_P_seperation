@@ -35,7 +35,7 @@ for ((i=0; i<=15; i=i+15)); do
                     # source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
-                    source $scriptsdir/velocity/velocity_profile_OW.sh
+                    source $scriptsdir/velocity/velocity_profile.sh
 
                     # 密度分布
                     # source $scriptsdir/density_profile/density.sh

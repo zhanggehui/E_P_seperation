@@ -26,7 +26,7 @@ for ((i=0; i<=15; i=i+15)); do
                 cd ./$dir
                     # 统计离子位移
                     # source $scriptsdir/trajectory/traj_first_last.sh
-                    # source $scriptsdir/trajectory/traj_continuous.sh
+                    source $scriptsdir/trajectory/traj_continuous.sh
 
                     # 统计径向分布函数
                     # source $scriptsdir/rdf/rdf.sh
@@ -35,7 +35,7 @@ for ((i=0; i<=15; i=i+15)); do
                     # source $scriptsdir/residence_time/residence_time.sh
                     
                     # 速度分布
-                    source $scriptsdir/velocity/velocity_profile.sh
+                    # source $scriptsdir/velocity/velocity_profile.sh
 
                     # 密度分布
                     # source $scriptsdir/density_profile/density.sh

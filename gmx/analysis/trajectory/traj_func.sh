@@ -24,7 +24,7 @@ function get_continuous_frame() {
     # $gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $1 -b $2 -e $3 -n index.ndx -dt $4 -pbc nojump
 
     # 2.使用waterlayer.ndx
-    echo "$1" | $gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $2 -pbc nojump -b $3 -e $4 -n index.ndx # waterlayer.ndx index.ndx
+    echo "$1" | $gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $2 -pbc nojump -b $3 -e $4 -n waterlayer.ndx # waterlayer.ndx index.ndx
 
     rm -rf \#* 
     if [ -e index.ndx ]; then

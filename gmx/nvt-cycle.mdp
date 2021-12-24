@@ -123,8 +123,8 @@ print-nose-hoover-chain-variables = no
 ; Groups to couple separately
 tc-grps                  = gra funcgrp Ion   ; 在nvt-cycle.sh中修改
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = -1 0.1 -1   ; 在nvt-cycle.sh中修改
-ref_t                    = 0 300 300   ; 在nvt-cycle.sh中修改
+tau_t                    = -1 0.1 -1         ; 在nvt-cycle.sh中修改
+ref_t                    = 0 300 300         ; 在nvt-cycle.sh中修改
 ; pressure coupling     
 pcoupl                   = no
 pcoupltype               = Isotropic

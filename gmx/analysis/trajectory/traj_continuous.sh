@@ -5,7 +5,7 @@
 mkdir con_trajs
 cd ./con_trajs
 
-echo -e "a 4553\na 9115\na 13677\n\nq" | $gmx make_ndx -f ./nvt-production.gro
+echo -e "a 4553\na 9115\na 13677\n\nq" | $gmx make_ndx -f ../nvt-production.gro
 get_continuous_frame a_4553 a_4553.gro 0 10000
 get_continuous_frame a_9115 a_9115.gro 0 10000
 get_continuous_frame a_13677 a_13677.gro 0 10000

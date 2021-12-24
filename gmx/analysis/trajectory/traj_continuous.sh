@@ -5,7 +5,7 @@
 mkdir con_trajs
 cd ./con_trajs
 
-echo -e "a 4553\na 9115\na 13677\n\nq" | $gmx make_ndx -f ../nvt-production.gro
+echo -e "a 4553\na 9115\na 13677\ndel 9\nq" | $gmx make_ndx -f ../nvt-production.gro
 get_continuous_frame $ion a_4553.gro 0 10000
 get_continuous_frame a_4553 a_4553.gro 0 10000
 get_continuous_frame a_9115 a_9115.gro 0 10000
@@ -13,4 +13,4 @@ get_continuous_frame a_13677 a_13677.gro 0 10000
 rm -rf index.ndx
 
 cd ../
-mv ./con_trajs ../$rundir/
+mv ./con_trajs ../$rundir/${pressure}Mpa-${voltage}V

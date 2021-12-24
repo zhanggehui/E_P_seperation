@@ -29,8 +29,9 @@ function get_continuous_frame() {
     # 2.使用index.ndx
     echo "$1" | $gmx trjconv -f nvt-production.trr -s nvt-production.tpr -o $2 -pbc nojump -b $3 -e $4 -n index.ndx
 
+
     rm -rf \#* 
-    if [ -e index.ndx ]; then
-        rm -rf index.ndx
-    fi
+    # if [ -e index.ndx ]; then
+    #     rm -rf index.ndx
+    # fi
 }

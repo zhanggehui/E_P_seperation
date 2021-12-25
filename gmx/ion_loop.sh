@@ -1,6 +1,6 @@
 # ions=("LI" "NA" "K" "CS" "CA" "MG")
 # ions=("LI" "NA" "K" "CS")
-ions=("NA")
+ions=("LI")
 # ions=("LI" "CS")
 # ions=("30e_fix" "30e_flexible" "40e_fix" "40e_flexible")
 n_ions=${#ions[@]}

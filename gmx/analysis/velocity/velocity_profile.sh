@@ -1,5 +1,5 @@
-mkdir ${pressure}Mpa-${voltage}V
-cd ./${pressure}Mpa-${voltage}V
+mkdir v_profile
+cd ./v_profile
 
 echo -e "a OW\nq" | $gmx make_ndx -f ../nvt-production.gro
 echo "OW" | $gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o OW.gro -b 1000 -e 60000 -n index.ndx
@@ -14,4 +14,4 @@ rm -rf ion.gro
 mv z-vy.xvg ion.xvg
 
 cd ../
-mv ${pressure}Mpa-${voltage}V ../$rundir/
+mv v_profile ../$rundir/

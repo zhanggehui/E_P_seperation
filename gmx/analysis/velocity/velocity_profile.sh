@@ -10,7 +10,7 @@ mv z-vy.xvg OW.xvg
 
 echo "$ion" | $gmx trjconv -f ../nvt-production.trr -s ../nvt-production.tpr -o ion.gro -b 1000 -e 60000 -n ../waterlayer.ndx
 source $scriptsdir/velocity/get_velocity_profile.sh z vy ion.gro 4 $ion 
-rm -rf Ion.gro
+rm -rf ion.gro
 mv z-vy.xvg ion.xvg
 
 cd ../

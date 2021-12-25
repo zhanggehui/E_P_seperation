@@ -19,7 +19,8 @@ for ((i=0; i<=15; i=i+15)); do
         voltage=`awk -v j=$j 'BEGIN{printf("%s", -0.05*j);}'`
         
         # if [ $i -eq 15 ] || [ $j -eq 15 ]; then
-        if [ $i -eq 0 ] || [ $j -eq 0 ]; then
+        # if [ $i -eq 0 ] || [ $j -eq 0 ]; then
+        if [ $i -eq 15 ]; then
             dir=${pressure}Mpa-${voltage}V
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"

@@ -21,7 +21,7 @@ for ((i=0; i<=15; i=i+1)); do
         # if [ $i -eq 15 ] || [ $j -eq 15 ]; then
         if [ $i -eq 0 ] || [ $j -eq 0 ]; then
         # if [ $i -eq 15 ]; then
-            dir=${pressure}Mpa-${voltage}V_60ns
+            dir=${pressure}Mpa-${voltage}V
             if [ -d $dir ]; then
                 echo "-------------------------- ${pressure}Mpa-${voltage}V --------------------------"
                 cd ./$dir

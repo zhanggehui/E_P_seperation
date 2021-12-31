@@ -9,7 +9,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 20000000
+nsteps                   = 10000000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -121,10 +121,10 @@ nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = gra SOL Ion
+tc-grps                  = gra Ion funcgrp ;SOL 
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = -1 0.1 -1
-ref_t                    = 0 300 300
+tau_t                    = -1 -1 0.1 ;0.1
+ref_t                    = 0 300 300 ;300
 ; pressure coupling     
 pcoupl                   = no
 pcoupltype               = Isotropic
@@ -203,7 +203,7 @@ pull_coord1_type        = umbrella
 pull-coord1-geometry    = direction
 pull_coord1_groups      = 0 1
 pull-coord1-dim         = N Y N
-pull-coord1-origin      = 2.460   6.020   2.500
+pull-coord1-origin      = 2.460   1.000   1.500
 pull_coord1_vec         = 0 1 0
 pull-coord1-start       = yes
 pull_coord1_rate        = 0

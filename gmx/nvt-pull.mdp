@@ -206,7 +206,7 @@ pull-coord1-dim         = N Y N
 pull-coord1-origin      = 2.460   1.000   1.500
 pull_coord1_vec         = 0 1 0
 pull_coord1_rate        = 0.001     ; 0.001 nm per ps == 1 nm per ns
-pull_coord1_k           = 1000      ; kJ mol^-1 nm^-2
+pull_coord1_k           = 2000      ; kJ mol^-1 nm^-2
 
 ;coord2
 ;pull_coord2_type        = umbrella  

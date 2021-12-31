@@ -152,7 +152,7 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen_vel                  = no
+gen_vel                  = yes
 gen_temp                 = 300
 gen_seed                 = -1
 
@@ -207,7 +207,7 @@ pull-coord1-origin      = 2.460   1.000   2.000
 pull_coord1_vec         = 0 1 0
 pull-coord1-start       = yes
 pull_coord1_rate        = 0
-pull_coord1_k           = 2000      ; kJ mol^-1 nm^-2
+pull_coord1_k           = 1500      ; kJ mol^-1 nm^-2
 
 ; ENFORCED ROTATION
 ; Enforced rotation: No or Yes

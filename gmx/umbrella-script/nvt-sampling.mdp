@@ -123,7 +123,7 @@ print-nose-hoover-chain-variables = no
 ; Groups to couple separately
 tc-grps                  = gra Ion funcgrp ;SOL 
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = -1 -1 0.1 ;0.1
+tau_t                    = -1 0.1 0.1 ;0.1
 ref_t                    = 0 300 300 ;300
 ; pressure coupling     
 pcoupl                   = no
@@ -153,7 +153,7 @@ annealing-temp           =
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen_vel                  = yes
-gen_temp                 = 300
+gen_temp                 = 0
 gen_seed                 = -1
 
 ; OPTIONS FOR BONDS    
@@ -161,7 +161,7 @@ constraints              = none
 ; Type of constraint algorithm
 constraint_algorithm     = lincs
 ; Do not constrain the start configuration
-continuation             = yes
+continuation             = no ;yes
 ; Use successive overrelaxation to reduce the number of shake iterations
 Shake-SOR                = no
 ; Relative tolerance of shake

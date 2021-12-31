@@ -11,5 +11,5 @@ mdpdir=/home/liufeng_pkuhpc/lustre3/zgh/gmx/gmx_GO/md_scripts/gmx/umbrella-scrip
 # $gmxrun -v -deffnm umbrellaXXX
 
 
-$gmx grompp -f $mdpdir/nvt-sampling.mdp -c ./confXXX.gro -p ../../GO_ion_pp.top -n ../../waterlayer.ndx -o umbrellaXXX.tpr
+$gmx grompp -f $mdpdir/nvt-sampling.mdp -c ./confXXX.gro -p ../../GO_ion_pp.top -n ../../waterlayer.ndx -o umbrellaXXX.tpr -maxwarn 1
 $gmxrun -v -deffnm umbrellaXXX

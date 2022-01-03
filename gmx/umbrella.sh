@@ -24,7 +24,7 @@ for udir in `ls | grep umbrella`; do
     if [ !-e  ]; then 
         cp ../conf/conf$XXX.gro ./
     fi
-    source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx cn_nl 4 . sampling.sh run
+    source /home/liufeng_pkuhpc/lustre2/zgh/sub_job/auto_run.sh gmx cn_nl 2 . sampling.sh run
     cd ../
 done
 

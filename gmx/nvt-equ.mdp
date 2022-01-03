@@ -9,7 +9,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 1000000
+nsteps                   = 1000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -123,10 +123,10 @@ nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = gra funcgrp Ion ; SOL
+tc-grps                  = gra  Ion ; funcgrp  SOL
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = -1 0.1 -1 ; 0.1
-ref_t                    = 0 300 300 ; 300
+tau_t                    = -1 -1 ; 0.1  0.1
+ref_t                    = 0 300 ; 300  300
 ; pressure coupling     
 pcoupl                   = no
 pcoupltype               = Isotropic
